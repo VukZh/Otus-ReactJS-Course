@@ -1,0 +1,19 @@
+{
+  "name": "otus-reactjs-course",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VukZh/Otus-ReactJS-Course.git"
+  },
+  "author": "Vuk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VukZh/Otus-ReactJS-Course/issues"
+  },
+  "homepage": "https://github.com/VukZh/Otus-ReactJS-Course#readme"
+}
