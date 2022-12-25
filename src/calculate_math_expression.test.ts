@@ -13,4 +13,7 @@ describe ('calculate math expressions', () => {
     test ('(1 + 2) * 3 - 100 / 5 = -11)', () => {
         expect(calculate_math_expression('(1 + 2) * 3 - 100 / 5')).toBe(-11)
     })
+    test ('sin(30) + cos(60) = 1', () => {
+        expect(calculate_math_expression('sin(30) + cos(60)')).toBe(1)
+    })
 })
