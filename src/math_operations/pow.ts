@@ -1,0 +1,1 @@
+export const pow = (a: number, b: number): number => Math.pow(a, b);
