@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "target": "es5",
+    "jsx": "react",
+    "esModuleInterop": true,
+    "plugins": [{ "name": "typescript-plugin-css-modules" }]
+  },
+  "include": ["src"],
+  "files": [
+    "./src/index.tsx"
+  ]
+}

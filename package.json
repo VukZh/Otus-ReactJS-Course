@@ -1,0 +1,58 @@
+{
+  "name": "otus-reactjs-course",
+  "version": "1.0.0",
+  "description": "exchange rate chart",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --env development",
+    "PROD": "webpack --env production",
+    "DEV": "webpack --env development",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VukZh/Otus-ReactJS-Course.git"
+  },
+  "keywords": [
+    "exchange",
+    "rate",
+    "chart",
+    "currency",
+    "cryptocurrency"
+  ],
+  "author": "Vuk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VukZh/Otus-ReactJS-Course/issues"
+  },
+  "homepage": "https://github.com/VukZh/Otus-ReactJS-Course#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.20.7",
+    "@babel/core": "^7.20.12",
+    "@babel/preset-env": "^7.20.2",
+    "@types/node": "^18.11.18",
+    "@types/react": "^18.0.26",
+    "@types/react-dom": "^18.0.10",
+    "@typescript-eslint/eslint-plugin": "^5.48.1",
+    "@typescript-eslint/parser": "^5.48.1",
+    "css-loader": "^6.7.3",
+    "eslint": "^8.31.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.11",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.7.2",
+    "prettier": "2.8.2",
+    "source-map-loader": "^4.0.1",
+    "style-loader": "^3.3.1",
+    "ts-loader": "^9.4.2",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.11.1"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
