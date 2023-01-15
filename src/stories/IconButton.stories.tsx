@@ -4,11 +4,12 @@ import { IconButton } from '../components/IconButton';
 export default {
   title: 'Example/Icon Button',
   component: IconButton,
+  argTypes: { onClick: { action: 'Click icon' } },
 };
-const IconBtn = (args) => <IconButton {...args} />;
+const IconBtn = (args: any) => <IconButton {...args} />;
 
 export const ExampleIconButton = IconBtn.bind({});
 ExampleIconButton.args = {
-  icon: '1'
+  icon: 'forward'
 };
 
