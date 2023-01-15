@@ -1,0 +1,18 @@
+.icon-button {
+  border: 1px solid darkgray;
+  cursor: pointer;
+  position: relative;
+  top: 9px;
+  width: 40px;
+  height: 30px;
+}
+.icon-button:hover {
+  border: 2px solid darkgray;
+  width: 40px;
+  height: 30px;
+}
+.icon-button:active {
+  border: 2px solid #666;
+  width: 40px;
+  height: 30px;
+}
