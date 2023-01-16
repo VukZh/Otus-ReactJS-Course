@@ -6,7 +6,7 @@ import { IconButton } from './IconButton';
 
 export const Header: React.FC = () => (
   <header>
-    <div className="wrapper">
+    <div className='wrapper'>
       <div>
         <div className='select-time'>Please select time period</div>
         <Button active={true} label='15'></Button>
@@ -15,7 +15,6 @@ export const Header: React.FC = () => (
         <IconButton icon='forward'></IconButton>
         <IconButton icon='backward'></IconButton>
       </div>
-
     </div>
   </header>
 );
