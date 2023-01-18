@@ -1,0 +1,23 @@
+.list {
+  font-family: Helvetica, Arial, sans-serif;
+  width: 40px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin: 5px;
+  padding: 8px;
+  list-style: none;
+  text-align: start;
+}
+
+.currency {
+  color: black;
+  background-color: white;
+  border: none;
+}
+
+.currency:hover {
+  background-color: lightgray;
+}
+
+.currency-active {
+  background-color: darkgray;
+}

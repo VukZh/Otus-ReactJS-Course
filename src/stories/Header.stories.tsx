@@ -4,7 +4,7 @@ import { Header } from '../components/Header';
 
 export default {
   title: 'Example/Header',
-  component: Header
+  component: Header,
 };
 
 const Hdr = (args: any) => <Header {...args} />;
