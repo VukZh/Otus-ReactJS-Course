@@ -12,3 +12,7 @@
 .icon-button:active {
   border: 1px solid #666;
 }
+.iconButton-wrapper {
+  display: inline-block;
+  margin: 0 2px;
+}

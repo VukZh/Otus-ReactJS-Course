@@ -29,3 +29,7 @@
   font-weight: bold;
   background-color: #ddd;
 }
+.button-wrapper {
+  display: inline-block;
+  margin: 0 2px;
+}

@@ -7,6 +7,7 @@ type TypeIcon = 'forward' | 'backward';
 interface IconButtonsProps {
   icon: TypeIcon;
 }
+
 export const IconButton: React.FC<IconButtonsProps> = ({ icon, ...props }) => {
   const iconImage = icon === 'forward' ? forwardIcon : backwardIcon;
   const iconStyle = {
@@ -14,11 +15,13 @@ export const IconButton: React.FC<IconButtonsProps> = ({ icon, ...props }) => {
   };
   useEffect(() => {});
   return (
-    <button
-      type='button'
-      className='icon-button'
-      style={iconStyle}
-      {...props}
-    ></button>
+    <div className='iconButton-wrapper'>
+      <button
+        type='button'
+        className='icon-button'
+        style={iconStyle}
+        {...props}
+      ></button>
+    </div>
   );
 };
