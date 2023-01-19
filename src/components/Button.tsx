@@ -6,7 +6,7 @@ interface ButtonProps {
   label: string;
 }
 
-const clickTimePeriodHandler = (time: string) =>
+export const clickTimePeriodHandler = (time: string) =>
   console.log(`clicked on time period: ${time}`);
 export const Button: React.FC<ButtonProps> = ({ active, label, ...props }) => {
   const mode = active ? 'button--active' : 'button--no-active';

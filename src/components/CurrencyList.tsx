@@ -6,7 +6,7 @@ interface CurrencyListProps {
   activated: string;
 }
 
-const clickListHandler = (currency: string) =>
+export const clickListHandler = (currency: string) =>
   console.log(`clicked on currency: ${currency}`);
 export const CurrencyList: React.FC<CurrencyListProps> = ({
   currencies,
