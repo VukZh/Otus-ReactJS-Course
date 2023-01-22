@@ -1,0 +1,18 @@
+.wrapper {
+  font-family: Helvetica, Arial, sans-serif;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 30px 20px;
+  display: flex;
+  justify-content: space-around;
+  width: 80vw;
+}
+
+.select-time {
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 3;
+  margin: 2px 20px;
+  display: inline-block;
+  vertical-align: top;
+}
+

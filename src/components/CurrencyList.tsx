@@ -1,0 +1,31 @@
+import React from 'react';
+import './currencyList.css';
+
+interface CurrencyListProps {
+  currencies: Array<string>;
+  activated: string;
+}
+
+export const CurrencyList: React.FC<CurrencyListProps> = ({
+  currencies,
+  activated,
+  ...props
+}) => {
+  const list = currencies.map((currency, index) => {
+    const currencyStyle =
+      activated === currency ? 'currency currency-active' : 'currency';
+    const clickListHandler = (currency: string) =>
+      console.log(`clicked on currency: ${currency}`);
+    return (
+      <li key={`${index}-${currency}`} {...props}>
+        <button
+          className={currencyStyle}
+          onClick={() => clickListHandler(currency)}
+        >
+          {currency}
+        </button>
+      </li>
+    );
+  });
+  return <ul className='list'>{list}</ul>;
+};
