@@ -6,21 +6,20 @@ interface ButtonProps {
   label: string;
 }
 
-export const clickTimePeriodHandler = (time: string) =>
-  console.log(`clicked on time period: ${time}`);
 export const Button: React.FC<ButtonProps> = ({ active, label, ...props }) => {
   const mode = active ? 'button--active' : 'button--no-active';
-
+  const clickTimePeriodHandler = (time: string) =>
+    console.log(`clicked on time period: ${time}`);
   return (
-    <div
-      className={'button-wrapper'}
+    <button
+      type='button'
+      className={['button', mode].join(' ')}
       onClick={() => {
         clickTimePeriodHandler(label);
       }}
+      {...props}
     >
-      <button type='button' className={['button', mode].join(' ')} {...props}>
-        {label}
-      </button>
-    </div>
+      {label}
+    </button>
   );
 };

@@ -17,5 +17,3 @@ export const NoActive = Btn.bind({});
 NoActive.args = {
   label: '15',
 };
-
-

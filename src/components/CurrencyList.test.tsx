@@ -6,18 +6,25 @@ import '@testing-library/react';
 import '@testing-library/jest-dom';
 import * as React from 'react';
 import { render, screen } from '@testing-library/react';
-import { CurrencyList, clickListHandler } from './CurrencyList';
+import { CurrencyList } from './CurrencyList';
+import { userEvent } from '@storybook/testing-library';
 
 describe('Currencies list test', () => {
-  test('List"s item handler test', () => {
-    const log = jest.spyOn(global.console, 'log').mockImplementation(() => {});
-    clickListHandler('EUR');
-    expect(log).toHaveBeenCalledWith('clicked on currency: EUR');
-    clickListHandler('GBP');
-    expect(log).toHaveBeenCalledWith('clicked on currency: GBP');
-    clickListHandler('JPY');
-    expect(log).toHaveBeenCalledWith('clicked on currency: JPY');
-    expect(log).not.toHaveBeenCalledWith('clicked on currency: RUB');
+  test('List"s buttons test', async () => {
+    jest.spyOn(console, 'log');
+    render(
+      <CurrencyList
+        activated='EUR'
+        currencies={['EUR', 'JPY', 'GBP']}
+      ></CurrencyList>
+    );
+    const button1 = screen.getByRole('button', { name: 'EUR' });
+    await userEvent.click(button1);
+    expect(console.log).toHaveBeenCalledWith('clicked on currency: EUR');
+    const button2 = screen.getByRole('button', { name: 'GBP' });
+    await userEvent.click(button2);
+    expect(console.log).toHaveBeenCalledWith('clicked on currency: GBP');
+    expect(screen.getByRole('button', { name: 'JPY' })).toBeInTheDocument();
   });
   test('List component test', () => {
     render(
@@ -28,5 +35,6 @@ describe('Currencies list test', () => {
     );
     expect(screen.queryByText('EUR')).not.toBeNull();
     expect(screen.queryByRole('list'));
+    expect(screen.getAllByRole('button').length).toBe(3);
   });
 });

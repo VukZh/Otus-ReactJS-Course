@@ -7,6 +7,7 @@
   font-size: 14px;
   width: 40px;
   height: 30px;
+  margin: 0 2px;
 }
 .button--active {
   font-weight: bold;
@@ -28,8 +29,4 @@
 .button--no-active:active {
   font-weight: bold;
   background-color: #ddd;
-}
-.button-wrapper {
-  display: inline-block;
-  margin: 0 2px;
 }

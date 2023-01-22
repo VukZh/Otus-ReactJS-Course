@@ -6,20 +6,23 @@ import '@testing-library/react';
 import '@testing-library/jest-dom';
 import * as React from 'react';
 import { render, screen } from '@testing-library/react';
-import { Button, clickTimePeriodHandler } from './Button';
+import { Button } from './Button';
+import { userEvent } from '@storybook/testing-library';
 
 describe('Button test', () => {
-  test('Button handler test', () => {
-    const log = jest.spyOn(global.console, 'log').mockImplementation(() => {});
-    clickTimePeriodHandler('15');
-    expect(log).toHaveBeenCalledWith('clicked on time period: 15');
-    clickTimePeriodHandler('45');
-    expect(log).toHaveBeenCalledWith('clicked on time period: 45');
-    expect(log).not.toHaveBeenCalledWith('clicked on time period: 45 minutes');
+  test('Button handler test', async () => {
+    jest.spyOn(console, 'log');
+    render(<Button label='15' />);
+    const button = screen.getByRole('button');
+    expect(button).toBeInTheDocument();
+    await userEvent.click(button);
+    expect(console.log).not.toHaveBeenCalledWith('clicked on time period: 30');
+    expect(console.log).toHaveBeenCalledWith('clicked on time period: 15');
   });
   test('Button component test', () => {
     render(<Button label='111' active={false}></Button>);
     expect(screen.queryByText('111')).not.toBeNull();
+    expect(screen.queryByText('113')).toBeNull();
     expect(screen.queryByRole('button'));
   });
 });

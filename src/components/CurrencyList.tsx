@@ -6,8 +6,6 @@ interface CurrencyListProps {
   activated: string;
 }
 
-export const clickListHandler = (currency: string) =>
-  console.log(`clicked on currency: ${currency}`);
 export const CurrencyList: React.FC<CurrencyListProps> = ({
   currencies,
   activated,
@@ -16,6 +14,8 @@ export const CurrencyList: React.FC<CurrencyListProps> = ({
   const list = currencies.map((currency, index) => {
     const currencyStyle =
       activated === currency ? 'currency currency-active' : 'currency';
+    const clickListHandler = (currency: string) =>
+      console.log(`clicked on currency: ${currency}`);
     return (
       <li key={`${index}-${currency}`} {...props}>
         <button
