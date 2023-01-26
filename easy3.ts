@@ -3,7 +3,7 @@
 // Нужно заменить FIXME на соответствующий тип
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type Obj = Record<any, any>;
+type Obj = Record<string, string | number | boolean | object | symbol | undefined>;
 type Key = keyof Obj;
 type FIXME = Record<Key, Obj[Key]>;
 
