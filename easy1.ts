@@ -6,6 +6,8 @@
 
 type FIXME = ReturnType<() => Array<"initial" | "inWork" | "fullfilled">>
 
+// type FIXME = OrderState[]; // other case ?
+
 const orderStates = [
   "initial",
   "inWork",
