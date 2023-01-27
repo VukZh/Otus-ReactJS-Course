@@ -4,7 +4,7 @@
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 
-type FIXME = "initial" | "inWork" | "buyingSupplies" | "producing" | "fullfilled";
+type FIXME = Pick<Order, "state">;
 
 type Order =
   | {
@@ -38,7 +38,7 @@ type Order =
   fullfillmentDate: Date;
 };
 
-export const getOrderState = (order: Order): FIXME => order.state;
+export const getOrderState = (order: Order): FIXME["state"] => order.state;
 
 // test
 

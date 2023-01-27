@@ -4,7 +4,7 @@
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 
-type FIXME = Array<"initial" | "inWork" | "fullfilled">;
+type FIXME = ReturnType<() => Array<"initial" | "inWork" | "fullfilled">>
 
 const orderStates = [
   "initial",
