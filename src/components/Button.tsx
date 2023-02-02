@@ -6,20 +6,22 @@ interface ButtonProps {
   label: string;
 }
 
-export const Button: React.FC<ButtonProps> = ({ active, label, ...props }) => {
-  const mode = active ? 'button--active' : 'button--no-active';
-  const clickTimePeriodHandler = (time: string) =>
+export class Button extends React.Component<ButtonProps> {
+  clickTimePeriodHandler = (time: string) =>
     console.log(`clicked on time period: ${time}`);
-  return (
-    <button
-      type='button'
-      className={['button', mode].join(' ')}
-      onClick={() => {
-        clickTimePeriodHandler(label);
-      }}
-      {...props}
-    >
-      {label}
-    </button>
-  );
-};
+  render() {
+    const mode = this.props.active ? 'button--active' : 'button--no-active';
+    return (
+      <button
+        type='button'
+        className={['button', mode].join(' ')}
+        onClick={() => {
+          this.clickTimePeriodHandler(this.props.label);
+        }}
+        {...this.props}
+      >
+        {this.props.label}
+      </button>
+    );
+  }
+}
