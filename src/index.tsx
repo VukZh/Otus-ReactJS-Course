@@ -4,17 +4,21 @@ import './main.css';
 
 import { Header } from './components/Header';
 import { CurrencyList } from './components/CurrencyList';
+import { CurrencyData } from './components/CurrencyData';
 
 class App extends React.Component {
   render() {
     return (
-      <div className='mainWrapper'>
-        <Header></Header>
-        <CurrencyList
-          activated='RUB'
-          currencies={['RUB', 'CHF', 'KZT', 'UAH']}
-        ></CurrencyList>
-      </div>
+      <>
+        <div className='mainWrapper'>
+          <Header></Header>
+          <CurrencyList
+            activated='RUB'
+            currencies={['RUB', 'CHF', 'KZT', 'UAH']}
+          ></CurrencyList>
+        </div>
+        <CurrencyData exchangeRate={112233}></CurrencyData>
+      </>
     );
   }
 }

@@ -10,7 +10,8 @@ export class Button extends React.Component<ButtonProps> {
   clickTimePeriodHandler = (time: string) =>
     console.log(`clicked on time period: ${time}`);
   render() {
-    const mode = this.props.active ? 'button--active' : 'button--no-active';
+    console.log('.', this.props.active);
+    const mode = this.props!.active ? 'button--active' : 'button--no-active';
     return (
       <button
         type='button'
