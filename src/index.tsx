@@ -5,19 +5,41 @@ import './main.css';
 import { Header } from './components/Header';
 import { CurrencyList } from './components/CurrencyList';
 import { CurrencyData } from './components/CurrencyData';
+import { getCurrencyData } from './services/getCurrencyData';
 
-class App extends React.Component {
+interface IProps {}
+
+interface IState {
+  currency: number;
+}
+class App extends React.Component<IProps, IState> {
+  constructor(props: IProps | Readonly<IProps>) {
+    super(props);
+    this.state = {
+      currency: 0,
+    };
+  }
+
+  componentDidMount() {
+    getCurrencyData('btc').then((data) =>
+      this.setState({
+        currency: data.USD,
+      })
+    );
+  }
+
   render() {
+    console.log('btc', getCurrencyData('btc'));
     return (
       <>
         <div className='mainWrapper'>
           <Header></Header>
           <CurrencyList
             activated='RUB'
-            currencies={['RUB', 'CHF', 'KZT', 'UAH']}
+            currencies={['BTC', 'ETH', 'BNB', 'DOT']}
           ></CurrencyList>
         </div>
-        <CurrencyData exchangeRate={112233}></CurrencyData>
+        <CurrencyData exchangeRate={this.state.currency}></CurrencyData>
       </>
     );
   }
