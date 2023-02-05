@@ -16,7 +16,7 @@ interface IState {
 }
 class App extends React.Component<IProps, IState> {
   interval: any;
-  constructor(props: IProps | Readonly<IProps>) {
+  constructor(props: IProps) {
     super(props);
     this.state = {
       currency: 0,
@@ -62,11 +62,14 @@ class App extends React.Component<IProps, IState> {
           <Header></Header>
           <CurrencyList
             activated={this.state.currentCurrency}
-            currencies={['BTC', 'ETH', 'BNB', 'DOT']}
+            currencies={['BTC', 'ETH', 'BNB', 'DOT', 'ERR']}
             changeCurrency={this.changeCurrentCurrency}
           ></CurrencyList>
         </div>
-        <CurrencyData exchangeRate={this.state.currency}></CurrencyData>
+        <CurrencyData
+          exchangeRate={this.state.currency}
+          currency={this.state.currentCurrency}
+        ></CurrencyData>
       </>
     );
   }
