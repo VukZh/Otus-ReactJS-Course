@@ -39,6 +39,9 @@ export class CurrencyData extends React.Component<
   }
 
   render() {
+    if (this.props.exchangeRate === undefined) {
+      throw new Error("can't get data");
+    }
     return <div className='formattedData'>{this.props.exchangeRate}</div>;
   }
 }

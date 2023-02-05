@@ -6,6 +6,7 @@ import { Header } from './components/Header';
 import { CurrencyList } from './components/CurrencyList';
 import { CurrencyData } from './components/CurrencyData';
 import { getCurrencyData } from './services/getCurrencyData';
+import { ErrorBoundary } from './components/ErrorBoundary';
 
 const DELAY = 3000;
 interface IProps {}
@@ -66,10 +67,12 @@ class App extends React.Component<IProps, IState> {
             changeCurrency={this.changeCurrentCurrency}
           ></CurrencyList>
         </div>
-        <CurrencyData
-          exchangeRate={this.state.currency}
-          currency={this.state.currentCurrency}
-        ></CurrencyData>
+        <ErrorBoundary>
+          <CurrencyData
+            exchangeRate={this.state.currency}
+            currency={this.state.currentCurrency}
+          ></CurrencyData>
+        </ErrorBoundary>
       </>
     );
   }
