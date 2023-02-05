@@ -11,13 +11,16 @@ interface IProps {}
 
 interface IState {
   currency: number;
+  currentCurrency: string;
 }
 class App extends React.Component<IProps, IState> {
   constructor(props: IProps | Readonly<IProps>) {
     super(props);
     this.state = {
       currency: 0,
+      currentCurrency: 'ETH',
     };
+    this.changeCurrentCurrency = this.changeCurrentCurrency.bind(this);
   }
 
   componentDidMount() {
@@ -28,15 +31,31 @@ class App extends React.Component<IProps, IState> {
     );
   }
 
+  componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<IState>) {
+    if (this.state.currentCurrency !== prevState.currentCurrency) {
+      getCurrencyData(this.state.currentCurrency).then((data) =>
+        this.setState({
+          currency: data.USD,
+        })
+      );
+    }
+  }
+
+  changeCurrentCurrency(currency: string) {
+    this.setState({
+      currentCurrency: currency,
+    });
+  }
+
   render() {
-    console.log('btc', getCurrencyData('btc'));
     return (
       <>
         <div className='mainWrapper'>
           <Header></Header>
           <CurrencyList
-            activated='RUB'
+            activated={this.state.currentCurrency}
             currencies={['BTC', 'ETH', 'BNB', 'DOT']}
+            changeCurrency={this.changeCurrentCurrency}
           ></CurrencyList>
         </div>
         <CurrencyData exchangeRate={this.state.currency}></CurrencyData>

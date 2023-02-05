@@ -4,11 +4,12 @@ import './currencyList.css';
 interface CurrencyListProps {
   currencies: Array<string>;
   activated: string;
+  // eslint-disable-next-line no-unused-vars
+  changeCurrency(currency: string): void;
 }
 
 export class CurrencyList extends React.Component<CurrencyListProps> {
-  clickListHandler = (currency: string) =>
-    console.log(`clicked on currency: ${currency}`);
+  clickListHandler = (currency: string) => this.props.changeCurrency(currency);
   render() {
     const list = this.props.currencies.map((currency, index) => {
       const currencyStyle =
