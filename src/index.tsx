@@ -7,6 +7,7 @@ import { CurrencyList } from './components/CurrencyList';
 import { CurrencyData } from './components/CurrencyData';
 import { getCurrencyData } from './services/getCurrencyData';
 
+const DELAY = 3000;
 interface IProps {}
 
 interface IState {
@@ -14,21 +15,28 @@ interface IState {
   currentCurrency: string;
 }
 class App extends React.Component<IProps, IState> {
+  interval: any;
   constructor(props: IProps | Readonly<IProps>) {
     super(props);
     this.state = {
       currency: 0,
-      currentCurrency: 'ETH',
+      currentCurrency: 'BTC',
     };
     this.changeCurrentCurrency = this.changeCurrentCurrency.bind(this);
   }
 
   componentDidMount() {
-    getCurrencyData('btc').then((data) =>
-      this.setState({
-        currency: data.USD,
-      })
-    );
+    this.interval = setInterval(() => {
+      getCurrencyData(this.state.currentCurrency).then((data) =>
+        this.setState({
+          currency: data.USD,
+        })
+      );
+    }, DELAY);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<IState>) {
