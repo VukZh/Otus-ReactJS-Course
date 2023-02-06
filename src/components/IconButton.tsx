@@ -10,7 +10,6 @@ interface IconButtonsProps {
 
 export class IconButton extends React.Component<IconButtonsProps> {
   render() {
-    // const { icon, ...props } = this.props;
     const iconImage =
       this.props.icon === 'forward' ? forwardIcon : backwardIcon;
     const iconStyle = {
