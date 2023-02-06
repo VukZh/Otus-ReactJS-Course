@@ -1,0 +1,13 @@
+.formattedData {
+  width: 90vw;
+  height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  font-family: Arial, SansSerif;
+  font-size: 5rem;
+  line-height: 7rem;
+  color: darkblue;
+  border: 2px solid black;
+}
