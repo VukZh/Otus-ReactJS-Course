@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './iconButton.css';
 import forwardIcon from '../../public/assets/forward.png';
 import backwardIcon from '../../public/assets/backward.png';
@@ -8,22 +8,20 @@ interface IconButtonsProps {
   icon: TypeIcon;
 }
 
-export class IconButton extends React.Component<IconButtonsProps> {
-  render() {
-    const iconImage =
-      this.props.icon === 'forward' ? forwardIcon : backwardIcon;
-    const iconStyle = {
-      background: `url(${iconImage})`,
-    };
-    return (
-      <div className='iconButton-wrapper'>
-        <button
-          type='button'
-          className='icon-button'
-          style={iconStyle}
-          {...this.props}
-        ></button>
-      </div>
-    );
-  }
-}
+export const IconButton: React.FC<IconButtonsProps> = ({ icon, ...props }) => {
+  const iconImage = icon === 'forward' ? forwardIcon : backwardIcon;
+  const iconStyle = {
+    background: `url(${iconImage})`,
+  };
+  useEffect(() => {});
+  return (
+    <div className='iconButton-wrapper'>
+      <button
+        type='button'
+        className='icon-button'
+        style={iconStyle}
+        {...props}
+      ></button>
+    </div>
+  );
+};

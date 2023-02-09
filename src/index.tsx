@@ -68,10 +68,7 @@ class App extends React.Component<IProps, IState> {
           ></CurrencyList>
         </div>
         <ErrorBoundary>
-          <CurrencyData
-            exchangeRate={this.state.currency}
-            currency={this.state.currentCurrency}
-          ></CurrencyData>
+          <CurrencyData exchangeRate={this.state.currency}></CurrencyData>
         </ErrorBoundary>
       </>
     );

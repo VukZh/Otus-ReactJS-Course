@@ -8,25 +8,26 @@ interface CurrencyListProps {
   changeCurrency(currency: string): void;
 }
 
-export class CurrencyList extends React.Component<CurrencyListProps> {
-  clickListHandler = (currency: string) => this.props.changeCurrency(currency);
-  render() {
-    const list = this.props.currencies.map((currency, index) => {
-      const currencyStyle =
-        this.props.activated === currency
-          ? 'currency currency-active'
-          : 'currency';
-      return (
-        <li key={`${index}-${currency}`} {...this.props}>
-          <button
-            className={currencyStyle}
-            onClick={() => this.clickListHandler(currency)}
-          >
-            {currency}
-          </button>
-        </li>
-      );
-    });
-    return <ul className='list'>{list}</ul>;
-  }
-}
+export const CurrencyList: React.FC<CurrencyListProps> = ({
+  currencies,
+  activated,
+  changeCurrency,
+  ...props
+}) => {
+  const list = currencies.map((currency, index) => {
+    const currencyStyle =
+      activated === currency ? 'currency currency-active' : 'currency';
+    const clickListHandler = (currency: string) => changeCurrency(currency);
+    return (
+      <li key={`${index}-${currency}`} {...props}>
+        <button
+          className={currencyStyle}
+          onClick={() => clickListHandler(currency)}
+        >
+          {currency}
+        </button>
+      </li>
+    );
+  });
+  return <ul className='list'>{list}</ul>;
+};
