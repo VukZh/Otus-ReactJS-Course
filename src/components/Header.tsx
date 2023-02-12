@@ -14,6 +14,7 @@ export const Header: React.FC = () => (
         <Button label='60'></Button>
         <IconButton icon='forward'></IconButton>
         <IconButton icon='backward'></IconButton>
+        <IconButton icon='settings'></IconButton>
       </div>
     </div>
   </header>
