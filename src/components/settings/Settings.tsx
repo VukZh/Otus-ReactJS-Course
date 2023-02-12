@@ -1,15 +1,28 @@
 import React, { FormEvent } from 'react';
-
 import './settings.css';
 
-export const Settings: React.FC = () => {
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+interface SettingsProps {
+  // eslint-disable-next-line no-unused-vars
+  close: (event: React.MouseEvent) => void;
+}
+
+export const Settings: React.FC<SettingsProps> = ({ close }) => {
+  const handleSubmit = (
+    e: FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>
+  ) => {
     e.preventDefault();
     // @ts-ignore
     console.log(e.target.updateTime.value, e.target.saveHistory.checked);
+    close(e as React.MouseEvent);
   };
+
   return (
-    <form className='formWrapper' onSubmit={handleSubmit}>
+    <form
+      className='formWrapper'
+      onSubmit={(e) => {
+        handleSubmit(e);
+      }}
+    >
       <p>Please select options: </p>
       <fieldset className='formInputPart'>
         <legend>Set update time:</legend>
@@ -29,6 +42,9 @@ export const Settings: React.FC = () => {
       </fieldset>
       <button type='submit' className='formButton'>
         Submit
+      </button>
+      <button type='button' className='formButton' onClick={close}>
+        Cancel
       </button>
     </form>
   );

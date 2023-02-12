@@ -7,7 +7,8 @@ import { CurrencyList } from './components/CurrencyList';
 import { CurrencyData } from './components/CurrencyData';
 import { getCurrencyData } from './services/getCurrencyData';
 import { ErrorBoundary } from './components/ErrorBoundary';
-import { Settings } from './components/Settings';
+import { Settings } from './components/settings/Settings';
+import { Modal } from './components/settings/Modal';
 
 const DELAY = 3000;
 interface IProps {}
@@ -16,6 +17,7 @@ interface IState {
   currency: number;
   currentCurrency: string;
   increased: IncreasedType;
+  showModal: boolean;
 }
 
 export type IncreasedType = 'yes' | 'no' | undefined;
@@ -27,8 +29,11 @@ class App extends React.Component<IProps, IState> {
       currency: 0,
       currentCurrency: 'BTC',
       increased: undefined,
+      showModal: false,
     };
     this.changeCurrentCurrency = this.changeCurrentCurrency.bind(this);
+    this.showModalOn = this.showModalOn.bind(this);
+    this.showModalOff = this.showModalOff.bind(this);
   }
 
   componentDidMount() {
@@ -80,11 +85,23 @@ class App extends React.Component<IProps, IState> {
     });
   }
 
+  showModalOn() {
+    this.setState({
+      showModal: true,
+    });
+  }
+
+  showModalOff() {
+    this.setState({
+      showModal: false,
+    });
+  }
+
   render() {
     return (
       <>
         <div className='mainWrapper'>
-          <Header></Header>
+          <Header showModal={this.showModalOn}></Header>
           <CurrencyList
             activated={this.state.currentCurrency}
             currencies={['BTC', 'ETH', 'BNB', 'DOT', 'ERR']}
@@ -97,7 +114,11 @@ class App extends React.Component<IProps, IState> {
             increased={this.state.increased}
           ></CurrencyData>
         </ErrorBoundary>
-        <Settings></Settings>
+        {this.state.showModal && (
+          <Modal>
+            <Settings close={this.showModalOff}></Settings>
+          </Modal>
+        )}
       </>
     );
   }

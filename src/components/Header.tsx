@@ -4,7 +4,12 @@ import { Button } from './Button';
 import './header.css';
 import { IconButton } from './IconButton';
 
-export const Header: React.FC = () => (
+interface HeaderProps {
+  // eslint-disable-next-line no-unused-vars
+  showModal: (event: React.MouseEvent<HTMLButtonElement>) => void;
+}
+
+export const Header: React.FC<HeaderProps> = ({ showModal }) => (
   <header>
     <div className='wrapper'>
       <div>
@@ -14,7 +19,7 @@ export const Header: React.FC = () => (
         <Button label='60'></Button>
         <IconButton icon='forward'></IconButton>
         <IconButton icon='backward'></IconButton>
-        <IconButton icon='settings'></IconButton>
+        <IconButton icon='settings' onClickAction={showModal}></IconButton>
       </div>
     </div>
   </header>

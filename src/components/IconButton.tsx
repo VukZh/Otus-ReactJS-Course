@@ -7,9 +7,15 @@ import settingsIcon from '../../public/assets/settings.png';
 type TypeIcon = 'forward' | 'backward' | 'settings';
 interface IconButtonsProps {
   icon: TypeIcon;
+  // eslint-disable-next-line no-unused-vars
+  onClickAction?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-export const IconButton: React.FC<IconButtonsProps> = ({ icon, ...props }) => {
+export const IconButton: React.FC<IconButtonsProps> = ({
+  icon,
+  onClickAction,
+  ...props
+}) => {
   const iconImage =
     icon === 'forward'
       ? forwardIcon
@@ -26,6 +32,7 @@ export const IconButton: React.FC<IconButtonsProps> = ({ icon, ...props }) => {
         type='button'
         className='icon-button'
         style={iconStyle}
+        onClick={onClickAction}
         {...props}
       ></button>
     </div>
