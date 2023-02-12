@@ -1,0 +1,22 @@
+.formWrapper {
+  font-family: Arial, SansSerif;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid gray;
+  margin: 10px auto;
+  width: 200px;
+  padding: 10px;
+  height: 240px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.formInputPart {
+  width: 150px;
+}
+
+.formButton {
+  width: 100px;
+  height: 30px;
+  font-weight: bolder;
+}

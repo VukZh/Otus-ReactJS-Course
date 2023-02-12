@@ -7,6 +7,7 @@ import { CurrencyList } from './components/CurrencyList';
 import { CurrencyData } from './components/CurrencyData';
 import { getCurrencyData } from './services/getCurrencyData';
 import { ErrorBoundary } from './components/ErrorBoundary';
+import { Settings } from './components/Settings';
 
 const DELAY = 3000;
 interface IProps {}
@@ -70,6 +71,7 @@ class App extends React.Component<IProps, IState> {
         <ErrorBoundary>
           <CurrencyData exchangeRate={this.state.currency}></CurrencyData>
         </ErrorBoundary>
+        <Settings></Settings>
       </>
     );
   }
