@@ -11,3 +11,11 @@
   color: darkblue;
   border: 2px solid black;
 }
+
+.increased {
+  background-color: lightgreen;
+}
+
+.decreased {
+  background-color: lightcoral;
+}

@@ -15,7 +15,10 @@ interface IProps {}
 interface IState {
   currency: number;
   currentCurrency: string;
+  increased: IncreasedType;
 }
+
+export type IncreasedType = 'yes' | 'no' | undefined;
 class App extends React.Component<IProps, IState> {
   interval: any;
   constructor(props: IProps) {
@@ -23,6 +26,7 @@ class App extends React.Component<IProps, IState> {
     this.state = {
       currency: 0,
       currentCurrency: 'BTC',
+      increased: undefined,
     };
     this.changeCurrentCurrency = this.changeCurrentCurrency.bind(this);
   }
@@ -46,8 +50,27 @@ class App extends React.Component<IProps, IState> {
       getCurrencyData(this.state.currentCurrency).then((data) =>
         this.setState({
           currency: data.USD,
+          increased: undefined,
         })
       );
+    }
+    if (this.state.currentCurrency === prevState.currentCurrency) {
+      if (
+        this.state.currency > prevState.currency &&
+        prevState.currency !== 0 &&
+        prevState.increased !== 'yes'
+      ) {
+        this.setState({
+          increased: 'yes',
+        });
+      } else if (
+        this.state.currency < prevState.currency &&
+        prevState.increased !== 'no'
+      ) {
+        this.setState({
+          increased: 'no',
+        });
+      }
     }
   }
 
@@ -69,7 +92,10 @@ class App extends React.Component<IProps, IState> {
           ></CurrencyList>
         </div>
         <ErrorBoundary>
-          <CurrencyData exchangeRate={this.state.currency}></CurrencyData>
+          <CurrencyData
+            exchangeRate={this.state.currency}
+            increased={this.state.increased}
+          ></CurrencyData>
         </ErrorBoundary>
         <Settings></Settings>
       </>

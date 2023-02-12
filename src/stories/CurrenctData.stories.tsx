@@ -9,4 +9,5 @@ const CurrData = (args: any) => <CurrencyData {...args} />;
 export const ExampleData = CurrData.bind({});
 ExampleData.args = {
   exchangeRate: 485,
+  increased: undefined,
 };
