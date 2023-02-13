@@ -18,6 +18,7 @@ interface IState {
   currentCurrency: string;
   increased: IncreasedType;
   showModal: boolean;
+  historicity: boolean;
 }
 
 export type IncreasedType = 'yes' | 'no' | undefined;
@@ -30,10 +31,13 @@ class App extends React.Component<IProps, IState> {
       currentCurrency: 'BTC',
       increased: undefined,
       showModal: false,
+      historicity: false,
     };
     this.changeCurrentCurrency = this.changeCurrentCurrency.bind(this);
     this.showModalOn = this.showModalOn.bind(this);
     this.showModalOff = this.showModalOff.bind(this);
+    this.setGettingPeriod = this.setGettingPeriod.bind(this);
+    this.setHistoricity = this.setHistoricity.bind(this);
   }
 
   componentDidMount() {
@@ -96,12 +100,31 @@ class App extends React.Component<IProps, IState> {
       showModal: false,
     });
   }
+  setGettingPeriod(time: number) {
+    clearInterval(this.interval);
+    this.interval = setInterval(() => {
+      getCurrencyData(this.state.currentCurrency).then((data) =>
+        this.setState({
+          currency: data.USD,
+        })
+      );
+    }, time);
+  }
+
+  setHistoricity(historicity: boolean) {
+    this.setState({
+      historicity: historicity,
+    });
+  }
 
   render() {
     return (
       <>
         <div className='mainWrapper'>
-          <Header showModal={this.showModalOn}></Header>
+          <Header
+            showModal={this.showModalOn}
+            historicity={this.state.historicity}
+          ></Header>
           <CurrencyList
             activated={this.state.currentCurrency}
             currencies={['BTC', 'ETH', 'BNB', 'DOT', 'ERR']}
@@ -116,7 +139,11 @@ class App extends React.Component<IProps, IState> {
         </ErrorBoundary>
         {this.state.showModal && (
           <Modal>
-            <Settings close={this.showModalOff}></Settings>
+            <Settings
+              close={this.showModalOff}
+              setGettingPeriod={this.setGettingPeriod}
+              setHistoricity={this.setHistoricity}
+            ></Settings>
           </Modal>
         )}
       </>

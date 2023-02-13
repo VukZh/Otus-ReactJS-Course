@@ -9,11 +9,13 @@ interface IconButtonsProps {
   icon: TypeIcon;
   // eslint-disable-next-line no-unused-vars
   onClickAction?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  disabled?: boolean;
 }
 
 export const IconButton: React.FC<IconButtonsProps> = ({
   icon,
   onClickAction,
+  disabled,
   ...props
 }) => {
   const iconImage =
@@ -30,7 +32,7 @@ export const IconButton: React.FC<IconButtonsProps> = ({
     <div className='iconButton-wrapper'>
       <button
         type='button'
-        className='icon-button'
+        className={disabled ? 'icon-button-disabled' : 'icon-button'}
         style={iconStyle}
         onClick={onClickAction}
         {...props}

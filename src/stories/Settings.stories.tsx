@@ -7,7 +7,13 @@ export default {
   component: Settings,
 };
 
-const Set = () => <Settings close={() => null} />;
+const Set = () => (
+  <Settings
+    close={() => null}
+    setGettingPeriod={() => null}
+    setHistoricity={() => null}
+  />
+);
 
 export const SettingsPart = Set.bind({});
 SettingsPart.args = {};

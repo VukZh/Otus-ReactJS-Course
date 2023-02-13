@@ -4,15 +4,27 @@ import './settings.css';
 interface SettingsProps {
   // eslint-disable-next-line no-unused-vars
   close: (event: React.MouseEvent) => void;
+  // eslint-disable-next-line no-unused-vars
+  setGettingPeriod: (time: number) => void;
+  // eslint-disable-next-line no-unused-vars
+  setHistoricity: (historicity: boolean) => void;
 }
 
-export const Settings: React.FC<SettingsProps> = ({ close }) => {
+export const Settings: React.FC<SettingsProps> = ({
+  close,
+  setGettingPeriod,
+  setHistoricity,
+}) => {
   const handleSubmit = (
     e: FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>
   ) => {
     e.preventDefault();
     // @ts-ignore
     console.log(e.target.updateTime.value, e.target.saveHistory.checked);
+    // @ts-ignore
+    setGettingPeriod(1000 * e.target.updateTime.value);
+    // @ts-ignore
+    setHistoricity(e.target.saveHistory.checked);
     close(e as React.MouseEvent);
   };
 

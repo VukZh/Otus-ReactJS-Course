@@ -9,7 +9,13 @@ import { render, screen } from '@testing-library/react';
 import { Settings } from './Settings';
 
 test('Settings test', () => {
-  render(<Settings close={() => null}></Settings>);
+  render(
+    <Settings
+      close={() => null}
+      setGettingPeriod={() => null}
+      setHistoricity={() => null}
+    ></Settings>
+  );
   expect(screen.queryByText('111')).toBeNull();
   expect(screen.queryByText('Please select options:')).not.toBeNull();
   expect(screen.queryByText('Set update time:')).not.toBeNull();
