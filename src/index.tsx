@@ -19,6 +19,7 @@ interface IState {
   increased: IncreasedType;
   showModal: boolean;
   historicity: boolean;
+  history: Array<string>;
 }
 
 export type IncreasedType = 'yes' | 'no' | undefined;
@@ -31,9 +32,11 @@ class App extends React.Component<IProps, IState> {
       currentCurrency: 'BTC',
       increased: undefined,
       showModal: false,
-      historicity: false,
+      historicity: true,
+      history: [],
     };
     this.changeCurrentCurrency = this.changeCurrentCurrency.bind(this);
+    this.changeCurrency = this.changeCurrency.bind(this);
     this.showModalOn = this.showModalOn.bind(this);
     this.showModalOff = this.showModalOff.bind(this);
     this.setGettingPeriod = this.setGettingPeriod.bind(this);
@@ -87,6 +90,20 @@ class App extends React.Component<IProps, IState> {
     this.setState({
       currentCurrency: currency,
     });
+    if (
+      this.state.historicity &&
+      this.state.history[this.state.history.length - 1] !== currency
+    ) {
+      this.setState((prevState) => ({
+        history: [...prevState.history, currency],
+      }));
+    }
+  }
+
+  changeCurrency(currency: string) {
+    this.setState(() => ({
+      currentCurrency: currency,
+    }));
   }
 
   showModalOn() {
@@ -124,6 +141,8 @@ class App extends React.Component<IProps, IState> {
           <Header
             showModal={this.showModalOn}
             historicity={this.state.historicity}
+            changeCurrency={this.changeCurrency}
+            history={this.state.history}
           ></Header>
           <CurrencyList
             activated={this.state.currentCurrency}
