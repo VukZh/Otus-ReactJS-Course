@@ -1,5 +1,5 @@
 import React from 'react';
-import './currencyList.css';
+import { classes, style } from 'typestyle';
 
 interface CurrencyListProps {
   currencies: Array<string>;
@@ -8,6 +8,32 @@ interface CurrencyListProps {
   changeCurrency(currency: string): void;
 }
 
+const listStyle = style({
+  display: 'inline-block',
+  fontFamily: 'Helvetica, Arial, sans-serif',
+  width: '20vw',
+  border: '1px solid rgba(0, 0, 0, 0.1)',
+  margin: '0 15px',
+  padding: '8px',
+  listStyle: 'none',
+  textAlign: 'start',
+});
+
+const currencyStyle = style({
+  color: 'black',
+  backgroundColor: 'white',
+  border: 'none',
+  $nest: {
+    '&:hover': {
+      backgroundColor: 'lightgray',
+    },
+  },
+});
+
+const currencyActiveStyle = style({
+  backgroundColor: 'darkgray',
+});
+
 export const CurrencyList: React.FC<CurrencyListProps> = ({
   currencies,
   activated,
@@ -15,13 +41,15 @@ export const CurrencyList: React.FC<CurrencyListProps> = ({
   ...props
 }) => {
   const list = currencies.map((currency, index) => {
-    const currencyStyle =
-      activated === currency ? 'currency currency-active' : 'currency';
+    const currency_Style =
+      activated === currency
+        ? classes(currencyStyle, currencyActiveStyle)
+        : currencyStyle;
     const clickListHandler = (currency: string) => changeCurrency(currency);
     return (
       <li key={`${index}-${currency}`} {...props}>
         <button
-          className={currencyStyle}
+          className={currency_Style}
           onClick={() => clickListHandler(currency)}
         >
           {currency}
@@ -29,5 +57,5 @@ export const CurrencyList: React.FC<CurrencyListProps> = ({
       </li>
     );
   });
-  return <ul className='list'>{list}</ul>;
+  return <ul className={listStyle}>{list}</ul>;
 };

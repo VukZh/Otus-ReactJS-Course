@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 
 import { Button } from './Button';
-import './header.css';
 import { IconButton } from './IconButton';
-
+import { style } from 'typestyle';
 interface HeaderProps {
   // eslint-disable-next-line no-unused-vars
   showModal: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -15,6 +14,23 @@ interface HeaderProps {
 
 type Direction = 'f' | 'b';
 
+const headerWrapperStyle = style({
+  fontFamily: 'Helvetica, Arial, sans-serif',
+  borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
+  padding: '30px 20px',
+  display: 'flex',
+  justifyContent: 'space-around',
+  width: '80vw',
+});
+
+const selectTimeStyle = style({
+  fontWeight: '700',
+  fontSize: '15px',
+  lineHeight: '3',
+  margin: '2px 20px',
+  display: 'inline-block',
+  verticalAlign: 'top',
+});
 export const Header: React.FC<HeaderProps> = ({
   showModal,
   historicity,
@@ -46,9 +62,9 @@ export const Header: React.FC<HeaderProps> = ({
   };
   return (
     <header>
-      <div className='wrapper'>
+      <div className={headerWrapperStyle}>
         <div>
-          <div className='select-time'>Please select time period</div>
+          <div className={selectTimeStyle}>Please select time period</div>
           <Button active={true} label='15'></Button>
           <Button label='30'></Button>
           <Button label='60'></Button>

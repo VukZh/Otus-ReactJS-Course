@@ -1,5 +1,5 @@
 import React, { ErrorInfo, ReactNode } from 'react';
-import './currencyData.css';
+import { style } from 'typestyle';
 interface Props {
   children: ReactNode;
 }
@@ -7,6 +7,20 @@ interface State {
   error: Error;
   errorInfo: ErrorInfo;
 }
+
+const formattedDataStyle = style({
+  width: '90vw',
+  height: '20vh',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  margin: '0 auto',
+  fontFamily: 'Arial, SansSerif',
+  fontSize: '5rem',
+  lineHeight: '7rem',
+  color: 'darkblue',
+  border: '2px solid black',
+});
 export class ErrorBoundary extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
@@ -22,7 +36,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
 
   render() {
     if (this.state.errorInfo) {
-      return <div className='formattedData'>Something went wrong.</div>;
+      return <div className={formattedDataStyle}>Something went wrong.</div>;
     }
     return this.props.children;
   }

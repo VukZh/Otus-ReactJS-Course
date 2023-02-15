@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './main.css';
 
 import { Header } from './components/Header';
 import { CurrencyList } from './components/CurrencyList';
@@ -9,6 +8,7 @@ import { getCurrencyData } from './services/getCurrencyData';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Settings } from './components/settings/Settings';
 import { Modal } from './components/settings/Modal';
+import { style } from 'typestyle';
 
 const DELAY = 3000;
 interface IProps {}
@@ -21,6 +21,11 @@ interface IState {
   historicity: boolean;
   history: Array<string>;
 }
+
+const mainWrapperStyle = style({
+  margin: '20px',
+  display: 'flex',
+});
 
 export type IncreasedType = 'yes' | 'no' | undefined;
 class App extends React.Component<IProps, IState> {
@@ -137,7 +142,7 @@ class App extends React.Component<IProps, IState> {
   render() {
     return (
       <>
-        <div className='mainWrapper'>
+        <div className={mainWrapperStyle}>
           <Header
             showModal={this.showModalOn}
             historicity={this.state.historicity}

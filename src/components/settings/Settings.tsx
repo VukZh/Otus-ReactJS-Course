@@ -1,5 +1,5 @@
 import React, { FormEvent } from 'react';
-import './settings.css';
+import { style } from 'typestyle';
 
 interface SettingsProps {
   // eslint-disable-next-line no-unused-vars
@@ -9,6 +9,30 @@ interface SettingsProps {
   // eslint-disable-next-line no-unused-vars
   setHistoricity: (historicity: boolean) => void;
 }
+
+const formWrapperStyle = style({
+  fontFamily: 'Arial, SansSerif',
+  display: 'flex',
+  flexDirection: 'column',
+  border: '1px solid gray',
+  margin: '10px auto',
+  width: '200px',
+  padding: '10px',
+  height: '260px',
+  justifyContent: 'space-around',
+  alignItems: 'center',
+  backgroundColor: 'white',
+});
+
+const formInputPartStyle = style({
+  width: '150px',
+});
+
+const formButtonStyle = style({
+  width: '100px',
+  height: '30px',
+  fontWeight: 'bolder',
+});
 
 export const Settings: React.FC<SettingsProps> = ({
   close,
@@ -30,13 +54,13 @@ export const Settings: React.FC<SettingsProps> = ({
 
   return (
     <form
-      className='formWrapper'
+      className={formWrapperStyle}
       onSubmit={(e) => {
         handleSubmit(e);
       }}
     >
       <p>Please select options: </p>
-      <fieldset className='formInputPart'>
+      <fieldset className={formInputPartStyle}>
         <legend>Set update time:</legend>
         <select name='updateTime' id='timePeriod' data-testid='select'>
           <option value='60'>1 minute</option>
@@ -52,10 +76,10 @@ export const Settings: React.FC<SettingsProps> = ({
           Currencies history
         </label>
       </fieldset>
-      <button type='submit' className='formButton'>
+      <button type='submit' className={formButtonStyle}>
         Submit
       </button>
-      <button type='button' className='formButton' onClick={close}>
+      <button type='button' className={formButtonStyle} onClick={close}>
         Cancel
       </button>
     </form>

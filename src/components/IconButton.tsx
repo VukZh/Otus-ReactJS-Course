@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import './iconButton.css';
 import forwardIcon from '../../public/assets/forward.png';
 import backwardIcon from '../../public/assets/backward.png';
 import settingsIcon from '../../public/assets/settings.png';
+import { style } from 'typestyle';
 
 type TypeIcon = 'forward' | 'backward' | 'settings';
 interface IconButtonsProps {
@@ -11,6 +11,37 @@ interface IconButtonsProps {
   onClickAction?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
 }
+
+const iconButtonStyle = style({
+  border: '1px solid darkgray',
+  cursor: 'pointer',
+  position: 'relative',
+  top: '9px',
+  width: '40px',
+  height: '30px',
+  $nest: {
+    '&:hover': {
+      border: '1px solid darkgray',
+    },
+    '&:active': {
+      border: '1px solid #666',
+    },
+  },
+});
+
+const iconButtonWrapperStyle = style({
+  display: 'inline-block',
+  margin: '0 2px',
+});
+
+const iconButtonDisabledStyle = style({
+  border: '1px solid white',
+  position: 'relative',
+  top: '9px',
+  width: '40px',
+  height: '30px',
+  backgroundColor: 'red',
+});
 
 export const IconButton: React.FC<IconButtonsProps> = ({
   icon,
@@ -29,10 +60,10 @@ export const IconButton: React.FC<IconButtonsProps> = ({
   };
   useEffect(() => {});
   return (
-    <div className='iconButton-wrapper'>
+    <div className={iconButtonWrapperStyle}>
       <button
         type='button'
-        className={disabled ? 'icon-button-disabled' : 'icon-button'}
+        className={disabled ? iconButtonDisabledStyle : iconButtonStyle}
         style={iconStyle}
         onClick={onClickAction}
         {...props}
