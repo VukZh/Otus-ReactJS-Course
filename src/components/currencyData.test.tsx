@@ -9,7 +9,9 @@ import { render, screen } from '@testing-library/react';
 import { CurrencyData } from './CurrencyData';
 
 test('CurrencyData test', () => {
-  render(<CurrencyData exchangeRate={10101} currency='BTC'></CurrencyData>);
+  render(
+    <CurrencyData exchangeRate={10101} increased={undefined}></CurrencyData>
+  );
   expect(screen.queryByText('10101')).not.toBeNull();
   expect(screen.queryByText('10102')).toBeNull();
 });

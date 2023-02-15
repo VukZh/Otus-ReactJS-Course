@@ -1,5 +1,5 @@
 import React from 'react';
-import './currencyList.css';
+import { classes, style } from 'typestyle';
 
 interface CurrencyListProps {
   currencies: Array<string>;
@@ -8,25 +8,54 @@ interface CurrencyListProps {
   changeCurrency(currency: string): void;
 }
 
-export class CurrencyList extends React.Component<CurrencyListProps> {
-  clickListHandler = (currency: string) => this.props.changeCurrency(currency);
-  render() {
-    const list = this.props.currencies.map((currency, index) => {
-      const currencyStyle =
-        this.props.activated === currency
-          ? 'currency currency-active'
-          : 'currency';
-      return (
-        <li key={`${index}-${currency}`} {...this.props}>
-          <button
-            className={currencyStyle}
-            onClick={() => this.clickListHandler(currency)}
-          >
-            {currency}
-          </button>
-        </li>
-      );
-    });
-    return <ul className='list'>{list}</ul>;
-  }
-}
+const listStyle = style({
+  display: 'inline-block',
+  fontFamily: 'Helvetica, Arial, sans-serif',
+  width: '20vw',
+  border: '1px solid rgba(0, 0, 0, 0.1)',
+  margin: '0 15px',
+  padding: '8px',
+  listStyle: 'none',
+  textAlign: 'start',
+});
+
+const currencyStyle = style({
+  color: 'black',
+  backgroundColor: 'white',
+  border: 'none',
+  $nest: {
+    '&:hover': {
+      backgroundColor: 'lightgray',
+    },
+  },
+});
+
+const currencyActiveStyle = style({
+  backgroundColor: 'darkgray',
+});
+
+export const CurrencyList: React.FC<CurrencyListProps> = ({
+  currencies,
+  activated,
+  changeCurrency,
+  ...props
+}) => {
+  const list = currencies.map((currency, index) => {
+    const currency_Style =
+      activated === currency
+        ? classes(currencyStyle, currencyActiveStyle)
+        : currencyStyle;
+    const clickListHandler = (currency: string) => changeCurrency(currency);
+    return (
+      <li key={`${index}-${currency}`} {...props}>
+        <button
+          className={currency_Style}
+          onClick={() => clickListHandler(currency)}
+        >
+          {currency}
+        </button>
+      </li>
+    );
+  });
+  return <ul className={listStyle}>{list}</ul>;
+};

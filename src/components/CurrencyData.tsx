@@ -1,47 +1,46 @@
 import React from 'react';
-import './currencyData.css';
+import { IncreasedType } from '../index';
+import { classes, style } from 'typestyle';
 
 interface CurrencyDataProps {
-  exchangeRate: number;
-  currency: string;
+  exchangeRate: number | undefined;
+  increased: IncreasedType;
 }
 
-interface CurrencyDataState {
-  updatedTime: number;
-}
+const formattedDataStyle = style({
+  width: '90vw',
+  height: '20vh',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  margin: '0 auto',
+  fontFamily: 'Arial, SansSerif',
+  fontSize: '5rem',
+  lineHeight: '7rem',
+  color: 'darkblue',
+  border: '2px solid black',
+});
 
-export class CurrencyData extends React.Component<
-  CurrencyDataProps,
-  CurrencyDataState
-> {
-  constructor(props: CurrencyDataProps) {
-    super(props);
-    this.state = {
-      updatedTime: new Date().valueOf(),
-    };
-  }
+const increasedStyle = style({
+  backgroundColor: 'lightgreen',
+});
 
-  componentDidUpdate() {
-    this.setState({
-      updatedTime: new Date().valueOf(),
-    });
-  }
+const decreasedStyle = style({
+  backgroundColor: 'lightcoral',
+});
 
-  shouldComponentUpdate(nextProps: Readonly<CurrencyDataProps>): boolean {
-    if (
-      new Date().valueOf() - this.state.updatedTime > 5000 || // delay > 5 sec
-      (nextProps.exchangeRate !== 0 && this.props.exchangeRate === 0) || // got 1st exchangeRate
-      nextProps.currency !== this.props.currency // change currency
-    ) {
-      return true;
-    }
-    return false;
+export const CurrencyData: React.FC<CurrencyDataProps> = ({
+  exchangeRate,
+  increased,
+}) => {
+  if (exchangeRate === undefined) {
+    throw new Error("can't get data");
   }
-
-  render() {
-    if (this.props.exchangeRate === undefined) {
-      throw new Error("can't get data");
-    }
-    return <div className='formattedData'>{this.props.exchangeRate}</div>;
-  }
-}
+  const dataStyle =
+    increased === 'yes'
+      ? classes(formattedDataStyle, increasedStyle)
+      : increased === 'no'
+      ? classes(formattedDataStyle, decreasedStyle)
+      : formattedDataStyle;
+  return <div className={dataStyle}>{exchangeRate}</div>;
+};

@@ -1,29 +1,73 @@
-import React from 'react';
-import './iconButton.css';
+import React, { useEffect } from 'react';
 import forwardIcon from '../../public/assets/forward.png';
 import backwardIcon from '../../public/assets/backward.png';
+import settingsIcon from '../../public/assets/settings.png';
+import { style } from 'typestyle';
 
-type TypeIcon = 'forward' | 'backward';
+type TypeIcon = 'forward' | 'backward' | 'settings';
 interface IconButtonsProps {
   icon: TypeIcon;
+  // eslint-disable-next-line no-unused-vars
+  onClickAction?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  disabled?: boolean;
 }
 
-export class IconButton extends React.Component<IconButtonsProps> {
-  render() {
-    const iconImage =
-      this.props.icon === 'forward' ? forwardIcon : backwardIcon;
-    const iconStyle = {
-      background: `url(${iconImage})`,
-    };
-    return (
-      <div className='iconButton-wrapper'>
-        <button
-          type='button'
-          className='icon-button'
-          style={iconStyle}
-          {...this.props}
-        ></button>
-      </div>
-    );
-  }
-}
+const iconButtonStyle = style({
+  border: '1px solid darkgray',
+  cursor: 'pointer',
+  position: 'relative',
+  top: '9px',
+  width: '40px',
+  height: '30px',
+  $nest: {
+    '&:hover': {
+      border: '1px solid darkgray',
+    },
+    '&:active': {
+      border: '1px solid #666',
+    },
+  },
+});
+
+const iconButtonWrapperStyle = style({
+  display: 'inline-block',
+  margin: '0 2px',
+});
+
+const iconButtonDisabledStyle = style({
+  border: '1px solid white',
+  position: 'relative',
+  top: '9px',
+  width: '40px',
+  height: '30px',
+  backgroundColor: 'red',
+});
+
+export const IconButton: React.FC<IconButtonsProps> = ({
+  icon,
+  onClickAction,
+  disabled,
+  ...props
+}) => {
+  const iconImage =
+    icon === 'forward'
+      ? forwardIcon
+      : icon === 'backward'
+      ? backwardIcon
+      : settingsIcon;
+  const iconStyle = {
+    background: `url(${iconImage})`,
+  };
+  useEffect(() => {});
+  return (
+    <div className={iconButtonWrapperStyle}>
+      <button
+        type='button'
+        className={disabled ? iconButtonDisabledStyle : iconButtonStyle}
+        style={iconStyle}
+        onClick={onClickAction}
+        {...props}
+      ></button>
+    </div>
+  );
+};
