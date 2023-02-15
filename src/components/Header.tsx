@@ -40,6 +40,7 @@ export const Header: React.FC<HeaderProps> = ({
   // eslint-disable-next-line prefer-const
   const [indexCurrencyArray, setIndexCurrencyArray] = useState(0);
   const handleChangeCurrency = (direction: Direction) => {
+    if (history.length === 0) return;
     if (
       historicity &&
       direction === 'f' &&
