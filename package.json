@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/VukZh/Otus-ReactJS-Course#readme",
   "devDependencies": {
+    "@babel/core": "^7.21.0",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-react": "^7.18.6",
+    "@babel/preset-typescript": "^7.21.0",
     "@types/jest": "^29.4.0",
     "@types/node": "^18.14.0",
     "@types/ramda": "^0.28.23",
