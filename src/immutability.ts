@@ -14,14 +14,31 @@ export type ExpectedTeam = {
 export const originalTeamToExpectedTeam = (
   originalTeam: OriginalTeam
 ): ExpectedTeam => {
-  //
+  const res = {} as ExpectedTeam;
+  Object.entries(originalTeam).map((el) => {
+    const [key, value] = el;
+    if (key === 'size') {
+      res.roster = +value + 10;
+    } else if (key === 'name') {
+      res.name = 'New York Badgers';
+    } else {
+      res.league = value.toString();
+    }
+  });
+  return res;
 };
 
 // Задание 2
-type SomeArray = Array<number | string>;
+export type SomeArray = Array<number | string>;
 
-const originalArrayToExpectedArray = (originalArray: SomeArray): SomeArray => {
-  //
+export const originalArrayToExpectedArray = (originalArray: SomeArray): SomeArray => {
+  return originalArray.map(el => {
+    if (el === 1) {
+      return "two";
+    } else {
+      return +el + 1;
+    }
+  })
 };
 
 // Задание 3
@@ -34,6 +51,19 @@ export type Team = {
   };
 };
 
-export const originalTeamToExpectedTeam = (originalTeam: Team): Team => {
-  //
+export const originalTeamToExpectedTeamDeep = (originalTeam: Team): Team => {
+  const res = {} as Team;
+
+  Object.entries(originalTeam).map((el) => {
+    const [key, value] = el;
+    if (key === 'captain') {
+      res.captain = { ...originalTeam.captain };
+      res.captain.age += 1;
+    } else {
+      // @ts-ignore
+      res[key] = value;
+    }
+  });
+
+  return res;
 }
