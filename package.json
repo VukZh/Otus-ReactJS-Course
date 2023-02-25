@@ -4,7 +4,8 @@
   "description": "functional programming",
   "main": "index.js",
   "scripts": {
-    "test": "npx jest"
+    "test": "npx jest",
+    "test coverage": "jest --coverage"
   },
   "repository": {
     "type": "git",
