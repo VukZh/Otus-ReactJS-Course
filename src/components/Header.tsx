@@ -9,7 +9,10 @@ interface HeaderProps {
   historicity: boolean;
   // eslint-disable-next-line no-unused-vars
   changeCurrency: (currency: string) => void;
+  // eslint-disable-next-line no-unused-vars
+  changeRandomCurrency: (random: number) => void;
   history: Array<string>;
+  listSize: number;
 }
 
 type Direction = 'f' | 'b';
@@ -31,11 +34,18 @@ const selectTimeStyle = style({
   display: 'inline-block',
   verticalAlign: 'top',
 });
+
+function randomCurrency(size: number): number {
+  const maxNumber = size - 2; // remove undef from currencies list
+  return Math.floor(Math.random() * (maxNumber + 1));
+}
 export const Header: React.FC<HeaderProps> = ({
   showModal,
   historicity,
   changeCurrency,
   history,
+  changeRandomCurrency,
+  listSize,
 }) => {
   // eslint-disable-next-line prefer-const
   const [indexCurrencyArray, setIndexCurrencyArray] = useState(0);
@@ -79,7 +89,12 @@ export const Header: React.FC<HeaderProps> = ({
             disabled={!historicity}
             onClickAction={() => handleChangeCurrency('f')}
           ></IconButton>
-          <IconButton icon='shuffle' onClickAction={() => {}}></IconButton>
+          <IconButton
+            icon='shuffle'
+            onClickAction={() => {
+              changeRandomCurrency(randomCurrency(listSize));
+            }}
+          ></IconButton>
           <IconButton icon='settings' onClickAction={showModal}></IconButton>
         </div>
       </div>

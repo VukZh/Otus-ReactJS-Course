@@ -15,6 +15,8 @@ test('Button test', () => {
       historicity={true}
       history={[]}
       changeCurrency={() => null}
+      listSize={3}
+      changeRandomCurrency={() => null}
     ></Header>
   );
   const text = screen.getAllByText(/Please/i);
