@@ -117,9 +117,7 @@ class App extends React.Component<IProps, IState> {
   }
 
   changeRandomCurrency(random: number) {
-    this.setState(() => ({
-      currentCurrency: this.state.currencies[random],
-    }));
+    this.changeCurrentCurrency(this.state.currencies[random]);
   }
 
   showModalOn() {
