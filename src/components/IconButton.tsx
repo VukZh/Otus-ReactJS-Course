@@ -2,9 +2,10 @@ import React, { useEffect } from 'react';
 import forwardIcon from '../../public/assets/forward.png';
 import backwardIcon from '../../public/assets/backward.png';
 import settingsIcon from '../../public/assets/settings.png';
+import shuffleIcon from '../../public/assets/shuffle.png';
 import { style } from 'typestyle';
 
-type TypeIcon = 'forward' | 'backward' | 'settings';
+type TypeIcon = 'forward' | 'backward' | 'settings' | 'shuffle';
 interface IconButtonsProps {
   icon: TypeIcon;
   // eslint-disable-next-line no-unused-vars
@@ -54,6 +55,8 @@ export const IconButton: React.FC<IconButtonsProps> = ({
       ? forwardIcon
       : icon === 'backward'
       ? backwardIcon
+      : icon === 'shuffle'
+      ? shuffleIcon
       : settingsIcon;
   const iconStyle = {
     background: `url(${iconImage})`,

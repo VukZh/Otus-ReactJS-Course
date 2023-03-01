@@ -21,5 +21,5 @@ test('Button test', () => {
   expect(text[0]).toBeInTheDocument();
   const buttons = screen.getAllByRole('button');
   expect(buttons[4]).toBeInTheDocument();
-  expect(buttons).toHaveLength(6);
+  expect(buttons).toHaveLength(7);
 });

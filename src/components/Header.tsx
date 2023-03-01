@@ -79,6 +79,7 @@ export const Header: React.FC<HeaderProps> = ({
             disabled={!historicity}
             onClickAction={() => handleChangeCurrency('f')}
           ></IconButton>
+          <IconButton icon='shuffle' onClickAction={() => {}}></IconButton>
           <IconButton icon='settings' onClickAction={showModal}></IconButton>
         </div>
       </div>

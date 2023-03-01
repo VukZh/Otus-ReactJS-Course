@@ -7,6 +7,7 @@ import '@testing-library/jest-dom';
 import * as React from 'react';
 import { render, screen } from '@testing-library/react';
 import { Settings } from './Settings';
+import userEvent from '@testing-library/user-event';
 
 test('Settings test', () => {
   render(
@@ -21,9 +22,19 @@ test('Settings test', () => {
   expect(screen.queryByText('Set update time:')).not.toBeNull();
   expect(screen.queryByText('Set history:')).not.toBeNull();
   expect(screen.getAllByRole('button').length).toBe(2);
-  expect(screen.queryByRole('form'));
-  expect(screen.queryByRole('checkbox'));
+  expect(screen.queryByRole('checkbox')).toBeInTheDocument();
   expect(screen.getAllByRole('option').length).toBe(4);
   expect(screen.getAllByRole('option')[0]).toHaveTextContent('1 minute');
   expect(screen.getAllByRole('option')[3]).toHaveTextContent('2 seconds');
+  expect(screen.getAllByRole('button')[0]).toHaveTextContent('Submit');
+  expect(screen.getAllByRole('button')[1]).toHaveTextContent('Cancel');
+
+  userEvent.selectOptions(
+    screen.getByRole('combobox'),
+    screen.getByRole('option', { name: '2 seconds' })
+  );
+  const option2sec = screen.getByRole('option', {
+    name: '2 seconds',
+  }) as HTMLOptionElement;
+  expect(option2sec.selected).toBe(true);
 });
