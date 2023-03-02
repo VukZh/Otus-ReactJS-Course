@@ -44,8 +44,6 @@ export const Settings: React.FC<SettingsProps> = ({
   ) => {
     e.preventDefault();
     // @ts-ignore
-    console.log(e.target.updateTime.value, e.target.saveHistory.checked);
-    // @ts-ignore
     setGettingPeriod(1000 * e.target.updateTime.value);
     // @ts-ignore
     setHistoricity(e.target.saveHistory.checked);

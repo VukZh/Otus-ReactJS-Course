@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import { Button } from './Button';
-import { IconButton } from './IconButton';
+import { Button } from '../Button';
+import { IconButton } from '../IconButton';
 import { style } from 'typestyle';
 interface HeaderProps {
   // eslint-disable-next-line no-unused-vars

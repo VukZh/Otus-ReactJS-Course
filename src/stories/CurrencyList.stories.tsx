@@ -1,5 +1,5 @@
 import React from 'react';
-import { CurrencyList } from '../components/CurrencyList';
+import { CurrencyList } from '../components/controls/CurrencyList';
 export default {
   title: 'Example/CurrencyList',
   component: CurrencyList,
