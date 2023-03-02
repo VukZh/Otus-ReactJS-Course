@@ -1,14 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { Header } from './components/Header';
-import { CurrencyList } from './components/CurrencyList';
+import { Controls } from './components/controls/Controls';
 import { CurrencyData } from './components/CurrencyData';
 import { getCurrencyData } from './services/getCurrencyData';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Settings } from './components/settings/Settings';
 import { Modal } from './components/settings/Modal';
-import { style } from 'typestyle';
 
 const DELAY = 3000;
 interface IProps {}
@@ -20,12 +18,9 @@ interface IState {
   showModal: boolean;
   historicity: boolean;
   history: Array<string>;
+  randomCurrency: number;
+  currencies: Array<string>;
 }
-
-const mainWrapperStyle = style({
-  margin: '20px',
-  display: 'flex',
-});
 
 export type IncreasedType = 'yes' | 'no' | undefined;
 class App extends React.Component<IProps, IState> {
@@ -39,6 +34,8 @@ class App extends React.Component<IProps, IState> {
       showModal: false,
       historicity: true,
       history: [],
+      randomCurrency: 0,
+      currencies: ['BTC', 'ETH', 'BNB', 'DOT', 'ERR'],
     };
     this.changeCurrentCurrency = this.changeCurrentCurrency.bind(this);
     this.changeCurrency = this.changeCurrency.bind(this);
@@ -46,6 +43,7 @@ class App extends React.Component<IProps, IState> {
     this.showModalOff = this.showModalOff.bind(this);
     this.setGettingPeriod = this.setGettingPeriod.bind(this);
     this.setHistoricity = this.setHistoricity.bind(this);
+    this.changeRandomCurrency = this.changeRandomCurrency.bind(this);
   }
 
   componentDidMount() {
@@ -111,6 +109,10 @@ class App extends React.Component<IProps, IState> {
     }));
   }
 
+  changeRandomCurrency(random: number) {
+    this.changeCurrentCurrency(this.state.currencies[random]);
+  }
+
   showModalOn() {
     this.setState({
       showModal: true,
@@ -142,19 +144,17 @@ class App extends React.Component<IProps, IState> {
   render() {
     return (
       <>
-        <div className={mainWrapperStyle}>
-          <Header
-            showModal={this.showModalOn}
-            historicity={this.state.historicity}
-            changeCurrency={this.changeCurrency}
-            history={this.state.history}
-          ></Header>
-          <CurrencyList
-            activated={this.state.currentCurrency}
-            currencies={['BTC', 'ETH', 'BNB', 'DOT', 'ERR']}
-            changeCurrency={this.changeCurrentCurrency}
-          ></CurrencyList>
-        </div>
+        <Controls
+          showModal={this.showModalOn}
+          historicity={this.state.historicity}
+          changeCurrency={this.changeCurrency}
+          changeRandomCurrency={this.changeRandomCurrency}
+          history={this.state.history}
+          currentCurrency={this.state.currentCurrency}
+          currencies={this.state.currencies}
+          changeCurrentCurrency={this.changeCurrentCurrency}
+        ></Controls>
+
         <ErrorBoundary>
           <CurrencyData
             exchangeRate={this.state.currency}

@@ -7,7 +7,7 @@ import '@testing-library/jest-dom';
 import * as React from 'react';
 import { render, screen } from '@testing-library/react';
 import { Button } from './Button';
-import { userEvent } from '@storybook/testing-library';
+import userEvent from '@testing-library/user-event';
 
 describe('Button test', () => {
   test('Button handler test', async () => {
