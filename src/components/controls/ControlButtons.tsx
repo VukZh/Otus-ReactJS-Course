@@ -39,7 +39,7 @@ function randomCurrency(size: number): number {
   const maxNumber = size - 2; // remove undef from currencies list
   return Math.floor(Math.random() * (maxNumber + 1));
 }
-export const Header: React.FC<HeaderProps> = ({
+export const ControlButtons: React.FC<HeaderProps> = ({
   showModal,
   historicity,
   changeCurrency,

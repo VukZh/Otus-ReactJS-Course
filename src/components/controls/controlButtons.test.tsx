@@ -6,18 +6,18 @@ import '@testing-library/react';
 import '@testing-library/jest-dom';
 import * as React from 'react';
 import { render, screen } from '@testing-library/react';
-import { Header } from './Header';
+import { ControlButtons } from './ControlButtons';
 
 test('Button test', () => {
   render(
-    <Header
+    <ControlButtons
       showModal={() => null}
       historicity={true}
       history={[]}
       changeCurrency={() => null}
       listSize={3}
       changeRandomCurrency={() => null}
-    ></Header>
+    ></ControlButtons>
   );
   const text = screen.getAllByText(/Please/i);
   expect(text[0]).toBeInTheDocument();

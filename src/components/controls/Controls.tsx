@@ -1,6 +1,6 @@
 import React from 'react';
 import { style } from 'typestyle';
-import { Header } from './Header';
+import { ControlButtons } from './ControlButtons';
 import { CurrencyList } from './CurrencyList';
 
 interface ControlsProps {
@@ -35,14 +35,14 @@ export const Controls: React.FC<ControlsProps> = ({
 }) => {
   return (
     <div className={controlsStyle}>
-      <Header
+      <ControlButtons
         showModal={showModal}
         historicity={historicity}
         changeCurrency={changeCurrency}
         changeRandomCurrency={changeRandomCurrency}
         history={history}
         listSize={currencies.length}
-      ></Header>
+      ></ControlButtons>
       <CurrencyList
         activated={currentCurrency}
         currencies={currencies}
