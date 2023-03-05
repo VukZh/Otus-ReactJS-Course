@@ -1,4 +1,4 @@
-import React, { FormEvent } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import { style } from 'typestyle';
 
 const startPageStyle = style({
@@ -25,12 +25,25 @@ const startPageStyle = style({
   },
 });
 export const StartPage: React.FC = () => {
+  const [name, setName] = useState('');
+  useEffect(() => {
+    if (window.localStorage.getItem('name')) {
+      setName(window.localStorage.getItem('name'));
+    }
+  }, []);
   const handleSubmit = (
     e: FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>
   ) => {
     e.preventDefault();
     // @ts-ignore
-    console.log('.. ', e.target.name.value);
+    const name = e.target.name.value;
+    console.log('> ', name);
+    window.localStorage.setItem('name', name);
+  };
+
+  const handleChange = (e: FormEvent<HTMLInputElement>) => {
+    // @ts-ignore
+    setName(e.target.value);
   };
 
   return (
@@ -43,11 +56,18 @@ export const StartPage: React.FC = () => {
       <p>Cryptocurrency checker app</p>
       <fieldset>
         <label>
-          <input type='text' name='name' />
+          <input
+            type='text'
+            name='name'
+            onChange={(e) => handleChange(e)}
+            value={name}
+          />
           Input your name
         </label>
       </fieldset>
-      <button type='submit'>Enter</button>
+      <button type='submit' disabled={name.length < 3}>
+        Enter
+      </button>
     </form>
   );
 };
