@@ -1,5 +1,6 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import { style } from 'typestyle';
+import { useNavigate } from 'react-router-dom';
 
 const startPageStyle = style({
   fontFamily: 'Arial, SansSerif',
@@ -26,6 +27,7 @@ const startPageStyle = style({
 });
 export const StartPage: React.FC = () => {
   const [name, setName] = useState('');
+  const siteNav = useNavigate();
   useEffect(() => {
     if (window.localStorage.getItem('name')) {
       setName(window.localStorage.getItem('name'));
@@ -35,13 +37,16 @@ export const StartPage: React.FC = () => {
     e: FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>
   ) => {
     e.preventDefault();
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const name = e.target.name.value;
     console.log('> ', name);
     window.localStorage.setItem('name', name);
+    siteNav('currency');
   };
 
   const handleChange = (e: FormEvent<HTMLInputElement>) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     setName(e.target.value);
   };

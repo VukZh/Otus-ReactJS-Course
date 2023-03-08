@@ -19,6 +19,13 @@ const controlsStyle = style({
   display: 'flex',
 });
 
+const welcomePartStyle = style({
+  fontFamily: 'Arial, SansSerif',
+  fontSize: '12px',
+  color: 'lightgray',
+  textAlign: 'center',
+});
+
 export const Controls: React.FC<ControlsProps> = ({
   showModal,
   historicity,
@@ -29,21 +36,25 @@ export const Controls: React.FC<ControlsProps> = ({
   currentCurrency,
   changeCurrentCurrency,
 }) => {
+  const welcomeString = `Hi ${window.localStorage.getItem('name')} !`;
   return (
-    <div className={controlsStyle}>
-      <ControlButtons
-        showModal={showModal}
-        historicity={historicity}
-        changeCurrency={changeCurrency}
-        changeRandomCurrency={changeRandomCurrency}
-        history={history}
-        listSize={currencies.length}
-      ></ControlButtons>
-      <CurrencyList
-        activated={currentCurrency}
-        currencies={currencies}
-        changeCurrency={changeCurrentCurrency}
-      ></CurrencyList>
-    </div>
+    <>
+      <div className={welcomePartStyle}> {welcomeString} </div>
+      <div className={controlsStyle}>
+        <ControlButtons
+          showModal={showModal}
+          historicity={historicity}
+          changeCurrency={changeCurrency}
+          changeRandomCurrency={changeRandomCurrency}
+          history={history}
+          listSize={currencies.length}
+        ></ControlButtons>
+        <CurrencyList
+          activated={currentCurrency}
+          currencies={currencies}
+          changeCurrency={changeCurrentCurrency}
+        ></CurrencyList>
+      </div>
+    </>
   );
 };
