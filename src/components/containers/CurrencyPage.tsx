@@ -1,13 +1,14 @@
 import React from 'react';
 
-import { Controls } from '../../components/controls/Controls';
-import { CurrencyData } from '../../components/CurrencyData';
+import { Controls } from '../controls/Controls';
+import { CurrencyData } from '../CurrencyData';
 import { getCurrencyData } from '../../services/getCurrencyData';
-import { ErrorBoundary } from '../../components/ErrorBoundary';
-import { Settings } from '../../components/settings/Settings';
-import { Modal } from '../../components/settings/Modal';
+import { ErrorBoundary } from '../ErrorBoundary';
+import { Settings } from '../settings/Settings';
+import { Modal } from '../settings/Modal';
 
 const DELAY = 3000;
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface IProps {}
 
 interface IState {

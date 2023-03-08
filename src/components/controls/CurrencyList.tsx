@@ -4,7 +4,6 @@ import { classes, style } from 'typestyle';
 interface CurrencyListProps {
   currencies: Array<string>;
   activated: string;
-  // eslint-disable-next-line no-unused-vars
   changeCurrency(currency: string): void;
 }
 

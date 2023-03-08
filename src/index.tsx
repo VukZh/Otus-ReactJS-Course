@@ -7,6 +7,7 @@ import { StartPage } from './components/containers/StartPage';
 import { style } from 'typestyle';
 
 const navStyle = style({
+  fontFamily: 'Helvetica, Arial, sans-serif',
   display: 'flex',
   margin: '10px auto',
   justifyContent: 'space-evenly',
@@ -17,8 +18,22 @@ const App = () => {
     <>
       <BrowserRouter>
         <nav className={navStyle}>
-          <NavLink to='/'>Start</NavLink>
-          <NavLink to='/currency'>Currency</NavLink>
+          <NavLink
+            to='/'
+            style={({ isActive }) => ({
+              color: isActive ? 'green' : 'black',
+            })}
+          >
+            Start
+          </NavLink>
+          <NavLink
+            to='/currency'
+            style={({ isActive }) => ({
+              color: isActive ? 'green' : 'black',
+            })}
+          >
+            Currency
+          </NavLink>
         </nav>
 
         <Routes>

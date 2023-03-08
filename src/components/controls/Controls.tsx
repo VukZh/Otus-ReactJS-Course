@@ -4,17 +4,13 @@ import { ControlButtons } from './ControlButtons';
 import { CurrencyList } from './CurrencyList';
 
 interface ControlsProps {
-  // eslint-disable-next-line no-unused-vars
   showModal: (event: React.MouseEvent<HTMLButtonElement>) => void;
   historicity: boolean;
-  // eslint-disable-next-line no-unused-vars
   changeCurrency: (currency: string) => void;
-  // eslint-disable-next-line no-unused-vars
   changeRandomCurrency: (random: number) => void;
   history: Array<string>;
   currencies: Array<string>;
   currentCurrency: string;
-  // eslint-disable-next-line no-unused-vars
   changeCurrentCurrency(currency: string): void;
 }
 

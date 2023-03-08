@@ -4,12 +4,9 @@ import { Button } from '../Button';
 import { IconButton } from '../IconButton';
 import { style } from 'typestyle';
 interface HeaderProps {
-  // eslint-disable-next-line no-unused-vars
   showModal: (event: React.MouseEvent<HTMLButtonElement>) => void;
   historicity: boolean;
-  // eslint-disable-next-line no-unused-vars
   changeCurrency: (currency: string) => void;
-  // eslint-disable-next-line no-unused-vars
   changeRandomCurrency: (random: number) => void;
   history: Array<string>;
   listSize: number;
@@ -47,7 +44,6 @@ export const ControlButtons: React.FC<HeaderProps> = ({
   changeRandomCurrency,
   listSize,
 }) => {
-  // eslint-disable-next-line prefer-const
   const [indexCurrencyArray, setIndexCurrencyArray] = useState(0);
   const handleChangeCurrency = (direction: Direction) => {
     if (history.length === 0) return;
