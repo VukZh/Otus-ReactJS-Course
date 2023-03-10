@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 
 import { ControlButtons } from '../components/controls/ControlButtons';
 export default {
@@ -6,7 +7,10 @@ export default {
   component: ControlButtons,
 };
 
-const Hdr = (args: any) => <ControlButtons {...args} />;
+export const Hdr = (args: any) => (
+  <BrowserRouter>
+    <ControlButtons {...args} />
+  </BrowserRouter>
+);
 
-export const HeaderPart = Hdr.bind({});
-HeaderPart.args = {};
+Hdr.args = {};

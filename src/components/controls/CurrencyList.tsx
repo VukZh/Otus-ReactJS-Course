@@ -4,7 +4,6 @@ import { classes, style } from 'typestyle';
 interface CurrencyListProps {
   currencies: Array<string>;
   activated: string;
-  // eslint-disable-next-line no-unused-vars
   changeCurrency(currency: string): void;
 }
 
@@ -42,7 +41,7 @@ export const CurrencyList: React.FC<CurrencyListProps> = ({
 }) => {
   const list = currencies.map((currency, index) => {
     const currency_Style =
-      activated === currency
+      activated.toLowerCase() === currency.toLowerCase()
         ? classes(currencyStyle, currencyActiveStyle)
         : currencyStyle;
     const clickListHandler = (currency: string) => changeCurrency(currency);

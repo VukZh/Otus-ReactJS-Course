@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
-
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -57,6 +57,7 @@ module.exports = (env = {}) => {
     plugins: [
       new HtmlWebPackPlugin({
         template: 'public/index.html',
+        publicPath: '/',
       }),
       new MiniCssExtractPlugin({
         filename: 'style-[hash:8].css',
@@ -64,6 +65,7 @@ module.exports = (env = {}) => {
     ],
     devServer: {
       open: true,
+      historyApiFallback: true,
     },
   };
 };
