@@ -41,7 +41,7 @@ export const CurrencyList: React.FC<CurrencyListProps> = ({
 }) => {
   const list = currencies.map((currency, index) => {
     const currency_Style =
-      activated === currency
+      activated.toLowerCase() === currency.toLowerCase()
         ? classes(currencyStyle, currencyActiveStyle)
         : currencyStyle;
     const clickListHandler = (currency: string) => changeCurrency(currency);

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom';
 
-import { CurrencyPage } from './components/containers/CurrencyPage';
+import CurrencyPage from './components/containers/CurrencyPage';
 import { StartPage } from './components/containers/StartPage';
 import { style } from 'typestyle';
 
@@ -39,6 +39,7 @@ const App = () => {
         <Routes>
           <Route index element={<StartPage />} />
           <Route path='currency' element={<CurrencyPage />} />
+          <Route path='currency/:id' element={<CurrencyPage />} />
         </Routes>
       </BrowserRouter>
     </>

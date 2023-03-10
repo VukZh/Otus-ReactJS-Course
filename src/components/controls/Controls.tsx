@@ -22,8 +22,9 @@ const controlsStyle = style({
 const welcomePartStyle = style({
   fontFamily: 'Arial, SansSerif',
   fontSize: '12px',
-  color: 'lightgray',
+  color: 'darkblue',
   textAlign: 'center',
+  backgroundColor: 'lightsalmon',
 });
 
 export const Controls: React.FC<ControlsProps> = ({

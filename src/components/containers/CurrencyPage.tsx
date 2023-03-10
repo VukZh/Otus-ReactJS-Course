@@ -1,4 +1,5 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 
 import { Controls } from '../controls/Controls';
 import { CurrencyData } from '../CurrencyData';
@@ -9,7 +10,9 @@ import { Modal } from '../settings/Modal';
 
 const DELAY = 3000;
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface IProps {}
+interface IProps {
+  params: any;
+}
 
 interface IState {
   currency: number;
@@ -23,19 +26,19 @@ interface IState {
 }
 
 export type IncreasedType = 'yes' | 'no' | undefined;
-export class CurrencyPage extends React.Component<IProps, IState> {
+class CurrencyPage extends React.Component<IProps, IState> {
   interval: any;
   constructor(props: IProps) {
     super(props);
     this.state = {
       currency: 0,
-      currentCurrency: 'BTC',
+      currentCurrency: '',
       increased: undefined,
       showModal: false,
       historicity: true,
       history: [],
       randomCurrency: 0,
-      currencies: ['BTC', 'ETH', 'BNB', 'DOT', 'ERR'],
+      currencies: ['BTC', 'ETH', 'BNB', 'DOT', 'ER~'],
     };
     this.changeCurrentCurrency = this.changeCurrentCurrency.bind(this);
     this.changeCurrency = this.changeCurrency.bind(this);
@@ -47,6 +50,8 @@ export class CurrencyPage extends React.Component<IProps, IState> {
   }
 
   componentDidMount() {
+    const curr = this.props.params.id ? this.props.params.id : 'BTC';
+    this.setState({ currentCurrency: curr });
     this.interval = setInterval(() => {
       getCurrencyData(this.state.currentCurrency).then((data) =>
         this.setState({
@@ -174,3 +179,5 @@ export class CurrencyPage extends React.Component<IProps, IState> {
     );
   }
 }
+
+export default (props: any) => <CurrencyPage {...props} params={useParams()} />;
