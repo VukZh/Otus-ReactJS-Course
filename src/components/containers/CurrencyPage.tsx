@@ -9,9 +9,12 @@ import { Settings } from '../settings/Settings';
 import { Modal } from '../settings/Modal';
 
 const DELAY = 3000;
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
+
+type CurrencyName = {
+  id: string;
+};
 interface IProps {
-  params: any;
+  params: undefined | CurrencyName;
 }
 
 interface IState {

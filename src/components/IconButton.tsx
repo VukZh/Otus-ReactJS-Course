@@ -1,14 +1,21 @@
-import React, { useEffect } from 'react';
-import forwardIcon from '../../public/assets/forward.png';
-import backwardIcon from '../../public/assets/backward.png';
-import settingsIcon from '../../public/assets/settings.png';
-import shuffleIcon from '../../public/assets/shuffle.png';
-import exitIcon from '../../public/assets/exit.png';
+import React from 'react';
+import forwardIcon from 'Icons/forward.png';
+import backwardIcon from 'Icons/backward.png';
+import settingsIcon from 'Icons/settings.png';
+import shuffleIcon from 'Icons/shuffle.png';
+import exitIcon from 'Icons/exit.png';
 import { style } from 'typestyle';
 
-type TypeIcon = 'forward' | 'backward' | 'settings' | 'shuffle' | 'exit';
+export enum Icons {
+  forward,
+  backward,
+  settings,
+  shuffle,
+  exit,
+}
+
 interface IconButtonsProps {
-  icon: TypeIcon;
+  icon: Icons;
   onClickAction?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
 }
@@ -51,20 +58,19 @@ export const IconButton: React.FC<IconButtonsProps> = ({
   ...props
 }) => {
   const iconImage =
-    icon === 'forward'
+    icon === Icons.forward
       ? forwardIcon
-      : icon === 'backward'
+      : icon === Icons.backward
       ? backwardIcon
-      : icon === 'shuffle'
+      : icon === Icons.shuffle
       ? shuffleIcon
-      : icon === 'exit'
+      : icon === Icons.exit
       ? exitIcon
       : settingsIcon;
   const iconStyle = {
     background: `url(${iconImage})`,
   };
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  useEffect(() => {});
+
   return (
     <div className={iconButtonWrapperStyle}>
       <button

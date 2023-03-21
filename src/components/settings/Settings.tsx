@@ -7,6 +7,15 @@ interface SettingsProps {
   setHistoricity: (historicity: boolean) => void;
 }
 
+type FormData = {
+  updateTime: {
+    value: number;
+  };
+  saveHistory: {
+    checked: boolean;
+  };
+};
+
 const formWrapperStyle = style({
   fontFamily: 'Arial, SansSerif',
   display: 'flex',
@@ -40,12 +49,10 @@ export const Settings: React.FC<SettingsProps> = ({
     e: FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>
   ) => {
     e.preventDefault();
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    setGettingPeriod(1000 * e.target.updateTime.value);
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    setHistoricity(e.target.saveHistory.checked);
+    const formData = e.target as unknown as FormData;
+
+    setGettingPeriod(1000 * formData.updateTime.value);
+    setHistoricity(formData.saveHistory.checked);
     close(e as React.MouseEvent);
   };
 

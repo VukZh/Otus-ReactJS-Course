@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -12,6 +11,9 @@ module.exports = (env = {}) => {
     devtool: 'source-map',
     resolve: {
       extensions: ['.ts', '.tsx', '.js', '.jsx'],
+      alias: {
+        Icons: path.resolve(__dirname, 'public/assets/icons'),
+      },
     },
     entry: path.resolve(__dirname, './src/index.tsx'),
     module: {

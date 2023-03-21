@@ -1,7 +1,7 @@
 import React from 'react';
 import { classes, style } from 'typestyle';
 
-type IncreasedType = 'yes' | 'no' | undefined;
+type IncreasedType = 'yes' | 'no';
 interface CurrencyDataProps {
   exchangeRate: number | undefined;
   increased: IncreasedType;

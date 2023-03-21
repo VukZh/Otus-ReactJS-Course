@@ -27,6 +27,7 @@
     "@typescript-eslint"
   ],
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "@typescript-eslint/no-var-requires": 0
   }
 }
