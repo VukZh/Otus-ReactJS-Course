@@ -13,7 +13,7 @@ type CurrencyName = {
   id: string;
 };
 interface IProps {
-  params: undefined | CurrencyName;
+  params?: CurrencyName;
 }
 
 interface IState {
@@ -175,4 +175,6 @@ class CurrencyPage extends React.Component<IProps, IState> {
   }
 }
 
-export default (props: any) => <CurrencyPage {...props} params={useParams()} />;
+export default (props: IProps) => (
+  <CurrencyPage {...props} params={useParams() as CurrencyName} />
+);
