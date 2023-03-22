@@ -10,13 +10,14 @@ import { render, screen } from '@testing-library/react';
 import { Controls } from './Controls';
 
 test('Controls test', () => {
+  const fn = jest.fn();
   render(
     <BrowserRouter>
       <Controls
-        changeCurrentCurrency={() => null}
-        changeRandomCurrency={() => null}
-        changeCurrency={() => null}
-        showModal={() => null}
+        changeCurrentCurrency={fn}
+        changeRandomCurrency={fn}
+        changeCurrency={fn}
+        showModal={fn}
         history={[]}
         currentCurrency='USD'
         currencies={['EUR', 'USD']}

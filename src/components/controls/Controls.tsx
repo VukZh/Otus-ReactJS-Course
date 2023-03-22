@@ -49,12 +49,12 @@ export const Controls: React.FC<ControlsProps> = ({
           changeRandomCurrency={changeRandomCurrency}
           history={history}
           listSize={currencies.length}
-        ></ControlButtons>
+        />
         <CurrencyList
           activated={currentCurrency}
           currencies={currencies}
           changeCurrency={changeCurrentCurrency}
-        ></CurrencyList>
+        />
       </div>
     </>
   );

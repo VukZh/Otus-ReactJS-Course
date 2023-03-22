@@ -7,8 +7,7 @@ import { getCurrencyData } from '../../services/getCurrencyData';
 import { ErrorBoundary } from '../ErrorBoundary';
 import { Settings } from '../settings/Settings';
 import { Modal } from '../settings/Modal';
-
-const DELAY = 3000;
+import { IncreasedType } from '../../types';
 
 type CurrencyName = {
   id: string;
@@ -28,9 +27,9 @@ interface IState {
   currencies: Array<string>;
 }
 
-export type IncreasedType = 'yes' | 'no' | undefined;
+type IntervalType = ReturnType<typeof setInterval>;
 class CurrencyPage extends React.Component<IProps, IState> {
-  interval: any;
+  interval: IntervalType;
   constructor(props: IProps) {
     super(props);
     this.state = {
@@ -43,17 +42,10 @@ class CurrencyPage extends React.Component<IProps, IState> {
       randomCurrency: 0,
       currencies: ['BTC', 'ETH', 'BNB', 'DOT', 'ER~'],
     };
-    this.changeCurrentCurrency = this.changeCurrentCurrency.bind(this);
-    this.changeCurrency = this.changeCurrency.bind(this);
-    this.showModalOn = this.showModalOn.bind(this);
-    this.showModalOff = this.showModalOff.bind(this);
-    this.setGettingPeriod = this.setGettingPeriod.bind(this);
-    this.setHistoricity = this.setHistoricity.bind(this);
-    this.changeRandomCurrency = this.changeRandomCurrency.bind(this);
   }
 
   componentDidMount() {
-    const curr = this.props.params.id ? this.props.params.id : 'BTC';
+    const curr = this.props.params.id || 'BTC';
     this.setState({ currentCurrency: curr });
     this.interval = setInterval(() => {
       getCurrencyData(this.state.currentCurrency).then((data) =>
@@ -61,7 +53,7 @@ class CurrencyPage extends React.Component<IProps, IState> {
           currency: data.USD,
         })
       );
-    }, DELAY);
+    }, 3000);
   }
 
   componentWillUnmount() {
@@ -97,7 +89,7 @@ class CurrencyPage extends React.Component<IProps, IState> {
     }
   }
 
-  changeCurrentCurrency(currency: string) {
+  changeCurrentCurrency = (currency: string): void => {
     this.setState({
       currentCurrency: currency,
     });
@@ -109,30 +101,30 @@ class CurrencyPage extends React.Component<IProps, IState> {
         history: [...prevState.history, currency],
       }));
     }
-  }
+  };
 
-  changeCurrency(currency: string) {
+  changeCurrency = (currency: string): void => {
     this.setState(() => ({
       currentCurrency: currency,
     }));
-  }
+  };
 
-  changeRandomCurrency(random: number) {
+  changeRandomCurrency = (random: number): void => {
     this.changeCurrentCurrency(this.state.currencies[random]);
-  }
+  };
 
-  showModalOn() {
+  showModalOn = (): void => {
     this.setState({
       showModal: true,
     });
-  }
+  };
 
-  showModalOff() {
+  showModalOff = (): void => {
     this.setState({
       showModal: false,
     });
-  }
-  setGettingPeriod(time: number) {
+  };
+  setGettingPeriod = (time: number): void => {
     clearInterval(this.interval);
     this.interval = setInterval(() => {
       getCurrencyData(this.state.currentCurrency).then((data) =>
@@ -141,13 +133,13 @@ class CurrencyPage extends React.Component<IProps, IState> {
         })
       );
     }, time);
-  }
+  };
 
-  setHistoricity(historicity: boolean) {
+  setHistoricity = (historicity: boolean): void => {
     this.setState({
       historicity: historicity,
     });
-  }
+  };
 
   render() {
     return (
@@ -161,13 +153,13 @@ class CurrencyPage extends React.Component<IProps, IState> {
           currentCurrency={this.state.currentCurrency}
           currencies={this.state.currencies}
           changeCurrentCurrency={this.changeCurrentCurrency}
-        ></Controls>
+        />
 
         <ErrorBoundary>
           <CurrencyData
             exchangeRate={this.state.currency}
             increased={this.state.increased}
-          ></CurrencyData>
+          />
         </ErrorBoundary>
         {this.state.showModal && (
           <Modal>
@@ -175,7 +167,7 @@ class CurrencyPage extends React.Component<IProps, IState> {
               close={this.showModalOff}
               setGettingPeriod={this.setGettingPeriod}
               setHistoricity={this.setHistoricity}
-            ></Settings>
+            />
           </Modal>
         )}
       </>

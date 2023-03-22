@@ -2,6 +2,12 @@ import React, { FormEvent, useEffect, useState } from 'react';
 import { style } from 'typestyle';
 import { useNavigate } from 'react-router-dom';
 
+type FormData = {
+  name: {
+    value: string;
+  };
+};
+
 const startPageStyle = style({
   fontFamily: 'Arial, SansSerif',
   display: 'flex',
@@ -37,36 +43,22 @@ export const StartPage: React.FC = () => {
     e: FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>
   ) => {
     e.preventDefault();
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    const name = e.target.name.value;
-    console.log('> ', name);
-    window.localStorage.setItem('name', name);
+    const formData = e.target as unknown as FormData;
+    window.localStorage.setItem('name', formData.name.value);
     siteNav('currency');
   };
 
   const handleChange = (e: FormEvent<HTMLInputElement>) => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    setName(e.target.value);
+    const nameValue = e.target as HTMLInputElement;
+    setName(nameValue.value);
   };
 
   return (
-    <form
-      className={startPageStyle}
-      onSubmit={(e) => {
-        handleSubmit(e);
-      }}
-    >
+    <form className={startPageStyle} onSubmit={handleSubmit}>
       <p>Cryptocurrency checker app</p>
       <fieldset>
         <label>
-          <input
-            type='text'
-            name='name'
-            onChange={(e) => handleChange(e)}
-            value={name}
-          />
+          <input type='text' name='name' onChange={handleChange} value={name} />
           Input your name
         </label>
       </fieldset>
