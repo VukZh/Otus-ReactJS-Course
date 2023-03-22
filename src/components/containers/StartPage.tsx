@@ -1,6 +1,6 @@
 import React, { FormEvent, useEffect, useState } from 'react';
-import { style } from 'typestyle';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
 type FormData = {
   name: {
@@ -8,29 +8,30 @@ type FormData = {
   };
 };
 
-const startPageStyle = style({
-  fontFamily: 'Arial, SansSerif',
-  display: 'flex',
-  flexDirection: 'column',
-  margin: '10px auto',
-  width: '400px',
-  padding: '10px',
-  height: '260px',
-  justifyContent: 'space-around',
-  alignItems: 'center',
-  backgroundColor: 'lightsalmon',
-  $nest: {
-    '& fieldset': {
-      padding: '10px 20px',
-    },
-    '& button': {
-      padding: '5px 10px',
-    },
-    '& fieldset label input': {
-      marginRight: '10px',
-    },
-  },
-});
+const Fieldset = styled.fieldset`
+  padding: 10px 20px;
+`;
+
+const Form = styled.form`
+  font-family: Arial, SansSerif;
+  display: flex;
+  flex-direction: column;
+  margin: 10px auto;
+  width: 400px;
+  padding: 10px;
+  height: 260px;
+  justify-content: space-around;
+  align-items: center;
+  background-color: lightsalmon;
+`;
+
+const Button = styled.button`
+  padding: 10px 20px;
+`;
+
+const Input = styled.input`
+  margin-right: 10px;
+`;
 export const StartPage: React.FC = () => {
   const [name, setName] = useState('');
   const siteNav = useNavigate();
@@ -54,17 +55,17 @@ export const StartPage: React.FC = () => {
   };
 
   return (
-    <form className={startPageStyle} onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <p>Cryptocurrency checker app</p>
-      <fieldset>
+      <Fieldset>
         <label>
-          <input type='text' name='name' onChange={handleChange} value={name} />
+          <Input type='text' name='name' onChange={handleChange} value={name} />
           Input your name
         </label>
-      </fieldset>
-      <button type='submit' disabled={name.length < 3}>
+      </Fieldset>
+      <Button type='submit' disabled={name.length < 3}>
         Enter
-      </button>
-    </form>
+      </Button>
+    </Form>
   );
 };
