@@ -2,12 +2,6 @@ import React, { FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-type FormData = {
-  name: {
-    value: string;
-  };
-};
-
 const Fieldset = styled.fieldset`
   padding: 10px 20px;
 `;
@@ -42,8 +36,11 @@ export const StartPage: React.FC = () => {
   }, []);
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = e.target as unknown as FormData;
-    window.localStorage.setItem('name', formData.name.value);
+    const form = e.currentTarget;
+    const formElements = form.elements as typeof form.elements & {
+      nameInput: { value: string };
+    };
+    window.localStorage.setItem('name', formElements.nameInput.value);
     siteNav('currency');
   };
 
@@ -57,7 +54,13 @@ export const StartPage: React.FC = () => {
       <p>Cryptocurrency checker app</p>
       <Fieldset>
         <label>
-          <Input type='text' name='name' onChange={handleChange} value={name} />
+          <Input
+            type='text'
+            name='name'
+            onChange={handleChange}
+            value={name}
+            id='nameInput'
+          />
           Input your name
         </label>
       </Fieldset>
