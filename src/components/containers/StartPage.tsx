@@ -40,9 +40,7 @@ export const StartPage: React.FC = () => {
       setName(window.localStorage.getItem('name'));
     }
   }, []);
-  const handleSubmit = (
-    e: FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>
-  ) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = e.target as unknown as FormData;
     window.localStorage.setItem('name', formData.name.value);
