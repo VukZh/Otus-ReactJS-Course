@@ -1,7 +1,7 @@
 import { IncreasedType } from '../types';
 
 export enum ActionTypes {
-  SET_CURRENCY = 'SET_CURRENCY',
+  CHANGE_CURRENCY = 'CHANGE_CURRENCY',
   SET_CURRENT_CURRENCY = 'SET_CURRENT_CURRENCY',
   CHANGE_RANDOM_CURRENCY = 'CHANGE_RANDOM_CURRENCY',
   SET_GETTING_PERIOD = 'SET_GETTING_PERIOD',
@@ -9,8 +9,8 @@ export enum ActionTypes {
   SET_HISTORICITY = 'SET_HISTORICITY',
 }
 
-type SetCurrencyActionType = {
-  type: ActionTypes.SET_CURRENCY;
+type ChangeCurrencyActionType = {
+  type: ActionTypes.CHANGE_CURRENCY;
   payload: string;
 };
 
@@ -39,11 +39,30 @@ type SetHistoricityType = {
   payload: boolean;
 };
 
+type StateType = {
+  currency: number;
+  currentCurrency: string;
+  increased: IncreasedType;
+  historicity: boolean;
+  history: Array<string>;
+  randomCurrency: number;
+  currencies: Array<string>;
+};
+
 export type {
-  SetCurrencyActionType,
+  ChangeCurrencyActionType,
   SetCurrentCurrencyActionType,
   ChangeRandomCurrencyType,
   SetGettingPeriodType,
   SetIncreasedType,
   SetHistoricityType,
+  StateType,
 };
+
+export type ActionType =
+  | ChangeCurrencyActionType
+  | SetCurrentCurrencyActionType
+  | ChangeRandomCurrencyType
+  | SetGettingPeriodType
+  | SetIncreasedType
+  | SetHistoricityType;

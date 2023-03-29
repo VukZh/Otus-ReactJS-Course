@@ -6,12 +6,12 @@ import {
   SetHistoricityAction,
   SetIncreasedAction,
 } from './actionCreators';
-import { ActionTypes } from './actionsTypes';
+import { ActionTypes } from './types';
 
 describe('Actions creators tests', () => {
   test('SetCurrencyAction test', () => {
     expect(SetCurrencyAction('BTC')).toEqual({
-      type: ActionTypes.SET_CURRENCY,
+      type: ActionTypes.CHANGE_CURRENCY,
       payload: 'BTC',
     });
     expect(SetCurrencyAction('BTC')).not.toEqual({
@@ -19,7 +19,7 @@ describe('Actions creators tests', () => {
       payload: 'BTC',
     });
     expect(SetCurrencyAction('BTC')).not.toEqual({
-      type: ActionTypes.SET_CURRENCY,
+      type: ActionTypes.CHANGE_CURRENCY,
       payload: 'BT',
     });
   });
@@ -30,7 +30,7 @@ describe('Actions creators tests', () => {
       payload: 'BTC',
     });
     expect(SetCurrentCurrencyAction('BTC')).not.toEqual({
-      type: ActionTypes.SET_CURRENCY,
+      type: ActionTypes.CHANGE_CURRENCY,
       payload: 'BTC',
     });
     expect(SetCurrentCurrencyAction('BTC')).not.toEqual({

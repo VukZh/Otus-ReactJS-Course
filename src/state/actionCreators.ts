@@ -1,17 +1,19 @@
 import {
   ActionTypes,
+  ChangeCurrencyActionType,
   ChangeRandomCurrencyType,
-  SetCurrencyActionType,
   SetCurrentCurrencyActionType,
   SetGettingPeriodType,
   SetHistoricityType,
   SetIncreasedType,
-} from './actionsTypes';
+} from './types';
 import { IncreasedType } from '../types';
 
-export const SetCurrencyAction = (currency: string): SetCurrencyActionType => {
+export const SetCurrencyAction = (
+  currency: string
+): ChangeCurrencyActionType => {
   return {
-    type: ActionTypes.SET_CURRENCY,
+    type: ActionTypes.CHANGE_CURRENCY,
     payload: currency,
   };
 };
