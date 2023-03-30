@@ -19,6 +19,8 @@ export const reducer = (
       return { ...state, currency: action.payload };
     case ActionTypes.CHANGE_CURRENCY:
       return { ...state, currentCurrency: action.payload };
+    case ActionTypes.SET_CURRENT_CURRENCY:
+      return { ...state, currentCurrency: action.payload };
     case ActionTypes.SET_INCREASED:
       return { ...state, increased: action.payload };
     case ActionTypes.SET_HISTORICITY:
