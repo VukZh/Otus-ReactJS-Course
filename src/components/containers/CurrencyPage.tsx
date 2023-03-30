@@ -5,7 +5,7 @@ import { Controls } from '../controls/Controls';
 import { CurrencyData } from '../CurrencyData';
 import { getCurrencyData } from '../../services/getCurrencyData';
 import { ErrorBoundary } from '../ErrorBoundary';
-import { Settings } from '../settings/Settings';
+import Settings from '../settings/Settings';
 import { Modal } from '../settings/Modal';
 import { IncreasedType } from '../../types';
 import { State } from '../../state/reducer';
@@ -108,10 +108,6 @@ class CurrencyPage extends React.Component<IProps, IState> {
     }, time);
   };
 
-  setHistoricity = (historicity: boolean): void => {
-    this.props.setHistoricity(historicity);
-  };
-
   render() {
     return (
       <>
@@ -137,7 +133,6 @@ class CurrencyPage extends React.Component<IProps, IState> {
             <Settings
               close={this.showModalOff}
               setGettingPeriod={this.setGettingPeriod}
-              setHistoricity={this.setHistoricity}
             />
           </Modal>
         )}
@@ -182,11 +177,6 @@ const mapDispatchToProps = (dispatch: Dispatch<ActionsType>) => {
       dispatch({
         type: ActionTypes.SET_INCREASED,
         payload: increased,
-      }),
-    setHistoricity: (historicity: boolean) =>
-      dispatch({
-        type: ActionTypes.SET_HISTORICITY,
-        payload: historicity,
       }),
     addHistory: (currency: string) =>
       dispatch({

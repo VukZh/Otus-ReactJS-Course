@@ -1,6 +1,8 @@
 import React from 'react';
 
-import { Settings } from '../components/settings/Settings';
+import Settings from '../components/settings/Settings';
+import { Provider } from 'react-redux';
+import { store } from '../state/store';
 
 export default {
   title: 'Example/Settings',
@@ -8,11 +10,9 @@ export default {
 };
 
 const Set = () => (
-  <Settings
-    close={() => null}
-    setGettingPeriod={() => null}
-    setHistoricity={() => null}
-  />
+  <Provider store={store}>
+    <Settings close={() => null} setGettingPeriod={() => null}></Settings>
+  </Provider>
 );
 
 export const SettingsPart = Set.bind({});

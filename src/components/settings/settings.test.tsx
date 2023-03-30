@@ -5,17 +5,17 @@
 import '@testing-library/react';
 import '@testing-library/jest-dom';
 import * as React from 'react';
+import { Provider } from 'react-redux';
 import { render, screen } from '@testing-library/react';
-import { Settings } from './Settings';
+import Settings from './Settings';
 import userEvent from '@testing-library/user-event';
+import { store } from '../../state/store';
 
 test('Settings test', () => {
   render(
-    <Settings
-      close={() => null}
-      setGettingPeriod={() => null}
-      setHistoricity={() => null}
-    ></Settings>
+    <Provider store={store}>
+      <Settings close={() => null} setGettingPeriod={() => null}></Settings>
+    </Provider>
   );
   expect(screen.queryByText('111')).toBeNull();
   expect(screen.queryByText('Please select options:')).not.toBeNull();
