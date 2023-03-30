@@ -14,7 +14,7 @@ import { store } from '../../state/store';
 test('Settings test', () => {
   render(
     <Provider store={store}>
-      <Settings close={() => null} setGettingPeriod={() => null}></Settings>
+      <Settings close={() => null} setGettingPeriod={() => null} />
     </Provider>
   );
   expect(screen.queryByText('111')).toBeNull();

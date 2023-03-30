@@ -11,7 +11,7 @@ export default {
 
 const Set = () => (
   <Provider store={store}>
-    <Settings close={() => null} setGettingPeriod={() => null}></Settings>
+    <Settings close={() => null} setGettingPeriod={() => null} />
   </Provider>
 );
 

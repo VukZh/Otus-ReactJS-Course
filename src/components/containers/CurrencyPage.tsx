@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 
 import { Controls } from '../controls/Controls';
-import { CurrencyData } from '../CurrencyData';
+import CurrencyData from '../CurrencyData';
 import { getCurrencyData } from '../../services/getCurrencyData';
 import { ErrorBoundary } from '../ErrorBoundary';
 import Settings from '../settings/Settings';
@@ -123,10 +123,7 @@ class CurrencyPage extends React.Component<IProps, IState> {
         />
 
         <ErrorBoundary>
-          <CurrencyData
-            exchangeRate={this.props.currency}
-            increased={this.props.increased}
-          />
+          <CurrencyData />
         </ErrorBoundary>
         {this.state.showModal && (
           <Modal>
