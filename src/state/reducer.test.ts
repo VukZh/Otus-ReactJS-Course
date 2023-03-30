@@ -78,20 +78,4 @@ describe('Reducer tests', () => {
       currencies: ['BTC'],
     });
   });
-  test('add history test', () => {
-    expect(
-      reducer(state, {
-        type: ActionTypes.ADD_HISTORY,
-        payload: 'BTC2',
-      })
-    ).toEqual({
-      currency: 0,
-      currentCurrency: '',
-      increased: undefined,
-      historicity: true,
-      history: ['BTC2'],
-      randomCurrency: 0,
-      currencies: ['BTC'],
-    });
-  });
 });

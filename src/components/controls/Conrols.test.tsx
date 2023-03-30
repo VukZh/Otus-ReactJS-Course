@@ -16,16 +16,7 @@ test('Controls test', () => {
   render(
     <Provider store={store}>
       <BrowserRouter>
-        <Controls
-          changeCurrentCurrency={fn}
-          changeRandomCurrency={fn}
-          changeCurrency={fn}
-          showModal={fn}
-          history={[]}
-          currentCurrency='USD'
-          currencies={['EUR', 'USD']}
-          historicity={false}
-        ></Controls>
+        <Controls showModal={fn}></Controls>
       </BrowserRouter>
     </Provider>
   );

@@ -68,26 +68,6 @@ class CurrencyPage extends React.Component<IProps, IState> {
       }
     }
   }
-
-  changeCurrentCurrency = (currency: string): void => {
-    this.props.changeCurrentCurrency(currency);
-    if (
-      this.props.historicity &&
-      this.props.history[this.props.history.length - 1] !== currency
-    ) {
-      this.props.addHistory(currency);
-    }
-  };
-
-  changeCurrency = (currency: string): void => {
-    this.props.changeCurrentCurrency(currency);
-    this.props.setIncreased(undefined);
-  };
-
-  changeRandomCurrency = (random: number): void => {
-    this.changeCurrentCurrency(this.props.currencies[random]);
-  };
-
   showModalOn = (): void => {
     this.setState({
       showModal: true,
@@ -111,16 +91,7 @@ class CurrencyPage extends React.Component<IProps, IState> {
   render() {
     return (
       <>
-        <Controls
-          showModal={this.showModalOn}
-          historicity={this.props.historicity}
-          changeCurrency={this.changeCurrency}
-          changeRandomCurrency={this.changeRandomCurrency}
-          history={this.props.history}
-          currentCurrency={this.props.currentCurrency}
-          currencies={this.props.currencies}
-          changeCurrentCurrency={this.changeCurrentCurrency}
-        />
+        <Controls showModal={this.showModalOn} />
 
         <ErrorBoundary>
           <CurrencyData />
@@ -160,11 +131,11 @@ const mapDispatchToProps = (dispatch: Dispatch<ActionsType>) => {
         type: ActionTypes.SET_CURRENT_CURRENCY,
         payload: currency,
       }),
-    changeRandomCurrency: (ind: number) =>
-      dispatch({
-        type: ActionTypes.CHANGE_RANDOM_CURRENCY,
-        payload: ind,
-      }),
+    // changeRandomCurrency: (ind: number) =>
+    //   dispatch({
+    //     type: ActionTypes.CHANGE_RANDOM_CURRENCY,
+    //     payload: ind,
+    //   }),
     setGettingPeriod: (period: number) =>
       dispatch({
         type: ActionTypes.SET_GETTING_PERIOD,
@@ -175,11 +146,11 @@ const mapDispatchToProps = (dispatch: Dispatch<ActionsType>) => {
         type: ActionTypes.SET_INCREASED,
         payload: increased,
       }),
-    addHistory: (currency: string) =>
-      dispatch({
-        type: ActionTypes.ADD_HISTORY,
-        payload: currency,
-      }),
+    // addHistory: (currency: string) =>
+    //   dispatch({
+    //     type: ActionTypes.ADD_HISTORY,
+    //     payload: currency,
+    //   }),
   };
 };
 
