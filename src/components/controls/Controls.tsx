@@ -1,7 +1,7 @@
 import React from 'react';
 import { style } from 'typestyle';
 import { ControlButtons } from './ControlButtons';
-import { CurrencyList } from './CurrencyList';
+import CurrencyList from './CurrencyList';
 
 interface ControlsProps {
   showModal: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -34,8 +34,6 @@ export const Controls: React.FC<ControlsProps> = ({
   changeRandomCurrency,
   history,
   currencies,
-  currentCurrency,
-  changeCurrentCurrency,
 }) => {
   const welcomeString = `Hi ${window.localStorage.getItem('name')} !`;
   return (
@@ -50,11 +48,7 @@ export const Controls: React.FC<ControlsProps> = ({
           history={history}
           listSize={currencies.length}
         />
-        <CurrencyList
-          activated={currentCurrency}
-          currencies={currencies}
-          changeCurrency={changeCurrentCurrency}
-        />
+        <CurrencyList />
       </div>
     </>
   );
