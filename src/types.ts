@@ -1,1 +1,1 @@
-export type IncreasedType = 'yes' | 'no';
+export type IncreasedType = 'yes' | 'no' | undefined;
