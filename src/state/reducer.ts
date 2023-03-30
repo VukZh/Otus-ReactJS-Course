@@ -29,3 +29,5 @@ export const reducer = (
       return state;
   }
 };
+
+export type State = ReturnType<typeof reducer>;
