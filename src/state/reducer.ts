@@ -8,6 +8,8 @@ const initialState: StateType = {
   history: [],
   randomCurrency: 0,
   currencies: ['BTC', 'ETH', 'BNB', 'DOT', 'ER~'],
+  isLoading: false,
+  error: null,
 };
 
 export const reducer = (
@@ -17,6 +19,26 @@ export const reducer = (
   switch (action.type) {
     case ActionTypes.SET_CURRENCY_VALUE:
       return { ...state, currency: action.payload };
+    case ActionTypes.GET_CURRENCY_VALUE:
+      return {
+        ...state,
+        isLoading: true,
+        error: null,
+      };
+    case ActionTypes.GET_CURRENCY_VALUE_SUCCESS:
+      return {
+        ...state,
+        currency: action.payload,
+        isLoading: false,
+        error: null,
+      };
+    case ActionTypes.GET_CURRENCY_VALUE_ERROR:
+      return {
+        ...state,
+        currency: 0,
+        isLoading: false,
+        error: action.payload,
+      };
     case ActionTypes.CHANGE_CURRENCY:
       return { ...state, currentCurrency: action.payload };
     case ActionTypes.SET_CURRENT_CURRENCY:

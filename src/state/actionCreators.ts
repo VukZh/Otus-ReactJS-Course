@@ -1,6 +1,5 @@
 import {
   ActionTypes,
-  AddHistoryType,
   ChangeCurrencyActionType,
   ChangeRandomCurrencyType,
   SetCurrencyValueActionType,
@@ -69,11 +68,5 @@ export const SetHistoricityAction = (
   return {
     type: ActionTypes.SET_HISTORICITY,
     payload: historicity,
-  };
-};
-export const AddHistoryAction = (currency: string): AddHistoryType => {
-  return {
-    type: ActionTypes.ADD_HISTORY,
-    payload: currency,
   };
 };

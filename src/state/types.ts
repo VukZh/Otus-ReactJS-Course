@@ -1,6 +1,9 @@
 import { IncreasedType } from '../types';
 
 export enum ActionTypes {
+  GET_CURRENCY_VALUE = 'GET_CURRENCY_VALUE',
+  GET_CURRENCY_VALUE_SUCCESS = 'GET_CURRENCY_VALUE_SUCCESS',
+  GET_CURRENCY_VALUE_ERROR = 'GET_CURRENCY_VALUE_ERROR',
   SET_CURRENCY_VALUE = 'SET_CURRENCY_VALUE',
   CHANGE_CURRENCY = 'CHANGE_CURRENCY',
   SET_CURRENT_CURRENCY = 'SET_CURRENT_CURRENCY',
@@ -8,8 +11,11 @@ export enum ActionTypes {
   SET_GETTING_PERIOD = 'SET_GETTING_PERIOD',
   SET_INCREASED = 'SET_INCREASED',
   SET_HISTORICITY = 'SET_HISTORICITY',
-  ADD_HISTORY = 'ADD_HISTORY',
 }
+
+type GetCurrencyValueActionType = {
+  type: ActionTypes.GET_CURRENCY_VALUE;
+};
 
 type SetCurrencyValueActionType = {
   type: ActionTypes.SET_CURRENCY_VALUE;
@@ -46,8 +52,13 @@ type SetHistoricityType = {
   payload: boolean;
 };
 
-type AddHistoryType = {
-  type: ActionTypes.ADD_HISTORY;
+type GetCurrencyValueSuccessType = {
+  type: ActionTypes.GET_CURRENCY_VALUE_SUCCESS;
+  payload: number;
+};
+
+type GetCurrencyValueErrorType = {
+  type: ActionTypes.GET_CURRENCY_VALUE_ERROR;
   payload: string;
 };
 
@@ -59,9 +70,14 @@ type StateType = {
   history: Array<string>;
   randomCurrency: number;
   currencies: Array<string>;
+  isLoading: boolean;
+  error: string | null;
 };
 
 export type {
+  GetCurrencyValueActionType,
+  GetCurrencyValueSuccessType,
+  GetCurrencyValueErrorType,
   SetCurrencyValueActionType,
   ChangeCurrencyActionType,
   SetCurrentCurrencyActionType,
@@ -69,7 +85,6 @@ export type {
   SetGettingPeriodType,
   SetIncreasedType,
   SetHistoricityType,
-  AddHistoryType,
   StateType,
 };
 
@@ -81,4 +96,6 @@ export type ActionsType =
   | SetGettingPeriodType
   | SetIncreasedType
   | SetHistoricityType
-  | AddHistoryType;
+  | GetCurrencyValueActionType
+  | GetCurrencyValueSuccessType
+  | GetCurrencyValueErrorType;

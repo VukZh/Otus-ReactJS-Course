@@ -1,5 +1,4 @@
 import {
-  AddHistoryAction,
   ChangeRandomCurrencyAction,
   SetCurrencyAction,
   SetCurrencyValueAction,
@@ -113,21 +112,6 @@ describe('Actions creators tests', () => {
     expect(SetHistoricityAction(true)).not.toEqual({
       type: ActionTypes.SET_HISTORICITY,
       payload: false,
-    });
-  });
-
-  test('AddHistoryAction test', () => {
-    expect(AddHistoryAction('ETH')).toEqual({
-      type: ActionTypes.ADD_HISTORY,
-      payload: 'ETH',
-    });
-    expect(AddHistoryAction('ETH')).not.toEqual({
-      type: ActionTypes.SET_HISTORICITY,
-      payload: 'ETH',
-    });
-    expect(AddHistoryAction('ETH')).not.toEqual({
-      type: ActionTypes.ADD_HISTORY,
-      payload: 'ETC',
     });
   });
 });

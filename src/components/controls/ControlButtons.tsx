@@ -43,12 +43,10 @@ export const ControlButtons: React.FC<ControlButtonsProps> = ({
   const [indexCurrencyArray, setIndexCurrencyArray] = useState(0);
   const siteNav = useNavigate();
   function randomCurrency(size: number): number {
-    console.log('rrr', historicity, currencies, history);
     const maxNumber = size - 2; // remove undef from currencies list
     return Math.floor(Math.random() * (maxNumber + 1));
   }
   const handleChangeCurrency = (direction: Direction) => {
-    console.log('1', historicity, currencies, history);
     if (history.length === 0) return;
     if (
       historicity &&

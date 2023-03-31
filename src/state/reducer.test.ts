@@ -12,6 +12,8 @@ describe('Reducer tests', () => {
       history: [],
       randomCurrency: 0,
       currencies: ['BTC'],
+      isLoading: false,
+      error: null,
     };
   });
   test('set currency value test', () => {
@@ -28,6 +30,8 @@ describe('Reducer tests', () => {
       history: [],
       randomCurrency: 0,
       currencies: ['BTC'],
+      isLoading: false,
+      error: null,
     });
   });
   test('change currency test', () => {
@@ -44,6 +48,8 @@ describe('Reducer tests', () => {
       history: [],
       randomCurrency: 0,
       currencies: ['BTC'],
+      isLoading: false,
+      error: null,
     });
   });
   test('set increased test', () => {
@@ -60,6 +66,8 @@ describe('Reducer tests', () => {
       history: [],
       randomCurrency: 0,
       currencies: ['BTC'],
+      isLoading: false,
+      error: null,
     });
   });
   test('set historicity test', () => {
@@ -76,6 +84,61 @@ describe('Reducer tests', () => {
       history: [],
       randomCurrency: 0,
       currencies: ['BTC'],
+      isLoading: false,
+      error: null,
+    });
+  });
+  test('get currency value test', () => {
+    expect(
+      reducer(state, {
+        type: ActionTypes.GET_CURRENCY_VALUE,
+      })
+    ).toEqual({
+      currency: 0,
+      currentCurrency: '',
+      increased: undefined,
+      historicity: true,
+      history: [],
+      randomCurrency: 0,
+      currencies: ['BTC'],
+      isLoading: true,
+      error: null,
+    });
+  });
+  test('get currency value success test', () => {
+    expect(
+      reducer(state, {
+        type: ActionTypes.GET_CURRENCY_VALUE_SUCCESS,
+        payload: 222,
+      })
+    ).toEqual({
+      currency: 222,
+      currentCurrency: '',
+      increased: undefined,
+      historicity: true,
+      history: [],
+      randomCurrency: 0,
+      currencies: ['BTC'],
+      isLoading: false,
+      error: null,
+    });
+  });
+  test('get currency value success test', () => {
+    expect(
+      reducer(state, {
+        type: ActionTypes.GET_CURRENCY_VALUE_ERROR,
+        payload: 'something error',
+      })
+    ).toEqual({
+      currency: 0,
+      currentCurrency: '',
+      increased: undefined,
+      historicity: true,
+      history: [],
+      randomCurrency: 0,
+      currencies: ['BTC'],
+      isLoading: false,
+      error: 'something error',
     });
   });
 });
