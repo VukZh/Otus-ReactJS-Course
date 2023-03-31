@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Button } from '../Button';
-import { IconButton } from '../IconButton';
+import { IconButton, Icons } from '../IconButton';
 import { style } from 'typestyle';
 interface HeaderProps {
-  // eslint-disable-next-line no-unused-vars
   showModal: (event: React.MouseEvent<HTMLButtonElement>) => void;
   historicity: boolean;
-  // eslint-disable-next-line no-unused-vars
   changeCurrency: (currency: string) => void;
-  // eslint-disable-next-line no-unused-vars
   changeRandomCurrency: (random: number) => void;
   history: Array<string>;
   listSize: number;
@@ -47,8 +45,8 @@ export const ControlButtons: React.FC<HeaderProps> = ({
   changeRandomCurrency,
   listSize,
 }) => {
-  // eslint-disable-next-line prefer-const
   const [indexCurrencyArray, setIndexCurrencyArray] = useState(0);
+  const siteNav = useNavigate();
   const handleChangeCurrency = (direction: Direction) => {
     if (history.length === 0) return;
     if (
@@ -71,6 +69,10 @@ export const ControlButtons: React.FC<HeaderProps> = ({
       changeCurrency(history[0]);
     }
   };
+  const handleExit = () => {
+    window.localStorage.removeItem('name');
+    siteNav('/');
+  };
   return (
     <header>
       <div className={headerWrapperStyle}>
@@ -80,22 +82,26 @@ export const ControlButtons: React.FC<HeaderProps> = ({
           <Button label='30'></Button>
           <Button label='60'></Button>
           <IconButton
-            icon='backward'
+            icon={Icons.backward}
             disabled={!historicity}
             onClickAction={() => handleChangeCurrency('b')}
           ></IconButton>
           <IconButton
-            icon='forward'
+            icon={Icons.forward}
             disabled={!historicity}
             onClickAction={() => handleChangeCurrency('f')}
           ></IconButton>
           <IconButton
-            icon='shuffle'
+            icon={Icons.shuffle}
             onClickAction={() => {
               changeRandomCurrency(randomCurrency(listSize));
             }}
           ></IconButton>
-          <IconButton icon='settings' onClickAction={showModal}></IconButton>
+          <IconButton
+            icon={Icons.settings}
+            onClickAction={showModal}
+          ></IconButton>
+          <IconButton icon={Icons.exit} onClickAction={handleExit}></IconButton>
         </div>
       </div>
     </header>

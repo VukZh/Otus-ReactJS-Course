@@ -4,23 +4,27 @@ import { ControlButtons } from './ControlButtons';
 import { CurrencyList } from './CurrencyList';
 
 interface ControlsProps {
-  // eslint-disable-next-line no-unused-vars
   showModal: (event: React.MouseEvent<HTMLButtonElement>) => void;
   historicity: boolean;
-  // eslint-disable-next-line no-unused-vars
   changeCurrency: (currency: string) => void;
-  // eslint-disable-next-line no-unused-vars
   changeRandomCurrency: (random: number) => void;
   history: Array<string>;
   currencies: Array<string>;
   currentCurrency: string;
-  // eslint-disable-next-line no-unused-vars
   changeCurrentCurrency(currency: string): void;
 }
 
 const controlsStyle = style({
   margin: '20px',
   display: 'flex',
+});
+
+const welcomePartStyle = style({
+  fontFamily: 'Arial, SansSerif',
+  fontSize: '12px',
+  color: 'darkblue',
+  textAlign: 'center',
+  backgroundColor: 'lightsalmon',
 });
 
 export const Controls: React.FC<ControlsProps> = ({
@@ -33,21 +37,25 @@ export const Controls: React.FC<ControlsProps> = ({
   currentCurrency,
   changeCurrentCurrency,
 }) => {
+  const welcomeString = `Hi ${window.localStorage.getItem('name')} !`;
   return (
-    <div className={controlsStyle}>
-      <ControlButtons
-        showModal={showModal}
-        historicity={historicity}
-        changeCurrency={changeCurrency}
-        changeRandomCurrency={changeRandomCurrency}
-        history={history}
-        listSize={currencies.length}
-      ></ControlButtons>
-      <CurrencyList
-        activated={currentCurrency}
-        currencies={currencies}
-        changeCurrency={changeCurrentCurrency}
-      ></CurrencyList>
-    </div>
+    <>
+      <div className={welcomePartStyle}> {welcomeString} </div>
+      <div className={controlsStyle}>
+        <ControlButtons
+          showModal={showModal}
+          historicity={historicity}
+          changeCurrency={changeCurrency}
+          changeRandomCurrency={changeRandomCurrency}
+          history={history}
+          listSize={currencies.length}
+        />
+        <CurrencyList
+          activated={currentCurrency}
+          currencies={currencies}
+          changeCurrency={changeCurrentCurrency}
+        />
+      </div>
+    </>
   );
 };

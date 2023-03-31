@@ -2,13 +2,19 @@ import React, { FormEvent } from 'react';
 import { style } from 'typestyle';
 
 interface SettingsProps {
-  // eslint-disable-next-line no-unused-vars
   close: (event: React.MouseEvent) => void;
-  // eslint-disable-next-line no-unused-vars
   setGettingPeriod: (time: number) => void;
-  // eslint-disable-next-line no-unused-vars
   setHistoricity: (historicity: boolean) => void;
 }
+
+type FormData = {
+  updateTime: {
+    value: number;
+  };
+  saveHistory: {
+    checked: boolean;
+  };
+};
 
 const formWrapperStyle = style({
   fontFamily: 'Arial, SansSerif',
@@ -43,10 +49,10 @@ export const Settings: React.FC<SettingsProps> = ({
     e: FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>
   ) => {
     e.preventDefault();
-    // @ts-ignore
-    setGettingPeriod(1000 * e.target.updateTime.value);
-    // @ts-ignore
-    setHistoricity(e.target.saveHistory.checked);
+    const formData = e.target as unknown as FormData;
+
+    setGettingPeriod(1000 * formData.updateTime.value);
+    setHistoricity(formData.saveHistory.checked);
     close(e as React.MouseEvent);
   };
 

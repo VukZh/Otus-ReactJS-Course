@@ -1,3 +1,5 @@
+const path = require("path");
+
 module.exports = {
   "stories": [
     "../src/**/*.stories.mdx",
@@ -12,4 +14,11 @@ module.exports = {
     "builder": "@storybook/builder-webpack5"
   },
   staticDirs: ['../public/assets'],
+  webpackFinal: async (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      'Icons': path.resolve(__dirname, '../public/assets/icons'),
+    };
+    return config;
+  },
 }

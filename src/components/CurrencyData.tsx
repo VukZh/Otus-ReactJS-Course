@@ -1,6 +1,6 @@
 import React from 'react';
-import { IncreasedType } from '../index';
 import { classes, style } from 'typestyle';
+import { IncreasedType } from '../types';
 
 interface CurrencyDataProps {
   exchangeRate: number | undefined;
