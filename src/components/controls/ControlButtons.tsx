@@ -4,14 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '../Button';
 import { IconButton, Icons } from '../IconButton';
 import { style } from 'typestyle';
-interface HeaderProps {
-  showModal: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  historicity: boolean;
-  changeCurrency: (currency: string) => void;
-  changeRandomCurrency: (random: number) => void;
-  history: Array<string>;
-  listSize: number;
-}
+import { State } from '../../state/reducer';
+import { Dispatch } from 'redux';
+import { ActionsType, ActionTypes } from '../../state/types';
+import { IncreasedType } from '../../types';
+import { connect, ConnectedProps } from 'react-redux';
 
 type Direction = 'f' | 'b';
 
@@ -33,20 +30,22 @@ const selectTimeStyle = style({
   verticalAlign: 'top',
 });
 
-function randomCurrency(size: number): number {
-  const maxNumber = size - 2; // remove undef from currencies list
-  return Math.floor(Math.random() * (maxNumber + 1));
-}
-export const ControlButtons: React.FC<HeaderProps> = ({
+export const ControlButtons: React.FC<ControlButtonsProps> = ({
   showModal,
   historicity,
-  changeCurrency,
+  changeCurrentCurrency,
   history,
   changeRandomCurrency,
-  listSize,
+  currencies,
+  setIncreased,
+  changeCurrency,
 }) => {
   const [indexCurrencyArray, setIndexCurrencyArray] = useState(0);
   const siteNav = useNavigate();
+  function randomCurrency(size: number): number {
+    const maxNumber = size - 2; // remove undef from currencies list
+    return Math.floor(Math.random() * (maxNumber + 1));
+  }
   const handleChangeCurrency = (direction: Direction) => {
     if (history.length === 0) return;
     if (
@@ -56,9 +55,11 @@ export const ControlButtons: React.FC<HeaderProps> = ({
     ) {
       setIndexCurrencyArray(indexCurrencyArray + 1);
       changeCurrency(history[indexCurrencyArray]);
+      setIncreased(undefined);
     } else if (historicity && direction === 'b' && indexCurrencyArray > 0) {
       setIndexCurrencyArray(indexCurrencyArray - 1);
       changeCurrency(history[indexCurrencyArray]);
+      setIncreased(undefined);
     } else if (
       historicity &&
       direction === 'f' &&
@@ -67,6 +68,7 @@ export const ControlButtons: React.FC<HeaderProps> = ({
       changeCurrency(history[history.length - 1]);
     } else if (historicity && direction === 'b' && indexCurrencyArray === 0) {
       changeCurrency(history[0]);
+      setIncreased(undefined);
     }
   };
   const handleExit = () => {
@@ -94,7 +96,7 @@ export const ControlButtons: React.FC<HeaderProps> = ({
           <IconButton
             icon={Icons.shuffle}
             onClickAction={() => {
-              changeRandomCurrency(randomCurrency(listSize));
+              changeRandomCurrency(randomCurrency(currencies.length));
             }}
           ></IconButton>
           <IconButton
@@ -107,3 +109,44 @@ export const ControlButtons: React.FC<HeaderProps> = ({
     </header>
   );
 };
+
+const mapStateToProps = (state: State) => ({
+  historicity: state.historicity,
+  history: state.history,
+  currencies: state.currencies,
+});
+
+const mapDispatchToProps = (dispatch: Dispatch<ActionsType>) => {
+  return {
+    changeCurrentCurrency: (currency: string) =>
+      dispatch({
+        type: ActionTypes.SET_CURRENT_CURRENCY,
+        payload: currency,
+      }),
+    changeRandomCurrency: (ind: number) =>
+      dispatch({
+        type: ActionTypes.CHANGE_RANDOM_CURRENCY,
+        payload: ind,
+      }),
+    setIncreased: (increased: IncreasedType) =>
+      dispatch({
+        type: ActionTypes.SET_INCREASED,
+        payload: increased,
+      }),
+    changeCurrency: (currency: string) =>
+      dispatch({
+        type: ActionTypes.CHANGE_CURRENCY,
+        payload: currency,
+      }),
+  };
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PreControlButtonsProps = ConnectedProps<typeof connector>;
+
+interface ControlButtonsProps extends PreControlButtonsProps {
+  showModal: (event: React.MouseEvent<HTMLButtonElement>) => void;
+}
+
+export default connector(ControlButtons);

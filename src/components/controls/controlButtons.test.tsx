@@ -6,22 +6,19 @@ import '@testing-library/react';
 import '@testing-library/jest-dom';
 import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
 import { render, screen } from '@testing-library/react';
-import { ControlButtons } from './ControlButtons';
+import ControlButtons from './ControlButtons';
+import { store } from '../../state/store';
 
 test('Button test', () => {
   render(
-    <BrowserRouter>
-      <ControlButtons
-        showModal={() => null}
-        historicity={true}
-        history={[]}
-        changeCurrency={() => null}
-        listSize={3}
-        changeRandomCurrency={() => null}
-      ></ControlButtons>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <ControlButtons showModal={() => null}></ControlButtons>
+      </BrowserRouter>
+    </Provider>
   );
   const text = screen.getAllByText(/Please/i);
   expect(text[0]).toBeInTheDocument();

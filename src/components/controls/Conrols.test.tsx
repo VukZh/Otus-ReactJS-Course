@@ -8,24 +8,19 @@ import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import { Controls } from './Controls';
+import { Provider } from 'react-redux';
+import { store } from '../../state/store';
 
 test('Controls test', () => {
   const fn = jest.fn();
   render(
-    <BrowserRouter>
-      <Controls
-        changeCurrentCurrency={fn}
-        changeRandomCurrency={fn}
-        changeCurrency={fn}
-        showModal={fn}
-        history={[]}
-        currentCurrency='USD'
-        currencies={['EUR', 'USD']}
-        historicity={false}
-      ></Controls>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Controls showModal={fn}></Controls>
+      </BrowserRouter>
+    </Provider>
   );
   expect(screen.getAllByText(/Please/i)[0]).toBeInTheDocument();
-  expect(screen.getAllByRole('button')).toHaveLength(10);
-  expect(screen.getAllByRole('button')[9]).toHaveTextContent('USD');
+  expect(screen.getAllByRole('button')).toHaveLength(13);
+  expect(screen.getAllByRole('button')[9]).toHaveTextContent('ETH');
 });

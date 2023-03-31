@@ -1,11 +1,8 @@
 import React, { FormEvent } from 'react';
 import { style } from 'typestyle';
-
-interface SettingsProps {
-  close: (event: React.MouseEvent) => void;
-  setGettingPeriod: (time: number) => void;
-  setHistoricity: (historicity: boolean) => void;
-}
+import { Dispatch } from 'redux';
+import { ActionsType, ActionTypes } from '../../state/types';
+import { connect, ConnectedProps } from 'react-redux';
 
 type FormData = {
   updateTime: {
@@ -40,7 +37,7 @@ const formButtonStyle = style({
   fontWeight: 'bolder',
 });
 
-export const Settings: React.FC<SettingsProps> = ({
+const Settings: React.FC<SettingsProps> = ({
   close,
   setGettingPeriod,
   setHistoricity,
@@ -89,3 +86,24 @@ export const Settings: React.FC<SettingsProps> = ({
     </form>
   );
 };
+
+const mapDispatchToProps = (dispatch: Dispatch<ActionsType>) => {
+  return {
+    setHistoricity: (historicity: boolean) =>
+      dispatch({
+        type: ActionTypes.SET_HISTORICITY,
+        payload: historicity,
+      }),
+  };
+};
+
+const connector = connect(null, mapDispatchToProps);
+
+type PreSettingsProps = ConnectedProps<typeof connector>;
+
+interface SettingsProps extends PreSettingsProps {
+  close: (event: React.MouseEvent) => void;
+  setGettingPeriod: (time: number) => void;
+}
+
+export default connector(Settings);

@@ -1,11 +1,7 @@
 import React from 'react';
 import { classes, style } from 'typestyle';
-import { IncreasedType } from '../types';
-
-interface CurrencyDataProps {
-  exchangeRate: number | undefined;
-  increased: IncreasedType;
-}
+import { State } from '../state/reducer';
+import { connect, ConnectedProps } from 'react-redux';
 
 const formattedDataStyle = style({
   width: '90vw',
@@ -29,9 +25,10 @@ const decreasedStyle = style({
   backgroundColor: 'lightcoral',
 });
 
-export const CurrencyData: React.FC<CurrencyDataProps> = ({
+const CurrencyData: React.FC<CurrencyDataProps> = ({
   exchangeRate,
   increased,
+  isLoading,
 }) => {
   if (exchangeRate === undefined) {
     throw new Error("can't get data");
@@ -42,5 +39,19 @@ export const CurrencyData: React.FC<CurrencyDataProps> = ({
       : increased === 'no'
       ? classes(formattedDataStyle, decreasedStyle)
       : formattedDataStyle;
-  return <div className={dataStyle}>{exchangeRate}</div>;
+  return (
+    <div className={dataStyle}>{isLoading ? 'loading ...' : exchangeRate}</div>
+  );
 };
+
+const mapStateToProps = (state: State) => ({
+  exchangeRate: state.currency,
+  increased: state.increased,
+  isLoading: state.isLoading,
+});
+
+const connector = connect(mapStateToProps);
+
+type CurrencyDataProps = ConnectedProps<typeof connector>;
+
+export default connector(CurrencyData);
