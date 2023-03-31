@@ -1,5 +1,7 @@
-import { ActionTypes, StateType } from './types';
-import { reducer } from './reducer';
+import { ActionsType, ActionTypes, StateType } from './types';
+import { reducer, State } from './reducer';
+import { getCurrency } from './asyncActions';
+import { ThunkDispatch } from 'redux-thunk/es/types';
 
 describe('Reducer tests', () => {
   let state: StateType;
@@ -140,5 +142,19 @@ describe('Reducer tests', () => {
       isLoading: false,
       error: 'something error',
     });
+  });
+  test('getCurrency action test', async () => {
+    const dispatch = jest.fn() as ThunkDispatch<State, undefined, ActionsType>;
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    await getCurrency('ETT')(dispatch);
+    expect(dispatch).toHaveBeenCalledWith({
+      type: ActionTypes.SET_CURRENT_CURRENCY,
+      payload: 'ETT',
+    });
+    expect(dispatch).toHaveBeenCalledWith({
+      type: ActionTypes.GET_CURRENCY_VALUE,
+    });
+    expect(dispatch).toHaveBeenCalledTimes(2);
   });
 });

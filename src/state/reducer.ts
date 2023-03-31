@@ -64,7 +64,6 @@ export const reducer = (
         state.currencies[action.payload] !== state.currentCurrency
       ) {
         const newHistory = [...state.history, state.currencies[action.payload]];
-        console.log('........ ', action.payload, state.currencies);
         return {
           ...state,
           currentCurrency: state.currencies[action.payload],

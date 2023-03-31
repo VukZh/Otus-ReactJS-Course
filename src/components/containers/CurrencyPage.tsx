@@ -9,9 +9,10 @@ import Settings from '../settings/Settings';
 import { Modal } from '../settings/Modal';
 import { IncreasedType } from '../../types';
 import { State } from '../../state/reducer';
-import { Dispatch } from 'redux';
 import { ActionsType, ActionTypes } from '../../state/types';
 import { connect, ConnectedProps } from 'react-redux';
+import { getCurrency } from '../../state/asyncActions';
+import { ThunkDispatch } from 'redux-thunk';
 
 type CurrencyName = {
   id: string;
@@ -33,12 +34,9 @@ class CurrencyPage extends React.Component<IProps, IState> {
 
   componentDidMount() {
     const curr = this.props.params.id || 'BTC';
-    // this.setState({ currentCurrency: curr });
     this.props.changeCurrentCurrency(curr);
     this.interval = setInterval(() => {
-      getCurrencyData(this.props.currentCurrency).then((data) =>
-        this.props.setCurrencyValue(data.USD)
-      );
+      this.props.dispatch(getCurrency(this.props.currentCurrency));
     }, 3000);
   }
 
@@ -82,9 +80,7 @@ class CurrencyPage extends React.Component<IProps, IState> {
   setGettingPeriod = (time: number): void => {
     clearInterval(this.interval);
     this.interval = setInterval(() => {
-      getCurrencyData(this.props.currentCurrency).then((data) =>
-        this.props.setCurrencyValue(data.USD as number)
-      );
+      this.props.dispatch(getCurrency(this.props.currentCurrency));
     }, time);
   };
 
@@ -113,13 +109,11 @@ const mapStateToProps = (state: State) => ({
   currency: state.currency,
   currentCurrency: state.currentCurrency,
   increased: state.increased,
-  historicity: state.historicity,
-  history: state.history,
-  randomCurrency: state.randomCurrency,
-  currencies: state.currencies,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<ActionsType>) => {
+const mapDispatchToProps = (
+  dispatch: ThunkDispatch<object, object, ActionsType>
+) => {
   return {
     setCurrencyValue: (value: number) =>
       dispatch({
@@ -131,26 +125,12 @@ const mapDispatchToProps = (dispatch: Dispatch<ActionsType>) => {
         type: ActionTypes.SET_CURRENT_CURRENCY,
         payload: currency,
       }),
-    // changeRandomCurrency: (ind: number) =>
-    //   dispatch({
-    //     type: ActionTypes.CHANGE_RANDOM_CURRENCY,
-    //     payload: ind,
-    //   }),
-    setGettingPeriod: (period: number) =>
-      dispatch({
-        type: ActionTypes.SET_GETTING_PERIOD,
-        payload: period,
-      }),
     setIncreased: (increased: IncreasedType) =>
       dispatch({
         type: ActionTypes.SET_INCREASED,
         payload: increased,
       }),
-    // addHistory: (currency: string) =>
-    //   dispatch({
-    //     type: ActionTypes.ADD_HISTORY,
-    //     payload: currency,
-    //   }),
+    dispatch: dispatch,
   };
 };
 

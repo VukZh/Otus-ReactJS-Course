@@ -28,6 +28,7 @@ const decreasedStyle = style({
 const CurrencyData: React.FC<CurrencyDataProps> = ({
   exchangeRate,
   increased,
+  isLoading,
 }) => {
   if (exchangeRate === undefined) {
     throw new Error("can't get data");
@@ -38,12 +39,15 @@ const CurrencyData: React.FC<CurrencyDataProps> = ({
       : increased === 'no'
       ? classes(formattedDataStyle, decreasedStyle)
       : formattedDataStyle;
-  return <div className={dataStyle}>{exchangeRate}</div>;
+  return (
+    <div className={dataStyle}>{isLoading ? 'loading ...' : exchangeRate}</div>
+  );
 };
 
 const mapStateToProps = (state: State) => ({
   exchangeRate: state.currency,
   increased: state.increased,
+  isLoading: state.isLoading,
 });
 
 const connector = connect(mapStateToProps);
