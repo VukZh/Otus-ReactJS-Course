@@ -3,7 +3,7 @@ import {
   SetCurrencyAction,
   SetCurrencyValueAction,
   SetCurrentCurrencyAction,
-  SetGettingPeriodAction,
+  SetPeriodAction,
   SetHistoricityAction,
   SetIncreasedAction,
 } from './actionCreators';
@@ -70,17 +70,17 @@ describe('Actions creators tests', () => {
     });
   });
 
-  test('SetGettingPeriodAction test', () => {
-    expect(SetGettingPeriodAction(15)).toEqual({
-      type: ActionTypes.SET_GETTING_PERIOD,
+  test('SetPeriodAction test', () => {
+    expect(SetPeriodAction(15)).toEqual({
+      type: ActionTypes.SET_PERIOD,
       payload: 15,
     });
-    expect(SetGettingPeriodAction(11)).not.toEqual({
-      type: ActionTypes.SET_CURRENT_CURRENCY,
+    expect(ChangeRandomCurrencyAction(11)).not.toEqual({
+      type: ActionTypes.SET_PERIOD,
       payload: 11,
     });
-    expect(SetGettingPeriodAction(5)).not.toEqual({
-      type: ActionTypes.SET_GETTING_PERIOD,
+    expect(SetPeriodAction(5)).not.toEqual({
+      type: ActionTypes.SET_PERIOD,
       payload: 15,
     });
   });
@@ -91,7 +91,7 @@ describe('Actions creators tests', () => {
       payload: 'yes',
     });
     expect(SetIncreasedAction('yes')).not.toEqual({
-      type: ActionTypes.SET_GETTING_PERIOD,
+      type: ActionTypes.SET_HISTORICITY,
       payload: 'yes',
     });
     expect(SetIncreasedAction('yes')).not.toEqual({

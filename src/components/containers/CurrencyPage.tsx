@@ -11,6 +11,7 @@ import { State } from '../../state/reducer';
 import { ActionTypes } from '../../state/types';
 import { connect, ConnectedProps } from 'react-redux';
 import { TypedDispatch } from '../../state/store';
+import { getCurrencyData } from '../../services/getCurrencyData';
 
 type CurrencyName = {
   id: string;
@@ -36,40 +37,30 @@ class CurrencyPage extends React.Component<IProps, IState> {
     this.props.dispatch({
       type: ActionTypes.GET_CURRENCY_VALUE,
     });
-    // this.props.changeCurrentCurrency(curr);
-    // this.interval = setInterval(() => {
-    //   // this.props.dispatch(getCurrency(this.props.currentCurrency));
-    //   this.props.dispatch({
-    //     type: ActionTypes.GET_CURRENCY,
-    //   });
-    // }, 3000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
   }
 
   componentDidUpdate(prevProps: Readonly<IProps>) {
-    // if (this.props.currentCurrency !== prevProps.currentCurrency) {
-    //   getCurrencyData(this.props.currentCurrency).then((data) => {
-    //     this.props.setCurrencyValue(data.USD);
-    //     this.props.setIncreased(undefined);
-    //   });
-    // }
-    // if (this.props.currentCurrency === prevProps.currentCurrency) {
-    //   if (
-    //     this.props.currency > prevProps.currency &&
-    //     prevProps.currency !== 0 &&
-    //     prevProps.increased !== 'yes'
-    //   ) {
-    //     this.props.setIncreased('yes');
-    //   } else if (
-    //     this.props.currency < prevProps.currency &&
-    //     prevProps.increased !== 'no'
-    //   ) {
-    //     this.props.setIncreased('no');
-    //   }
-    // }
+    if (this.props.currentCurrency !== prevProps.currentCurrency) {
+      getCurrencyData(this.props.currentCurrency)
+        .then((data) => {
+          this.props.setCurrencyValue(data.USD);
+        })
+        .then(() => this.props.setIncreased(undefined));
+    }
+    if (this.props.currentCurrency === prevProps.currentCurrency) {
+      if (
+        this.props.currency > prevProps.currency &&
+        prevProps.currency !== 0 &&
+        prevProps.increased !== 'yes'
+      ) {
+        this.props.setIncreased('yes');
+      } else if (
+        this.props.currency < prevProps.currency &&
+        prevProps.increased !== 'no'
+      ) {
+        this.props.setIncreased('no');
+      }
+    }
   }
   showModalOn = (): void => {
     this.setState({
@@ -81,12 +72,6 @@ class CurrencyPage extends React.Component<IProps, IState> {
     this.setState({
       showModal: false,
     });
-  };
-  setGettingPeriod = (time: number): void => {
-    clearInterval(this.interval);
-    this.interval = setInterval(() => {
-      // this.props.dispatch(getCurrency(this.props.currentCurrency));
-    }, time);
   };
 
   render() {
@@ -101,7 +86,7 @@ class CurrencyPage extends React.Component<IProps, IState> {
           <Modal>
             <Settings
               close={this.showModalOff}
-              setGettingPeriod={this.setGettingPeriod}
+              // setGettingPeriod={this.setGettingPeriod}
             />
           </Modal>
         )}

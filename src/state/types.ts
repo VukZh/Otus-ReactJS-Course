@@ -8,7 +8,6 @@ export enum ActionTypes {
   CHANGE_CURRENCY = 'CHANGE_CURRENCY',
   SET_CURRENT_CURRENCY = 'SET_CURRENT_CURRENCY',
   CHANGE_RANDOM_CURRENCY = 'CHANGE_RANDOM_CURRENCY',
-  SET_GETTING_PERIOD = 'SET_GETTING_PERIOD',
   SET_INCREASED = 'SET_INCREASED',
   SET_HISTORICITY = 'SET_HISTORICITY',
   SET_PERIOD = 'SET_PERIOD',
@@ -35,11 +34,6 @@ type SetCurrentCurrencyActionType = {
 
 type ChangeRandomCurrencyType = {
   type: ActionTypes.CHANGE_RANDOM_CURRENCY;
-  payload: number;
-};
-
-type SetGettingPeriodType = {
-  type: ActionTypes.SET_GETTING_PERIOD;
   payload: number;
 };
 
@@ -89,7 +83,6 @@ export type {
   ChangeCurrencyActionType,
   SetCurrentCurrencyActionType,
   ChangeRandomCurrencyType,
-  SetGettingPeriodType,
   SetIncreasedType,
   SetHistoricityType,
   StateType,
@@ -101,7 +94,6 @@ export type ActionsType =
   | ChangeCurrencyActionType
   | SetCurrentCurrencyActionType
   | ChangeRandomCurrencyType
-  | SetGettingPeriodType
   | SetIncreasedType
   | SetHistoricityType
   | GetCurrencyValueActionType

@@ -4,7 +4,6 @@ import {
   ChangeRandomCurrencyType,
   SetCurrencyValueActionType,
   SetCurrentCurrencyActionType,
-  SetGettingPeriodType,
   SetHistoricityType,
   SetIncreasedType,
   SetPeriodType,
@@ -44,13 +43,6 @@ export const ChangeRandomCurrencyAction = (
   return {
     type: ActionTypes.CHANGE_RANDOM_CURRENCY,
     payload: random,
-  };
-};
-
-export const SetGettingPeriodAction = (time: number): SetGettingPeriodType => {
-  return {
-    type: ActionTypes.SET_GETTING_PERIOD,
-    payload: time,
   };
 };
 
