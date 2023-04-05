@@ -7,6 +7,7 @@ import {
   SetGettingPeriodType,
   SetHistoricityType,
   SetIncreasedType,
+  SetPeriodType,
 } from './types';
 import { IncreasedType } from '../types';
 
@@ -68,5 +69,12 @@ export const SetHistoricityAction = (
   return {
     type: ActionTypes.SET_HISTORICITY,
     payload: historicity,
+  };
+};
+
+export const SetPeriodAction = (period: number): SetPeriodType => {
+  return {
+    type: ActionTypes.SET_PERIOD,
+    payload: period,
   };
 };

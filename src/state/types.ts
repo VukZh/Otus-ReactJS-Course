@@ -11,6 +11,7 @@ export enum ActionTypes {
   SET_GETTING_PERIOD = 'SET_GETTING_PERIOD',
   SET_INCREASED = 'SET_INCREASED',
   SET_HISTORICITY = 'SET_HISTORICITY',
+  SET_PERIOD = 'SET_PERIOD',
 }
 
 type GetCurrencyValueActionType = {
@@ -62,6 +63,11 @@ type GetCurrencyValueErrorType = {
   payload: string;
 };
 
+type SetPeriodType = {
+  type: ActionTypes.SET_PERIOD;
+  payload: number;
+};
+
 type StateType = {
   currency: number;
   currentCurrency: string;
@@ -72,6 +78,7 @@ type StateType = {
   currencies: Array<string>;
   isLoading: boolean;
   error: string | null;
+  period: number;
 };
 
 export type {
@@ -86,6 +93,7 @@ export type {
   SetIncreasedType,
   SetHistoricityType,
   StateType,
+  SetPeriodType,
 };
 
 export type ActionsType =
@@ -98,4 +106,5 @@ export type ActionsType =
   | SetHistoricityType
   | GetCurrencyValueActionType
   | GetCurrencyValueSuccessType
-  | GetCurrencyValueErrorType;
+  | GetCurrencyValueErrorType
+  | SetPeriodType;
