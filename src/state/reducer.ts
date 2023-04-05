@@ -1,22 +1,28 @@
 import { ActionsType, ActionTypes, StateType } from './types';
 
-const initialState: StateType = {
-  currency: 0,
-  currentCurrency: '',
-  increased: undefined,
-  historicity: true,
-  history: [],
-  randomCurrency: 0,
-  currencies: ['BTC', 'ETH', 'BNB', 'DOT', 'ER~'],
-  isLoading: false,
-  error: null,
-  period: 3000,
-};
+const initialState: StateType =
+  window.localStorage.getItem('stateApp').length === 0
+    ? {
+        currency: 0,
+        currentCurrency: '',
+        increased: undefined,
+        historicity: true,
+        history: [],
+        randomCurrency: 0,
+        currencies: ['BTC', 'ETH', 'BNB', 'DOT', 'ER~'],
+        isLoading: false,
+        error: null,
+        period: 3000,
+      }
+    : { ...JSON.parse(window.localStorage.getItem('stateApp')) };
 
 export const reducer = (
   state = initialState,
   action: ActionsType
 ): StateType => {
+  // if (window.localStorage.getItem('stateApp').length > 0) {
+  //   state = JSON.parse(window.localStorage.getItem('stateApp'));
+  // }
   switch (action.type) {
     case ActionTypes.SET_CURRENCY_VALUE:
       return { ...state, currency: action.payload };

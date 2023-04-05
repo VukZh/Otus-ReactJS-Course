@@ -32,7 +32,7 @@ class CurrencyPage extends React.Component<IProps, IState> {
   }
 
   componentDidMount() {
-    const curr = this.props.params.id || 'BTC';
+    const curr = this.props.params.id || this.props.currentCurrency || 'BTC';
     this.props.changeCurrentCurrency(curr);
     this.props.dispatch({
       type: ActionTypes.GET_CURRENCY_VALUE,
@@ -40,6 +40,8 @@ class CurrencyPage extends React.Component<IProps, IState> {
   }
 
   componentDidUpdate(prevProps: Readonly<IProps>) {
+    console.log('..');
+    this.props.dispatch({ type: ActionTypes.SAVE_STATE });
     if (this.props.currentCurrency !== prevProps.currentCurrency) {
       getCurrencyData(this.props.currentCurrency)
         .then((data) => {

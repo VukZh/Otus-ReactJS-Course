@@ -1,6 +1,16 @@
-import { call, select, put, take, delay } from 'redux-saga/effects';
+import {
+  call,
+  select,
+  put,
+  take,
+  delay,
+  all,
+  fork,
+  takeEvery,
+} from 'redux-saga/effects';
 import { getCurrencyData } from '../services/getCurrencyData';
 import { ActionTypes } from './types';
+
 function* getCurrencySaga(): any {
   yield take(ActionTypes.GET_CURRENCY_VALUE);
   const period = yield select((state) => state.period);
@@ -19,6 +29,14 @@ function* getCurrencySaga(): any {
   }
 }
 
+function* saveStateSaga(): any {
+  const state = yield select((state) => state);
+  window.localStorage.setItem('stateApp', JSON.stringify(state));
+}
+
 export function* rootSaga() {
-  yield getCurrencySaga();
+  yield all([
+    fork(getCurrencySaga),
+    takeEvery(ActionTypes.SAVE_STATE, saveStateSaga),
+  ]);
 }
