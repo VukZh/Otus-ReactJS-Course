@@ -10,14 +10,17 @@ import {
   SelectEffect,
 } from 'redux-saga/effects';
 import { getCurrencyData } from '../services/getCurrencyData';
-import { ActionTypes } from './types';
+import { ActionTypes, StateType } from './types';
 
-function* getCurrencySaga(): Generator<any, void, any> {
+export const selectorPeriod = (state: StateType) => state.period;
+export const currCurrency = (state: StateType) => state.currentCurrency;
+
+export function* getCurrencySaga(): Generator<any, void, any> {
   yield take(ActionTypes.GET_CURRENCY_VALUE);
-  const period = yield select((state) => state.period);
+  const period = yield select(selectorPeriod);
   while (true) {
     try {
-      const currentCurrency = yield select((state) => state.currentCurrency);
+      const currentCurrency = yield select(currCurrency);
       const data = yield call(getCurrencyData, currentCurrency);
       yield put({
         type: ActionTypes.GET_CURRENCY_VALUE_SUCCESS,
@@ -30,7 +33,7 @@ function* getCurrencySaga(): Generator<any, void, any> {
   }
 }
 
-function* saveStateSaga(): Generator<SelectEffect, void, any> {
+export function* saveStateSaga(): Generator<SelectEffect, void, any> {
   const state = yield select((state) => state);
   window.localStorage.setItem('stateApp', JSON.stringify(state));
 }
