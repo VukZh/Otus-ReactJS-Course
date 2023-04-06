@@ -40,7 +40,6 @@ class CurrencyPage extends React.Component<IProps, IState> {
   }
 
   componentDidUpdate(prevProps: Readonly<IProps>) {
-    console.log('..');
     this.props.dispatch({ type: ActionTypes.SAVE_STATE });
     if (this.props.currentCurrency !== prevProps.currentCurrency) {
       getCurrencyData(this.props.currentCurrency)
@@ -86,10 +85,7 @@ class CurrencyPage extends React.Component<IProps, IState> {
         </ErrorBoundary>
         {this.state.showModal && (
           <Modal>
-            <Settings
-              close={this.showModalOff}
-              // setGettingPeriod={this.setGettingPeriod}
-            />
+            <Settings close={this.showModalOff} />
           </Modal>
         )}
       </>
