@@ -1,6 +1,13 @@
 import { applyMiddleware, legacy_createStore as createStore } from 'redux';
 import { reducer } from './reducer';
-import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { rootSaga } from './sagas';
 
-export const store = createStore(reducer, applyMiddleware(thunk));
+const sagaMiddleware = createSagaMiddleware();
+export const store = createStore(
+  reducer,
+  composeWithDevTools(applyMiddleware(sagaMiddleware))
+);
+sagaMiddleware.run(rootSaga);
 export type TypedDispatch = typeof store.dispatch;

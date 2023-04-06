@@ -10,6 +10,7 @@ const initialState: StateType = {
   currencies: ['BTC', 'ETH', 'BNB', 'DOT', 'ER~'],
   isLoading: false,
   error: null,
+  period: 3000,
 };
 
 export const reducer = (
@@ -74,6 +75,8 @@ export const reducer = (
         ...state,
         currentCurrency: state.currencies[action.payload],
       };
+    case ActionTypes.SET_PERIOD:
+      return { ...state, period: action.payload };
     default:
       return state;
   }

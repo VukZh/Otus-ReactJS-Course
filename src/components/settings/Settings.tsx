@@ -1,4 +1,5 @@
 import React, { FormEvent } from 'react';
+
 import { style } from 'typestyle';
 import { Dispatch } from 'redux';
 import { ActionsType, ActionTypes } from '../../state/types';
@@ -39,7 +40,7 @@ const formButtonStyle = style({
 
 const Settings: React.FC<SettingsProps> = ({
   close,
-  setGettingPeriod,
+  setPeriod,
   setHistoricity,
 }) => {
   const handleSubmit = (
@@ -48,7 +49,7 @@ const Settings: React.FC<SettingsProps> = ({
     e.preventDefault();
     const formData = e.target as unknown as FormData;
 
-    setGettingPeriod(1000 * formData.updateTime.value);
+    setPeriod(1000 * formData.updateTime.value);
     setHistoricity(formData.saveHistory.checked);
     close(e as React.MouseEvent);
   };
@@ -94,6 +95,11 @@ const mapDispatchToProps = (dispatch: Dispatch<ActionsType>) => {
         type: ActionTypes.SET_HISTORICITY,
         payload: historicity,
       }),
+    setPeriod: (period: number) =>
+      dispatch({
+        type: ActionTypes.SET_PERIOD,
+        payload: period,
+      }),
   };
 };
 
@@ -103,7 +109,6 @@ type PreSettingsProps = ConnectedProps<typeof connector>;
 
 interface SettingsProps extends PreSettingsProps {
   close: (event: React.MouseEvent) => void;
-  setGettingPeriod: (time: number) => void;
 }
 
 export default connector(Settings);

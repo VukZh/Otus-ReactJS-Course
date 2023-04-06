@@ -1,7 +1,5 @@
-import { ActionsType, ActionTypes, StateType } from './types';
-import { reducer, State } from './reducer';
-import { getCurrency } from './asyncActions';
-import { ThunkDispatch } from 'redux-thunk/es/types';
+import { ActionTypes, StateType } from './types';
+import { reducer } from './reducer';
 
 describe('Reducer tests', () => {
   let state: StateType;
@@ -16,6 +14,7 @@ describe('Reducer tests', () => {
       currencies: ['BTC'],
       isLoading: false,
       error: null,
+      period: 3000,
     };
   });
   test('set currency value test', () => {
@@ -34,6 +33,7 @@ describe('Reducer tests', () => {
       currencies: ['BTC'],
       isLoading: false,
       error: null,
+      period: 3000,
     });
   });
   test('change currency test', () => {
@@ -52,6 +52,7 @@ describe('Reducer tests', () => {
       currencies: ['BTC'],
       isLoading: false,
       error: null,
+      period: 3000,
     });
   });
   test('set increased test', () => {
@@ -70,6 +71,7 @@ describe('Reducer tests', () => {
       currencies: ['BTC'],
       isLoading: false,
       error: null,
+      period: 3000,
     });
   });
   test('set historicity test', () => {
@@ -88,6 +90,7 @@ describe('Reducer tests', () => {
       currencies: ['BTC'],
       isLoading: false,
       error: null,
+      period: 3000,
     });
   });
   test('get currency value test', () => {
@@ -105,6 +108,7 @@ describe('Reducer tests', () => {
       currencies: ['BTC'],
       isLoading: true,
       error: null,
+      period: 3000,
     });
   });
   test('get currency value success test', () => {
@@ -123,6 +127,7 @@ describe('Reducer tests', () => {
       currencies: ['BTC'],
       isLoading: false,
       error: null,
+      period: 3000,
     });
   });
   test('get currency value success test', () => {
@@ -141,20 +146,26 @@ describe('Reducer tests', () => {
       currencies: ['BTC'],
       isLoading: false,
       error: 'something error',
+      period: 3000,
     });
   });
-  test('getCurrency action test', async () => {
-    const dispatch = jest.fn() as ThunkDispatch<State, undefined, ActionsType>;
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    await getCurrency('ETT')(dispatch);
-    expect(dispatch).toHaveBeenCalledWith({
-      type: ActionTypes.SET_CURRENT_CURRENCY,
-      payload: 'ETT',
+  test('set period test', () => {
+    expect(
+      reducer(state, {
+        type: ActionTypes.SET_PERIOD,
+        payload: 1111,
+      })
+    ).toEqual({
+      currency: 0,
+      currentCurrency: '',
+      increased: undefined,
+      historicity: true,
+      history: [],
+      randomCurrency: 0,
+      currencies: ['BTC'],
+      isLoading: false,
+      error: null,
+      period: 1111,
     });
-    expect(dispatch).toHaveBeenCalledWith({
-      type: ActionTypes.GET_CURRENCY_VALUE,
-    });
-    expect(dispatch).toHaveBeenCalledTimes(2);
   });
 });
