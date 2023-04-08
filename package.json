@@ -56,6 +56,8 @@
     "@storybook/manager-webpack5": "^6.5.15",
     "@storybook/react": "^6.5.15",
     "@storybook/testing-library": "^0.0.13",
+    "@stryker-mutator/core": "^6.4.2",
+    "@stryker-mutator/typescript-checker": "^6.4.2",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@types/jest": "^29.2.5",
