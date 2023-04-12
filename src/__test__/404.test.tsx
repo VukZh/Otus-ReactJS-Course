@@ -6,7 +6,7 @@ import '@testing-library/react';
 import '@testing-library/jest-dom';
 import * as React from 'react';
 import { render, screen } from '@testing-library/react';
-import NotFound from './404';
+import NotFound from '../pages/404';
 describe('NotFound test', () => {
   test('NotFound test text', async () => {
     render(<NotFound />);
