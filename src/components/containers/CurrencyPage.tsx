@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 
 import { Controls } from '../controls/Controls';
 import CurrencyData from '../CurrencyData';
@@ -121,7 +121,8 @@ const mapDispatchToProps = (dispatch: TypedDispatch) => {
 };
 
 const CurrencyPageWithParams = (props: IProps) => (
-  <CurrencyPage {...props} params={useParams() as CurrencyName} />
+  // <CurrencyPage {...props} params={useParams() as CurrencyName} />
+  <CurrencyPage {...props} />
 );
 
 const connector = connect(mapStateToProps, mapDispatchToProps);

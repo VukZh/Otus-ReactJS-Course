@@ -1,5 +1,5 @@
 import React, { FormEvent, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Fieldset = styled.fieldset`
@@ -28,7 +28,7 @@ const Input = styled.input`
 `;
 export const StartPage: React.FC = () => {
   const [name, setName] = useState('');
-  const siteNav = useNavigate();
+  // const siteNav = useNavigate();
   useEffect(() => {
     if (window.localStorage.getItem('name')) {
       setName(window.localStorage.getItem('name'));
@@ -41,7 +41,7 @@ export const StartPage: React.FC = () => {
       nameInput: { value: string };
     };
     window.localStorage.setItem('name', formElements.nameInput.value);
-    siteNav('currency');
+    // siteNav('currency');
   };
 
   const handleChange = (e: FormEvent<HTMLInputElement>) => {

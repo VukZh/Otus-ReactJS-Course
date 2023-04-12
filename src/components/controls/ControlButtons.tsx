@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 import { Button } from '../Button';
 import { IconButton, Icons } from '../IconButton';
@@ -41,7 +41,7 @@ export const ControlButtons: React.FC<ControlButtonsProps> = ({
   changeCurrency,
 }) => {
   const [indexCurrencyArray, setIndexCurrencyArray] = useState(0);
-  const siteNav = useNavigate();
+  // const siteNav = useNavigate();
   function randomCurrency(size: number): number {
     const maxNumber = size - 2; // remove undef from currencies list
     return Math.floor(Math.random() * (maxNumber + 1));
@@ -73,7 +73,7 @@ export const ControlButtons: React.FC<ControlButtonsProps> = ({
   };
   const handleExit = () => {
     window.localStorage.removeItem('name');
-    siteNav('/');
+    // siteNav('/');
   };
   return (
     <header>
