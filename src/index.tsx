@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 // import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom';
 
 import CurrencyPage from './components/containers/CurrencyPage';
-import { StartPage } from './components/containers/StartPage';
+// import { StartPage } from './components/containers/StartPage';
 // import { NotFound } from './components/containers/NotFound';
 import { style } from 'typestyle';
 import { Provider } from 'react-redux';
