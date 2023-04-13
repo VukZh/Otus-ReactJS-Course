@@ -1,6 +1,7 @@
 import React from 'react';
-import Link from 'next/link';
+// import Link from 'next/link';
 import { style } from 'typestyle';
+import NavBar from '@/components/NavBar';
 
 const navStyle = style({
   fontFamily: 'Helvetica, Arial, sans-serif',
@@ -8,11 +9,6 @@ const navStyle = style({
   margin: '10px auto',
   justifyContent: 'space-evenly',
 });
-const Home: React.FC = () => (
-  <nav className={navStyle}>
-    <Link href='/start'>Start</Link>
-    <Link href='/currency'>Currency</Link>
-  </nav>
-);
+const Home: React.FC = () => <NavBar></NavBar>;
 
 export default Home;

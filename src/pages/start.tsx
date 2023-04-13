@@ -1,6 +1,7 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
+import NavBar from '@/components/NavBar';
 
 const Fieldset = styled.fieldset`
   padding: 10px 20px;
@@ -50,24 +51,27 @@ const StartPage: React.FC = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <p>Cryptocurrency checker app</p>
-      <Fieldset>
-        <label>
-          <Input
-            type='text'
-            name='name'
-            onChange={handleChange}
-            value={name}
-            id='nameInput'
-          />
-          Input your name
-        </label>
-      </Fieldset>
-      <Button type='submit' disabled={name.length < 3}>
-        Enter
-      </Button>
-    </Form>
+    <>
+      <NavBar></NavBar>
+      <Form onSubmit={handleSubmit}>
+        <p>Cryptocurrency checker app</p>
+        <Fieldset>
+          <label>
+            <Input
+              type='text'
+              name='name'
+              onChange={handleChange}
+              value={name}
+              id='nameInput'
+            />
+            Input your name
+          </label>
+        </Fieldset>
+        <Button type='submit' disabled={name.length < 3}>
+          Enter
+        </Button>
+      </Form>
+    </>
   );
 };
 
