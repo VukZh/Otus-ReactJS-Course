@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const modalRoot = document.getElementById('modal');
+const modalRoot =
+  typeof window !== 'undefined' ? document.getElementById('modal') : null;
 
 export class Modal extends React.Component<{ children?: React.ReactNode }> {
   el: HTMLElement = document.createElement('div');

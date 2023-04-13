@@ -1,9 +1,9 @@
 import React from 'react';
-import forwardIcon from 'Icons/forward.png';
-import backwardIcon from 'Icons/backward.png';
-import settingsIcon from 'Icons/settings.png';
-import shuffleIcon from 'Icons/shuffle.png';
-import exitIcon from 'Icons/exit.png';
+import forwardIcon from '../../public/assets/icons/forward.png';
+import backwardIcon from '../../public/assets/icons//backward.png';
+import settingsIcon from '../../public/assets/icons//settings.png';
+import shuffleIcon from '../../public/assets/icons//shuffle.png';
+import exitIcon from '../../public/assets/icons//exit.png';
 import { style } from 'typestyle';
 
 export enum Icons {
