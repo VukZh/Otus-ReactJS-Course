@@ -11,6 +11,7 @@ import { ActionTypes } from '../state/types';
 import { connect, ConnectedProps } from 'react-redux';
 import { TypedDispatch } from '../state/store';
 import { getCurrencyData } from '../services/getCurrencyData';
+import NavBar from '@/components/NavBar';
 
 type CurrencyName = {
   id: string;
@@ -76,8 +77,8 @@ class CurrencyPage extends React.Component<IProps, IState> {
   render() {
     return (
       <>
+        <NavBar></NavBar>
         <Controls showModal={this.showModalOn} />
-
         <ErrorBoundary>
           <CurrencyData />
         </ErrorBoundary>

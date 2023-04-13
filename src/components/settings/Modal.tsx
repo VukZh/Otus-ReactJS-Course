@@ -16,11 +16,11 @@ export class Modal extends React.Component<{ children?: React.ReactNode }> {
     this.el.style.zIndex = '50';
     this.el.style.background = 'rgba(0, 0, 0, 0.8)';
 
-    modalRoot.appendChild(this.el);
+    if (modalRoot) modalRoot.appendChild(this.el);
   }
 
   componentWillUnmount() {
-    modalRoot.removeChild(this.el);
+    if (modalRoot) modalRoot.removeChild(this.el);
   }
 
   render() {

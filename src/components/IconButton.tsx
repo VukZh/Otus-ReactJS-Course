@@ -57,6 +57,7 @@ export const IconButton: React.FC<IconButtonsProps> = ({
   disabled,
   ...props
 }) => {
+  console.log('.', icon);
   const iconImage =
     icon === Icons.forward
       ? forwardIcon
@@ -68,7 +69,7 @@ export const IconButton: React.FC<IconButtonsProps> = ({
       ? exitIcon
       : settingsIcon;
   const iconStyle = {
-    background: `url(${iconImage})`,
+    background: `url(${iconImage.src})`,
   };
 
   return (
