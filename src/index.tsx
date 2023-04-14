@@ -29,7 +29,7 @@ const App: React.FC = () => (
     {/*      Start*/}
     {/*    </NavLink>*/}
     {/*    <NavLink*/}
-    {/*      to='/currency'*/}
+    {/*      to='/currencies'*/}
     {/*      style={({ isActive }) => ({*/}
     {/*        color: isActive ? 'green' : 'black',*/}
     {/*      })}*/}
@@ -39,8 +39,8 @@ const App: React.FC = () => (
     {/*  </nav>*/}
     {/*  <Routes>*/}
     {/*    <Route index element={<StartPage />} />*/}
-    {/*    <Route path='currency' element={<CurrencyPage />} />*/}
-    {/*    <Route path='currency/:id' element={<CurrencyPage />} />*/}
+    {/*    <Route path='currencies' element={<CurrencyPage />} />*/}
+    {/*    <Route path='currencies/:id' element={<CurrencyPage />} />*/}
     {/*    <Route path='*' element={<NotFound />} />*/}
     {/*  </Routes>*/}
     {/*</BrowserRouter>*/}

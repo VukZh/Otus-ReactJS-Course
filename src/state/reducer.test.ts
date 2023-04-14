@@ -17,7 +17,7 @@ describe('Reducer tests', () => {
       period: 3000,
     };
   });
-  test('set currency value test', () => {
+  test('set currencies value test', () => {
     expect(
       reducer(state, {
         type: ActionTypes.SET_CURRENCY_VALUE,
@@ -36,7 +36,7 @@ describe('Reducer tests', () => {
       period: 3000,
     });
   });
-  test('change currency test', () => {
+  test('change currencies test', () => {
     expect(
       reducer(state, {
         type: ActionTypes.CHANGE_CURRENCY,
@@ -93,7 +93,7 @@ describe('Reducer tests', () => {
       period: 3000,
     });
   });
-  test('get currency value test', () => {
+  test('get currencies value test', () => {
     expect(
       reducer(state, {
         type: ActionTypes.GET_CURRENCY_VALUE,
@@ -111,7 +111,7 @@ describe('Reducer tests', () => {
       period: 3000,
     });
   });
-  test('get currency value success test', () => {
+  test('get currencies value success test', () => {
     expect(
       reducer(state, {
         type: ActionTypes.GET_CURRENCY_VALUE_SUCCESS,
@@ -130,7 +130,7 @@ describe('Reducer tests', () => {
       period: 3000,
     });
   });
-  test('get currency value success test', () => {
+  test('get currencies value success test', () => {
     expect(
       reducer(state, {
         type: ActionTypes.GET_CURRENCY_VALUE_ERROR,

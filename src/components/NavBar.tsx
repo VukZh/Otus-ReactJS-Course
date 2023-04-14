@@ -9,7 +9,7 @@ const navStyle = style({
   margin: '10px auto',
   justifyContent: 'space-evenly',
 });
-const NavBar: React.FC = () => {
+export const NavBar: React.FC = () => {
   useEffect(() => {
     const { pathname } = Router;
     if (pathname == '/') {
@@ -23,4 +23,3 @@ const NavBar: React.FC = () => {
     </nav>
   );
 };
-export default NavBar;

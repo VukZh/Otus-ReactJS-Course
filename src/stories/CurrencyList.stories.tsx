@@ -5,7 +5,7 @@ import { store } from '../state/store';
 export default {
   title: 'Example/CurrencyList',
   component: CurrencyList,
-  argTypes: { onClick: { action: 'Select currency' } },
+  argTypes: { onClick: { action: 'Select currencies' } },
 };
 const Lst = (args: any) => (
   <Provider store={store}>

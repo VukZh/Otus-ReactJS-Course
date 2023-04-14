@@ -1,7 +1,7 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import NavBar from '@/components/NavBar';
+import { NavBar } from '@/components/NavBar';
 
 const Fieldset = styled.fieldset`
   padding: 10px 20px;
