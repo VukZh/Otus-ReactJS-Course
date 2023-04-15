@@ -1,29 +1,32 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 
-import { Controls } from '../controls/Controls';
-import CurrencyData from '../CurrencyData';
-import { ErrorBoundary } from '../ErrorBoundary';
-import Settings from '../settings/Settings';
-import { Modal } from '../settings/Modal';
-import { IncreasedType } from '../../types';
-import { State } from '../../state/reducer';
-import { ActionTypes } from '../../state/types';
+import { Controls } from '@/components/controls/Controls';
+import CurrencyData from '@/components/CurrencyData';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
+import Settings from '../components/settings/Settings';
+import { Modal } from '@/components/settings/Modal';
+import { IncreasedType } from '@/types';
+import { State } from '@/state/reducer';
+import { ActionTypes } from '@/state/types';
 import { connect, ConnectedProps } from 'react-redux';
-import { TypedDispatch } from '../../state/store';
-import { getCurrencyData } from '../../services/getCurrencyData';
-
-type CurrencyName = {
-  id: string;
-};
+import { TypedDispatch } from '@/state/store';
+import { getCurrencyData } from '@/services/getCurrencyData';
+import { NavBar } from '@/components/NavBar';
+import Link from 'next/link';
+import { style } from 'typestyle';
 
 interface IState {
   showModal: boolean;
 }
 
-type IntervalType = ReturnType<typeof setInterval>;
+const navStyle = style({
+  fontFamily: 'Helvetica, Arial, sans-serif',
+  display: 'flex',
+  margin: '10px auto',
+  justifyContent: 'space-evenly',
+});
+
 class CurrencyPage extends React.Component<IProps, IState> {
-  interval: IntervalType;
   constructor(props: IProps) {
     super(props);
     this.state = {
@@ -32,8 +35,8 @@ class CurrencyPage extends React.Component<IProps, IState> {
   }
 
   componentDidMount() {
-    const curr = this.props.params.id || this.props.currentCurrency || 'BTC';
-    this.props.changeCurrentCurrency(curr);
+    console.log('... ', this.props);
+    this.props.changeCurrentCurrency('BTC');
     this.props.dispatch({
       type: ActionTypes.GET_CURRENCY_VALUE,
     });
@@ -76,13 +79,17 @@ class CurrencyPage extends React.Component<IProps, IState> {
   };
 
   render() {
+    const hrefDetails = `/currency/${this.props.currentCurrency}`;
     return (
       <>
+        <NavBar></NavBar>
         <Controls showModal={this.showModalOn} />
-
         <ErrorBoundary>
           <CurrencyData />
         </ErrorBoundary>
+        <Link href={hrefDetails} className={navStyle}>
+          Details
+        </Link>
         {this.state.showModal && (
           <Modal>
             <Settings close={this.showModalOff} />
@@ -120,14 +127,10 @@ const mapDispatchToProps = (dispatch: TypedDispatch) => {
   };
 };
 
-const CurrencyPageWithParams = (props: IProps) => (
-  <CurrencyPage {...props} params={useParams() as CurrencyName} />
-);
+const CurrencyPageWithParams = (props: IProps) => <CurrencyPage {...props} />;
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-type CurrencyPageProps = ConnectedProps<typeof connector>;
-interface IProps extends CurrencyPageProps {
-  params?: CurrencyName;
-}
+type IProps = ConnectedProps<typeof connector>;
+
 export default connector(CurrencyPageWithParams);

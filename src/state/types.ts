@@ -1,4 +1,4 @@
-import { IncreasedType } from '../types';
+import { IncreasedType } from '@/types';
 
 export enum ActionTypes {
   GET_CURRENCY_VALUE = 'GET_CURRENCY_VALUE',

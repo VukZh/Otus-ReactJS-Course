@@ -1,20 +1,20 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import ControlButtons from '../components/controls/ControlButtons';
 import { store } from '../state/store';
+
 export default {
   title: 'Example/ControlButtons',
   component: ControlButtons,
 };
 
-export const Hdr = (args: any) => (
-  <Provider store={store}>
-    <BrowserRouter>
+export const Hdr = (args: any) => {
+  return (
+    <Provider store={store}>
       <ControlButtons {...args} />
-    </BrowserRouter>
-  </Provider>
-);
+    </Provider>
+  );
+};
 
 Hdr.args = {};

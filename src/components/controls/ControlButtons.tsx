@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/router';
 
-import { Button } from '../Button';
 import { IconButton, Icons } from '../IconButton';
 import { style } from 'typestyle';
 import { State } from '../../state/reducer';
@@ -21,19 +20,9 @@ const headerWrapperStyle = style({
   width: '80vw',
 });
 
-const selectTimeStyle = style({
-  fontWeight: '700',
-  fontSize: '15px',
-  lineHeight: '3',
-  margin: '2px 20px',
-  display: 'inline-block',
-  verticalAlign: 'top',
-});
-
 export const ControlButtons: React.FC<ControlButtonsProps> = ({
   showModal,
   historicity,
-  changeCurrentCurrency,
   history,
   changeRandomCurrency,
   currencies,
@@ -41,7 +30,7 @@ export const ControlButtons: React.FC<ControlButtonsProps> = ({
   changeCurrency,
 }) => {
   const [indexCurrencyArray, setIndexCurrencyArray] = useState(0);
-  const siteNav = useNavigate();
+  const siteNav = useRouter();
   function randomCurrency(size: number): number {
     const maxNumber = size - 2; // remove undef from currencies list
     return Math.floor(Math.random() * (maxNumber + 1));
@@ -73,16 +62,12 @@ export const ControlButtons: React.FC<ControlButtonsProps> = ({
   };
   const handleExit = () => {
     window.localStorage.removeItem('name');
-    siteNav('/');
+    siteNav.push('/');
   };
   return (
     <header>
       <div className={headerWrapperStyle}>
         <div>
-          <div className={selectTimeStyle}>Please select time period</div>
-          <Button active={true} label='15'></Button>
-          <Button label='30'></Button>
-          <Button label='60'></Button>
           <IconButton
             icon={Icons.backward}
             disabled={!historicity}
@@ -118,11 +103,6 @@ const mapStateToProps = (state: State) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch<ActionsType>) => {
   return {
-    changeCurrentCurrency: (currency: string) =>
-      dispatch({
-        type: ActionTypes.SET_CURRENT_CURRENCY,
-        payload: currency,
-      }),
     changeRandomCurrency: (ind: number) =>
       dispatch({
         type: ActionTypes.CHANGE_RANDOM_CURRENCY,

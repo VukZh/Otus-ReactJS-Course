@@ -21,7 +21,10 @@ const welcomePartStyle = style({
 });
 
 export const Controls: React.FC<ControlsProps> = ({ showModal }) => {
-  const welcomeString = `Hi ${window.localStorage.getItem('name')} !`;
+  const welcomeString =
+    typeof window !== 'undefined'
+      ? `Hi ${window.localStorage.getItem('name')} !`
+      : 'Hi !';
   return (
     <>
       <div className={welcomePartStyle}> {welcomeString} </div>

@@ -8,10 +8,12 @@ const notFoundStyle = style({
   color: 'red',
 });
 
-export const NotFound: React.FC = () => {
+const NotFound: React.FC = () => {
   return (
     <div className={notFoundStyle}>
       <h2>Oops - page not found</h2>
     </div>
   );
 };
+
+export default NotFound;
