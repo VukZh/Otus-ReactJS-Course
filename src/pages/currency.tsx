@@ -1,25 +1,19 @@
 import React from 'react';
 
-import { Controls } from '../components/controls/Controls';
-import CurrencyData from '../components/CurrencyData';
-import { ErrorBoundary } from '../components/ErrorBoundary';
+import { Controls } from '@/components/controls/Controls';
+import CurrencyData from '@/components/CurrencyData';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 import Settings from '../components/settings/Settings';
-import { Modal } from '../components/settings/Modal';
-import { IncreasedType } from '../types';
-import { State } from '../state/reducer';
-import { ActionTypes } from '../state/types';
+import { Modal } from '@/components/settings/Modal';
+import { IncreasedType } from '@/types';
+import { State } from '@/state/reducer';
+import { ActionTypes } from '@/state/types';
 import { connect, ConnectedProps } from 'react-redux';
-import { TypedDispatch } from '../state/store';
-import { getCurrencyData } from '../services/getCurrencyData';
+import { TypedDispatch } from '@/state/store';
+import { getCurrencyData } from '@/services/getCurrencyData';
 import { NavBar } from '@/components/NavBar';
 import Link from 'next/link';
 import { style } from 'typestyle';
-
-type Router = {
-  query: {
-    loc: string;
-  };
-};
 
 interface IState {
   showModal: boolean;
@@ -133,10 +127,7 @@ const mapDispatchToProps = (dispatch: TypedDispatch) => {
   };
 };
 
-const CurrencyPageWithParams = (props: IProps) => (
-  // <CurrencyPage {...props} params={useRouter() as unknown as Router} />
-  <CurrencyPage {...props} />
-);
+const CurrencyPageWithParams = (props: IProps) => <CurrencyPage {...props} />;
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 

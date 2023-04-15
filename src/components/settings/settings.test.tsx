@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 import { render, screen } from '@testing-library/react';
 import Settings from './Settings';
 import userEvent from '@testing-library/user-event';
-import { store } from '../../state/store';
+import { store } from '@/state/store';
 
 test('Settings test', () => {
   render(

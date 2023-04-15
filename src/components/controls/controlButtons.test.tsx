@@ -5,19 +5,19 @@
 import '@testing-library/react';
 import '@testing-library/jest-dom';
 import * as React from 'react';
-import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import { render, screen } from '@testing-library/react';
 import ControlButtons from './ControlButtons';
 import { store } from '../../state/store';
+import mockRouter from 'next-router-mock';
 
+jest.mock('next/router', () => require('next-router-mock'));
 test('Button test', () => {
+  mockRouter.push('/');
   render(
     <Provider store={store}>
-      <BrowserRouter>
-        <ControlButtons showModal={() => null}></ControlButtons>
-      </BrowserRouter>
+      <ControlButtons showModal={() => null}></ControlButtons>
     </Provider>
   );
   const text = screen.getAllByText(/Please/i);

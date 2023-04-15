@@ -57,7 +57,6 @@ export const IconButton: React.FC<IconButtonsProps> = ({
   disabled,
   ...props
 }) => {
-  console.log('.', icon);
   const iconImage =
     icon === Icons.forward
       ? forwardIcon

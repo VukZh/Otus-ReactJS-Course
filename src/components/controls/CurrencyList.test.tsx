@@ -8,7 +8,7 @@ import * as React from 'react';
 import { render, screen } from '@testing-library/react';
 import CurrencyList from './CurrencyList';
 import { Provider } from 'react-redux';
-import { store } from '../../state/store';
+import { store } from '@/state/store';
 
 describe('Currencies list test', () => {
   test('List component test', () => {

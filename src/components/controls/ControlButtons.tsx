@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
 import { useRouter } from 'next/router';
 
 import { Button } from '../Button';
@@ -34,7 +33,6 @@ const selectTimeStyle = style({
 export const ControlButtons: React.FC<ControlButtonsProps> = ({
   showModal,
   historicity,
-  changeCurrentCurrency,
   history,
   changeRandomCurrency,
   currencies,
@@ -119,11 +117,6 @@ const mapStateToProps = (state: State) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch<ActionsType>) => {
   return {
-    changeCurrentCurrency: (currency: string) =>
-      dispatch({
-        type: ActionTypes.SET_CURRENT_CURRENCY,
-        payload: currency,
-      }),
     changeRandomCurrency: (ind: number) =>
       dispatch({
         type: ActionTypes.CHANGE_RANDOM_CURRENCY,

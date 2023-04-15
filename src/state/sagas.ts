@@ -18,7 +18,7 @@ export const currCurrency = (state: StateType) => state.currentCurrency;
 export function* getCurrencySaga(): Generator<any, void, any> {
   yield take(ActionTypes.GET_CURRENCY_VALUE);
   const localeData = JSON.parse(window.localStorage.getItem('stateApp'));
-  const period = localeData.period
+  const period = localeData?.period
     ? localeData.period
     : yield select(selectorPeriod);
   while (true) {

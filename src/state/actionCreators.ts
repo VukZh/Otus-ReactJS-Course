@@ -8,7 +8,7 @@ import {
   SetIncreasedType,
   SetPeriodType,
 } from './types';
-import { IncreasedType } from '../types';
+import { IncreasedType } from '@/types';
 
 export const SetCurrencyValueAction = (
   value: number

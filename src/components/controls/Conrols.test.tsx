@@ -5,19 +5,20 @@
 import '@testing-library/react';
 import '@testing-library/jest-dom';
 import * as React from 'react';
-import { BrowserRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import { Controls } from './Controls';
 import { Provider } from 'react-redux';
+import mockRouter from 'next-router-mock';
 import { store } from '../../state/store';
+
+jest.mock('next/router', () => require('next-router-mock'));
 
 test('Controls test', () => {
   const fn = jest.fn();
+  mockRouter.push('/');
   render(
     <Provider store={store}>
-      <BrowserRouter>
-        <Controls showModal={fn}></Controls>
-      </BrowserRouter>
+      <Controls showModal={fn}></Controls>
     </Provider>
   );
   expect(screen.getAllByText(/Please/i)[0]).toBeInTheDocument();

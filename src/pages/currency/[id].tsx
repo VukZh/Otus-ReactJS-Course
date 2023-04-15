@@ -1,25 +1,22 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import CurrencyData from '../../components/CurrencyData';
-import { ErrorBoundary } from '../../components/ErrorBoundary';
-import { ActionTypes } from '../../state/types';
+import CurrencyData from '@/components/CurrencyData';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
+import { ActionTypes } from '@/state/types';
 import { NavBar } from '@/components/NavBar';
 import { useDispatch } from 'react-redux';
 import { style } from 'typestyle';
 import axios from 'axios';
-import {
-  GetServerSideProps,
-  GetStaticPropsContext,
-  InferGetServerSidePropsType,
-} from 'next';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
-const imageStyle = style({
+const graphStyle = style({
   width: '450px',
   height: '105px',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  margin: '10px auto',
+  margin: '20px auto',
+  border: '1px solid gray',
 });
 
 const newsStyle = style({
@@ -85,7 +82,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const { data } = await axios.get(
       `https://data-api.cryptocompare.com/news/v1/article/list?categories=${id}`
     );
-    console.log('++++++++++', data);
     return {
       props: { news: data },
     };
@@ -125,7 +121,7 @@ const CurrencyPage = ({
     <>
       <NavBar></NavBar>
       {chartLink && (
-        <img src={chartLink} alt='sparkchart' className={imageStyle} />
+        <img src={chartLink} alt='sparkchart' className={graphStyle} />
       )}
       <ErrorBoundary>
         <CurrencyData />

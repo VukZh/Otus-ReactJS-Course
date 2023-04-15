@@ -1,6 +1,6 @@
 import React from 'react';
 import { classes, style } from 'typestyle';
-import { State } from '../state/reducer';
+import { State } from '@/state/reducer';
 import { connect, ConnectedProps } from 'react-redux';
 
 const formattedDataStyle = style({

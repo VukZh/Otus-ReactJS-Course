@@ -6,7 +6,6 @@ import '@testing-library/react';
 
 import '@testing-library/jest-dom';
 import * as React from 'react';
-import { useRouter } from 'next/router';
 import mockRouter from 'next-router-mock';
 import { render, screen } from '@testing-library/react';
 import { NavBar } from '@/components/NavBar';

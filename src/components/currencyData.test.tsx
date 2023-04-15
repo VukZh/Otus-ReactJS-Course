@@ -8,7 +8,7 @@ import * as React from 'react';
 import { render, screen } from '@testing-library/react';
 import CurrencyData from './CurrencyData';
 import { Provider } from 'react-redux';
-import { store } from '../state/store';
+import { store } from '@/state/store';
 
 describe('Currencies test', () => {
   test('CurrencyData test with exchangeRate', () => {
