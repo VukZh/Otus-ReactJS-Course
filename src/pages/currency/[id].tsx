@@ -19,9 +19,8 @@ const graphStyle = style({
   border: '1px solid gray',
 });
 
-const newsStyle = style({
-  width: '90vw',
-  padding: '20px 0',
+const newsItemStyle = style({
+  padding: '20px',
   fontFamily: 'Helvetica, Arial, sans-serif',
   borderBottom: '1px solid gray',
   listStyle: 'none',
@@ -34,6 +33,10 @@ const newsStyle = style({
       fontSize: 'small',
     },
   },
+});
+
+const newsItem = style({
+  padding: '20px',
 });
 
 type CategoryType = {
@@ -114,9 +117,7 @@ const CurrencyPage = ({
       });
     }
   }, [id]);
-  console.log('nnn', news);
   const shortNews: Array<NewsType> = news.Data.slice(0, 5);
-  console.log('nnnnn', shortNews);
   return (
     <>
       <NavBar></NavBar>
@@ -126,11 +127,11 @@ const CurrencyPage = ({
       <ErrorBoundary>
         <CurrencyData />
       </ErrorBoundary>
-      <ul>
+      <ul className={newsItem}>
         {shortNews.map((item, i: number) => {
           const date = new Date(item.CREATED_ON * 1000);
           return (
-            <div key={i} className={newsStyle}>
+            <div key={i} className={newsItemStyle}>
               <li className='news-created-style'>
                 {date.toLocaleString('en-US')}
               </li>
