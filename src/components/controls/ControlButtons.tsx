@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 
-import { Button } from '../Button';
 import { IconButton, Icons } from '../IconButton';
 import { style } from 'typestyle';
 import { State } from '../../state/reducer';
@@ -19,15 +18,6 @@ const headerWrapperStyle = style({
   display: 'flex',
   justifyContent: 'space-around',
   width: '80vw',
-});
-
-const selectTimeStyle = style({
-  fontWeight: '700',
-  fontSize: '15px',
-  lineHeight: '3',
-  margin: '2px 20px',
-  display: 'inline-block',
-  verticalAlign: 'top',
 });
 
 export const ControlButtons: React.FC<ControlButtonsProps> = ({
@@ -78,10 +68,6 @@ export const ControlButtons: React.FC<ControlButtonsProps> = ({
     <header>
       <div className={headerWrapperStyle}>
         <div>
-          <div className={selectTimeStyle}>Please select time period</div>
-          <Button active={true} label='15'></Button>
-          <Button label='30'></Button>
-          <Button label='60'></Button>
           <IconButton
             icon={Icons.backward}
             disabled={!historicity}

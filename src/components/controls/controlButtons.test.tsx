@@ -20,9 +20,6 @@ test('Button test', () => {
       <ControlButtons showModal={() => null}></ControlButtons>
     </Provider>
   );
-  const text = screen.getAllByText(/Please/i);
-  expect(text[0]).toBeInTheDocument();
   const buttons = screen.getAllByRole('button');
-  expect(buttons[4]).toBeInTheDocument();
-  expect(buttons).toHaveLength(8);
+  expect(buttons).toHaveLength(5);
 });

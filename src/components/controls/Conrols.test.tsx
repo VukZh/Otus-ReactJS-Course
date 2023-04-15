@@ -21,7 +21,6 @@ test('Controls test', () => {
       <Controls showModal={fn}></Controls>
     </Provider>
   );
-  expect(screen.getAllByText(/Please/i)[0]).toBeInTheDocument();
-  expect(screen.getAllByRole('button')).toHaveLength(13);
-  expect(screen.getAllByRole('button')[9]).toHaveTextContent('ETH');
+  expect(screen.getAllByRole('button')).toHaveLength(10);
+  expect(screen.getAllByRole('button')[6]).toHaveTextContent('ETH');
 });
