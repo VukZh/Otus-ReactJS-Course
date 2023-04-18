@@ -1,4 +1,7 @@
 const path = require('path');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 module.exports = (env = {}) => {
   const isProd = env.production;
   const isDev = env.development;
@@ -13,13 +16,30 @@ module.exports = (env = {}) => {
       rules: [
         {
           test: /\.(ts|tsx)$/,
-          use: ['ts-loader'],
+          use: ['babel-loader'],
+        },
+        {
+          test: /\.css$/,
+          use: ['style-loader', 'css-loader'],
         },
       ]
     },
     output: {
       path: path.resolve(__dirname, './dist'),
       filename: 'bundle.js',
+    },
+    plugins: [
+      new HtmlWebPackPlugin({
+        template: 'public/index.html',
+        publicPath: '/',
+      }),
+      new MiniCssExtractPlugin({
+        filename: 'style-[hash:8].css',
+      }),
+    ],
+    devServer: {
+      open: true,
+      historyApiFallback: true,
     },
   }
 }
