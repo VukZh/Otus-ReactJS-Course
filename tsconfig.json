@@ -6,7 +6,7 @@
     "noImplicitAny": true,
     "module": "commonjs",
     "target": "es5",
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "esModuleInterop": true,
     "lib": [
       "dom",
@@ -15,7 +15,7 @@
     "strict": false,
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
   },
   "include": [
     "src", "**/*.ts", "**/*.tsx"
