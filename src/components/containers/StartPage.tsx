@@ -64,7 +64,7 @@ export const StartPage: React.FC = () => {
           Input your name
         </label>
       </Fieldset>
-      <Button type='submit' data-testid="submit" disabled={name.length < 3}>
+      <Button type='submit' disabled={name.length < 3}>
         Enter
       </Button>
     </Form>
