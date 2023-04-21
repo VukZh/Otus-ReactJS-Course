@@ -1,8 +1,9 @@
-import {getTopList} from "@/services/getTopList";
+import {getTopList} from "../services/getTopList";
 import {all, call, fork, put, take} from "@redux-saga/core/effects";
-import {ActionTypes} from "@/state/types";
-import {prepareTopList} from "@/utils/prepareTopList";
-import {prepareHistoricalData} from "@/utils/prepareHistoricalData";
+import {ActionTypes} from "../state/types";
+import {prepareTopList} from "../utils/prepareTopList";
+import {prepareHistoricalData} from "../utils/prepareHistoricalData";
+import {getHistoricalData} from "../services/getHistoricalData";
 
 export function* getTopListSaga(): Generator<any, void, any> {
   yield take(ActionTypes.GET_TOP_CURRENCIES);
@@ -20,7 +21,7 @@ export function* getTopListSaga(): Generator<any, void, any> {
 export function* getHistoricalDataSaga(): Generator<any, void, any> {
   yield take(ActionTypes.GET_HISTORICAL_DATA);
   try {
-    const data = yield call(getTopList);
+    const data = yield call(getHistoricalData, 'day', 'BTC');
     yield put({
       type: ActionTypes.GET_HISTORICAL_DATA_SUCCESS,
       payload: prepareHistoricalData(data),
