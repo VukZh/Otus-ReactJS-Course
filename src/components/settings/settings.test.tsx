@@ -37,4 +37,9 @@ test('Settings test', () => {
     name: '2 seconds',
   }) as HTMLOptionElement;
   expect(option2sec.selected).toBe(true);
+
+  const historyCheckbox = screen.getByRole('checkbox') as HTMLInputElement;
+  expect(historyCheckbox.checked).toBe(false);
+  userEvent.click(historyCheckbox);
+  expect(historyCheckbox.checked).toBe(true);
 });
