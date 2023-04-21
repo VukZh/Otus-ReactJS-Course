@@ -1,5 +1,5 @@
 /**
- * @jest-environment jsdom
+ * @jest-environment @stryker-mutator/jest-runner/jest-env/jsdom
  */
 
 import '@testing-library/react';
@@ -25,4 +25,7 @@ test('Button test', () => {
   const buttons = screen.getAllByRole('button');
   expect(buttons[4]).toBeInTheDocument();
   expect(buttons).toHaveLength(8);
+  expect(screen.getByRole('button', {name: '15' })).toBeInTheDocument();
+  expect(screen.getByRole('button', {name: '30' })).toBeInTheDocument();
+  expect(screen.getByRole('button', {name: '60' })).toBeInTheDocument();
 });
