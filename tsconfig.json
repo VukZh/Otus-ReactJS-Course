@@ -10,6 +10,7 @@
     "esModuleInterop": true,
     "lib": [
       "dom",
+      "esnext"
     ],
     "allowJs": true,
     "strict": false,
