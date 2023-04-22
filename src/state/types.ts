@@ -1,4 +1,4 @@
-import { CurrenciesTopType, HistoricalDataType } from '@/types';
+import { CurrenciesTopType, HistoricalDataType } from '../types';
 
 export enum ActionTypes {
   GET_TOP_CURRENCIES = 'GET_TOP_CURRENCIES',
@@ -7,7 +7,11 @@ export enum ActionTypes {
   GET_HISTORICAL_DATA = 'GET_HISTORICAL_DATA',
   GET_HISTORICAL_DATA_SUCCESS = 'GET_HISTORICAL_DATA_SUCCESS',
   GET_HISTORICAL_DATA_ERROR = 'GET_HISTORICAL_DATA_ERROR',
+  SET_CURRENCY = 'SET_CURRENCY',
+  SET_TIME_STEP = 'SET_TIME_STEP'
 }
+
+type TimeStepType = 'minute' | 'hour' | 'day'
 
 type GetTopCurrenciesActionType = {
   type: ActionTypes.GET_TOP_CURRENCIES;
@@ -33,6 +37,16 @@ type GetHistoricalDataErrorActionType = {
   payload: string;
 };
 
+type SetCurrencyActionType = {
+  type: ActionTypes.SET_CURRENCY;
+  payload: string;
+};
+
+type SetTimeStepActionType = {
+  type: ActionTypes.SET_TIME_STEP;
+  payload: TimeStepType;
+};
+
 type StateType = {
   top: CurrenciesTopType;
   data: HistoricalDataType;
@@ -40,12 +54,15 @@ type StateType = {
   historicalDataIsLoading: boolean,
   topError: null | string,
   historicalDataError: null | string,
+  currency: string,
+  timeStep: TimeStepType
 };
 
 export type {
   StateType,
   GetTopCurrenciesActionType,
   GetHistoricalDataActionType,
+  TimeStepType
 };
 
 export type CurrenciesActionsType =
@@ -54,4 +71,6 @@ export type CurrenciesActionsType =
   | GetTopCurrenciesErrorActionType
   | GetHistoricalDataActionType
   | GetHistoricalDataSuccessActionType
-  | GetHistoricalDataErrorActionType;
+  | GetHistoricalDataErrorActionType
+  | SetCurrencyActionType
+  | SetTimeStepActionType;

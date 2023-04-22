@@ -7,6 +7,8 @@ const initialState: StateType = {
   historicalDataIsLoading: false,
   topError: null,
   historicalDataError: null,
+  currency: '',
+  timeStep: 'day'
 };
 
 export const reducer = (
@@ -26,6 +28,10 @@ export const reducer = (
       return { ...state, data: action.payload, historicalDataIsLoading: false, historicalDataError: null };
     case ActionTypes.GET_HISTORICAL_DATA_ERROR:
       return { ...state, historicalDataIsLoading: false, historicalDataError: action.payload };
+    case ActionTypes.SET_CURRENCY:
+      return { ...state, currency: action.payload };
+    case ActionTypes.SET_TIME_STEP:
+      return { ...state, timeStep: action.payload };
     default:
       return state;
   }
