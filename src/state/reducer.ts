@@ -1,4 +1,4 @@
-import {CurrenciesActionsType, ActionTypes, StateType} from "./types";
+import { CurrenciesActionsType, ActionTypes, StateType } from './types';
 
 const initialState: StateType = {
   data: [],
@@ -8,7 +8,7 @@ const initialState: StateType = {
   topError: null,
   historicalDataError: null,
   currency: '',
-  timeStep: 'day'
+  timeStep: 'day',
 };
 
 export const reducer = (
@@ -19,15 +19,33 @@ export const reducer = (
     case ActionTypes.GET_TOP_CURRENCIES:
       return { ...state, topIsLoading: true, topError: null };
     case ActionTypes.GET_TOP_CURRENCIES_SUCCESS:
-      return { ...state, top: action.payload, topIsLoading: false, topError: null };
+      return {
+        ...state,
+        top: action.payload,
+        topIsLoading: false,
+        topError: null,
+      };
     case ActionTypes.GET_TOP_CURRENCIES_ERROR:
       return { ...state, topIsLoading: false, topError: action.payload };
     case ActionTypes.GET_HISTORICAL_DATA:
-      return { ...state, historicalDataIsLoading: true, historicalDataError: null };
+      return {
+        ...state,
+        historicalDataIsLoading: true,
+        historicalDataError: null,
+      };
     case ActionTypes.GET_HISTORICAL_DATA_SUCCESS:
-      return { ...state, data: action.payload, historicalDataIsLoading: false, historicalDataError: null };
+      return {
+        ...state,
+        data: action.payload,
+        historicalDataIsLoading: false,
+        historicalDataError: null,
+      };
     case ActionTypes.GET_HISTORICAL_DATA_ERROR:
-      return { ...state, historicalDataIsLoading: false, historicalDataError: action.payload };
+      return {
+        ...state,
+        historicalDataIsLoading: false,
+        historicalDataError: action.payload,
+      };
     case ActionTypes.SET_CURRENCY:
       return { ...state, currency: action.payload };
     case ActionTypes.SET_TIME_STEP:

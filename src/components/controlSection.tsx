@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { Radio, Select } from 'antd';
-import {ActionTypes} from "../state/types";
-import {useTypedDispatch} from "../hooks/useTypedDispatch";
+import { Radio, RadioChangeEvent, Select } from 'antd';
+import { ActionTypes } from '../state/types';
+import { useTypedDispatch } from '../hooks/useTypedDispatch';
 export const ControlSection: FC = () => {
   const dispatch = useTypedDispatch();
   const options = [
@@ -25,13 +25,19 @@ export const ControlSection: FC = () => {
       value: 'USDC',
       label: 'USDC',
     },
-  ]
-  const setTimeStepHandler = (e) => dispatch({type: ActionTypes.SET_TIME_STEP, payload: e.target.value});
-  const setCurrencyHandler = (currency) => dispatch({type: ActionTypes.SET_CURRENCY, payload: currency});
+  ];
+  const setTimeStepHandler = (e: RadioChangeEvent) =>
+    dispatch({ type: ActionTypes.SET_TIME_STEP, payload: e.target.value });
+  const setCurrencyHandler = (currency: string) =>
+    dispatch({ type: ActionTypes.SET_CURRENCY, payload: currency });
   return (
     <>
       <div>Time step: </div>
-      <Radio.Group defaultValue='day' buttonStyle='solid' onChange={setTimeStepHandler}>
+      <Radio.Group
+        defaultValue='day'
+        buttonStyle='solid'
+        onChange={setTimeStepHandler}
+      >
         <Radio.Button value='day'>Daily</Radio.Button>
         <Radio.Button value='hour'>Hourly</Radio.Button>
         <Radio.Button value='minute'>Minute</Radio.Button>

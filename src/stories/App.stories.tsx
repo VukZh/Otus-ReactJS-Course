@@ -8,4 +8,3 @@ const App_Sample = () => <App />;
 
 export const AppSample = App_Sample.bind({});
 AppSample.args = {};
-
