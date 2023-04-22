@@ -1,3 +1,5 @@
+import { CurrenciesTopType } from '../types';
+
 type TopListItemType = {
   CoinInfo: {
     Algorithm: string;
@@ -32,7 +34,7 @@ type TopListType = {
   Type: number;
 };
 
-export const prepareTopList = (top: TopListType) => {
+export const prepareTopList = (top: TopListType): CurrenciesTopType => {
   return top.Data.map((el) => ({
     name: el.CoinInfo.Name,
     fullName: el.CoinInfo.FullName,

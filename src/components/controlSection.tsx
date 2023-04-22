@@ -1,35 +1,38 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { Radio, RadioChangeEvent, Select } from 'antd';
-import { ActionTypes } from '../state/types';
-import { useTypedDispatch } from '../hooks/useTypedDispatch';
-export const ControlSection: FC = () => {
-  const dispatch = useTypedDispatch();
-  const options = [
-    {
-      value: 'BTC',
-      label: 'BTC',
-    },
-    {
-      value: 'ETH',
-      label: 'ETH',
-    },
-    {
-      value: 'BNB',
-      label: 'BNB',
-    },
-    {
-      value: 'USDT',
-      label: 'USDT',
-    },
-    {
-      value: 'USDC',
-      label: 'USDC',
-    },
-  ];
-  const setTimeStepHandler = (e: RadioChangeEvent) =>
-    dispatch({ type: ActionTypes.SET_TIME_STEP, payload: e.target.value });
-  const setCurrencyHandler = (currency: string) =>
-    dispatch({ type: ActionTypes.SET_CURRENCY, payload: currency });
+import { ActionTypes, StateType, TimeStepType } from '../state/types';
+import { TypedDispatch } from '../state/store';
+import { connect, ConnectedProps } from 'react-redux';
+import { CurrenciesTopType } from '../types';
+
+const ControlSection: FC<ControlSectionProps> = ({
+  topList,
+  changeCurrency,
+  changeTimeStep,
+  getTopList,
+  getHistoricalData,
+}) => {
+  useEffect(() => {
+    getTopList();
+  }, []);
+  const convertTopListToSelect = (topList: CurrenciesTopType) =>
+    topList.map((currency) => ({
+      value: currency.name,
+      label: `${currency.name}/${currency.fullName}`,
+    }));
+
+  const options = convertTopListToSelect(topList);
+  const setTimeStepHandler = (e: RadioChangeEvent) => {
+    console.log('setTime');
+    changeTimeStep(e.target.value);
+    getHistoricalData();
+  };
+
+  const setCurrencyHandler = (currency: string) => {
+    changeCurrency(currency);
+    console.log('setTime');
+    getHistoricalData();
+  };
   return (
     <>
       <div>Time step: </div>
@@ -56,3 +59,31 @@ export const ControlSection: FC = () => {
     </>
   );
 };
+
+const mapStateToProps = (state: StateType) => ({
+  topList: state.top,
+});
+
+const mapDispatchToProps = (dispatch: TypedDispatch) => {
+  return {
+    changeCurrency: (currency: string) =>
+      dispatch({
+        type: ActionTypes.SET_CURRENCY,
+        payload: currency,
+      }),
+    changeTimeStep: (step: TimeStepType) =>
+      dispatch({
+        type: ActionTypes.SET_TIME_STEP,
+        payload: step,
+      }),
+    getTopList: () => dispatch({ type: ActionTypes.GET_TOP_CURRENCIES }),
+    getHistoricalData: () =>
+      dispatch({ type: ActionTypes.GET_HISTORICAL_DATA }),
+  };
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type ControlSectionProps = ConnectedProps<typeof connector>;
+
+export default connector(ControlSection);

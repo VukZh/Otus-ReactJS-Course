@@ -1,4 +1,4 @@
-type CurrencyNameType = {
+export type CurrencyNameType = {
   name: string;
   fullName: string;
 };
