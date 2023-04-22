@@ -1,9 +1,10 @@
 import { FC, useEffect } from 'react';
-import { Radio, RadioChangeEvent, Select } from 'antd';
+import { Radio, RadioChangeEvent, Select, Checkbox } from 'antd';
 import { ActionTypes, StateType, TimeStepType } from '../state/types';
 import { TypedDispatch } from '../state/store';
 import { connect, ConnectedProps } from 'react-redux';
 import { CurrenciesTopType } from '../types';
+import { CheckboxChangeEvent } from 'antd/es/checkbox';
 
 const ControlSection: FC<ControlSectionProps> = ({
   topList,
@@ -11,6 +12,7 @@ const ControlSection: FC<ControlSectionProps> = ({
   changeTimeStep,
   getTopList,
   getHistoricalData,
+  setExtendedMode,
 }) => {
   useEffect(() => {
     getTopList();
@@ -32,6 +34,10 @@ const ControlSection: FC<ControlSectionProps> = ({
     changeCurrency(currency);
     console.log('setTime');
     getHistoricalData();
+  };
+
+  const changeModeHandler = (e: CheckboxChangeEvent) => {
+    setExtendedMode(e.target.checked);
   };
   return (
     <>
@@ -56,6 +62,8 @@ const ControlSection: FC<ControlSectionProps> = ({
         options={options}
         onChange={setCurrencyHandler}
       />
+      <div></div>
+      <Checkbox onChange={changeModeHandler}>Extended Graph</Checkbox>
     </>
   );
 };
@@ -79,6 +87,11 @@ const mapDispatchToProps = (dispatch: TypedDispatch) => {
     getTopList: () => dispatch({ type: ActionTypes.GET_TOP_CURRENCIES }),
     getHistoricalData: () =>
       dispatch({ type: ActionTypes.GET_HISTORICAL_DATA }),
+    setExtendedMode: (mode: boolean) =>
+      dispatch({
+        type: ActionTypes.SET_EXTENDED_MODE,
+        payload: mode,
+      }),
   };
 };
 

@@ -9,6 +9,7 @@ export enum ActionTypes {
   GET_HISTORICAL_DATA_ERROR = 'GET_HISTORICAL_DATA_ERROR',
   SET_CURRENCY = 'SET_CURRENCY',
   SET_TIME_STEP = 'SET_TIME_STEP',
+  SET_EXTENDED_MODE = 'SET_EXTENDED_MODE',
 }
 
 type TimeStepType = 'minute' | 'hour' | 'day';
@@ -47,6 +48,11 @@ type SetTimeStepActionType = {
   payload: TimeStepType;
 };
 
+type SetExtendedModeActionType = {
+  type: ActionTypes.SET_EXTENDED_MODE;
+  payload: boolean;
+};
+
 type StateType = {
   top: CurrenciesTopType;
   data: HistoricalDataType;
@@ -56,6 +62,7 @@ type StateType = {
   historicalDataError: null | string;
   currency: string;
   timeStep: TimeStepType;
+  extendedMode: boolean;
 };
 
 export type {
@@ -73,4 +80,5 @@ export type CurrenciesActionsType =
   | GetHistoricalDataSuccessActionType
   | GetHistoricalDataErrorActionType
   | SetCurrencyActionType
-  | SetTimeStepActionType;
+  | SetTimeStepActionType
+  | SetExtendedModeActionType;

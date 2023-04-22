@@ -3,14 +3,23 @@ import { StateType } from '../state/types';
 import { connect, ConnectedProps } from 'react-redux';
 import { HistoricalDataType } from '../types';
 
-const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data }) => {
+const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode }) => {
+  if (!data.length) return null;
   const convertHistoryData = (data: HistoricalDataType) =>
-    data.map((item) => item.close);
+    data.map((item) => (item.close + item.open) / 2);
+  const convertHistoryDataHeight = (data: HistoricalDataType) =>
+    data.map((item) => item.high);
+  const convertHistoryDataLow = (data: HistoricalDataType) =>
+    data.map((item) => item.low);
 
   const convertedData = convertHistoryData(data);
+  const convertedDataL = convertHistoryDataLow(data);
+  const convertedDataH = convertHistoryDataHeight(data);
 
-  const _max = Math.max(...convertedData);
-  const _min = Math.min(...convertedData);
+  const _max = mode ? Math.max(...convertedData, ...convertedDataH) : Math.max(...convertedData);
+  const _min = mode ? Math.min(...convertedData, ...convertedDataL) : Math.min(...convertedData);
+
+  console.log(_max, _min);
 
   const max = _max + 0.22 * (_max - _min);
   const min = _min - 0.22 * (_max - _min);
@@ -19,7 +28,7 @@ const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data }) => {
   const endTime = new Date(data[data.length - 1].time * 1000).toLocaleString();
 
   const width = 1000;
-  const height = 150;
+  const height = 350;
   const colorLine =
     convertedData[0] < convertedData[convertedData.length - 1]
       ? 'green'
@@ -29,6 +38,12 @@ const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data }) => {
   const yScale = height / (max - min);
 
   const points = convertedData.map(
+    (value, index) => `${index * xScale},${(max - value) * yScale}`
+  );
+  const pointsH = convertedDataH.map(
+    (value, index) => `${index * xScale},${(max - value) * yScale}`
+  );
+  const pointsL = convertedDataL.map(
     (value, index) => `${index * xScale},${(max - value) * yScale}`
   );
 
@@ -45,6 +60,24 @@ const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data }) => {
         stroke={colorLine}
         strokeWidth='2'
       />
+      { mode && (
+        <>
+          <polyline
+            points={pointsH.join(' ')}
+            fill='none'
+            stroke='green'
+            strokeWidth='1'
+          />
+          <polyline
+            points={pointsL.join(' ')}
+            fill='none'
+            stroke='red'
+            strokeWidth='1'
+          />
+        </>
+
+      )}
+
       <text
         x='5'
         y='6'
@@ -107,6 +140,7 @@ const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data }) => {
 
 const mapStateToProps = (state: StateType) => ({
   data: state.data,
+  mode: state.extendedMode
 });
 
 const connector = connect(mapStateToProps);

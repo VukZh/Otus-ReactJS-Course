@@ -1,4 +1,4 @@
-import { CurrenciesActionsType, ActionTypes, StateType } from './types';
+import { ActionTypes, CurrenciesActionsType, StateType } from './types';
 
 const initialState: StateType = {
   data: [],
@@ -9,6 +9,7 @@ const initialState: StateType = {
   historicalDataError: null,
   currency: '',
   timeStep: 'day',
+  extendedMode: false,
 };
 
 export const reducer = (
@@ -50,6 +51,8 @@ export const reducer = (
       return { ...state, currency: action.payload };
     case ActionTypes.SET_TIME_STEP:
       return { ...state, timeStep: action.payload };
+    case ActionTypes.SET_EXTENDED_MODE:
+      return { ...state, extendedMode: action.payload };
     default:
       return state;
   }
