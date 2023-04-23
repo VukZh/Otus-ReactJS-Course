@@ -42,10 +42,6 @@ const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode, range }) => {
 
   const width = 1000;
   const height = 350;
-  const colorLine =
-    convertedData[0] < convertedData[convertedData.length - 1]
-      ? 'green'
-      : 'red';
 
   const xScale = width / (convertedData.length - 1);
   const yScale = height / (max - min);
@@ -70,7 +66,7 @@ const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode, range }) => {
       <polyline
         points={points.join(' ')}
         fill='none'
-        stroke={colorLine}
+        stroke='blue'
         strokeWidth='2'
       />
       {mode && (
@@ -106,7 +102,7 @@ const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode, range }) => {
       </text>
       <text
         x='995'
-        y='145'
+        y='345'
         textAnchor='end'
         dominantBaseline='auto'
         style={{
@@ -120,7 +116,7 @@ const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode, range }) => {
       </text>
       <text
         x='5'
-        y='145'
+        y='345'
         textAnchor='start'
         dominantBaseline='auto'
         style={{

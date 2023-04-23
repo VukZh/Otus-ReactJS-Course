@@ -6,7 +6,7 @@ const getHistoricalData = async (
 ): Promise<any> => {
   try {
     const { data } = await axios.get(
-      `https://min-api.cryptocompare.com/data/v2/histo${timeInterval}?fsym=${currency}&tsym=USD&limit=200`
+      `https://min-api.cryptocompare.com/data/v2/histo${timeInterval}?fsym=${currency}&tsym=USD&limit=1000`
     );
     return data;
   } catch (e) {
