@@ -6,13 +6,6 @@ import { HistoricalDataType } from '../types';
 const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode, range }) => {
   if (!data.length) return null;
 
-  console.log(
-    '--- ',
-    data.length,
-    Math.floor((data.length * range.min) / 100),
-    Math.ceil((data.length * range.max) / 100)
-  );
-
   const recalcData = data.slice(Math.floor((data.length * range.min) / 100), Math.ceil((data.length * range.max) / 100))
   const convertHistoryData = (data: HistoricalDataType) =>
     data.map((item) => (item.close + item.open) / 2);
@@ -31,8 +24,6 @@ const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode, range }) => {
   const _min = mode
     ? Math.min(...convertedData, ...convertedDataL)
     : Math.min(...convertedData);
-
-  console.log(_max, _min);
 
   const max = _max + 0.22 * (_max - _min);
   const min = _min - 0.22 * (_max - _min);

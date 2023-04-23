@@ -25,14 +25,12 @@ const ControlSection: FC<ControlSectionProps> = ({
 
   const options = convertTopListToSelect(topList);
   const setTimeStepHandler = (e: RadioChangeEvent) => {
-    console.log('setTime');
     changeTimeStep(e.target.value);
     getHistoricalData();
   };
 
   const setCurrencyHandler = (currency: string) => {
     changeCurrency(currency);
-    console.log('setTime');
     getHistoricalData();
   };
 

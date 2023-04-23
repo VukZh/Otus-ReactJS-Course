@@ -16,11 +16,10 @@ const RangeSlider: FC<RangeSliderProps> = ({
         draggableTrack
         maxValue={100}
         minValue={0}
-        onChange={(value) => setValue(value as RangeValueType)}
-        onChangeComplete={(value) => {
+        onChange={(value) => {
+          setValue(value as RangeValueType);
           if ("min" in value && value.min < 0) {value.min = 0}
           if ("max" in value && value.max > 100) {value.max = 100}
-          console.log(JSON.stringify(value));
           setRange(value);
         }}
         value={ value }
