@@ -3,8 +3,17 @@ import { StateType } from '../state/types';
 import { connect, ConnectedProps } from 'react-redux';
 import { HistoricalDataType } from '../types';
 
-const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode }) => {
+const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode, range }) => {
   if (!data.length) return null;
+
+  console.log(
+    '--- ',
+    data.length,
+    Math.floor((data.length * range.min) / 100),
+    Math.ceil((data.length * range.max) / 100)
+  );
+
+  const recalcData = data.slice(Math.floor((data.length * range.min) / 100), Math.ceil((data.length * range.max) / 100))
   const convertHistoryData = (data: HistoricalDataType) =>
     data.map((item) => (item.close + item.open) / 2);
   const convertHistoryDataHeight = (data: HistoricalDataType) =>
@@ -12,9 +21,9 @@ const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode }) => {
   const convertHistoryDataLow = (data: HistoricalDataType) =>
     data.map((item) => item.low);
 
-  const convertedData = convertHistoryData(data);
-  const convertedDataL = convertHistoryDataLow(data);
-  const convertedDataH = convertHistoryDataHeight(data);
+  const convertedData = convertHistoryData(recalcData);
+  const convertedDataL = convertHistoryDataLow(recalcData);
+  const convertedDataH = convertHistoryDataHeight(recalcData);
 
   const _max = mode
     ? Math.max(...convertedData, ...convertedDataH)
@@ -28,8 +37,8 @@ const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode }) => {
   const max = _max + 0.22 * (_max - _min);
   const min = _min - 0.22 * (_max - _min);
 
-  const startTime = new Date(data[0].time * 1000).toLocaleString();
-  const endTime = new Date(data[data.length - 1].time * 1000).toLocaleString();
+  const startTime = new Date(recalcData[0].time * 1000).toLocaleString();
+  const endTime = new Date(recalcData[recalcData.length - 1].time * 1000).toLocaleString();
 
   const width = 1000;
   const height = 350;
@@ -121,7 +130,7 @@ const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode }) => {
           fill: 'red',
         }}
       >
-        {data[0].low}
+        {recalcData[0].low}
       </text>
       <text
         x='995'
@@ -135,7 +144,7 @@ const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode }) => {
           fill: 'red',
         }}
       >
-        {data[data.length - 1].high}
+        {recalcData[recalcData.length - 1].high}
       </text>
     </svg>
   );
@@ -144,6 +153,7 @@ const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode }) => {
 const mapStateToProps = (state: StateType) => ({
   data: state.data,
   mode: state.extendedMode,
+  range: state.range,
 });
 
 const connector = connect(mapStateToProps);
