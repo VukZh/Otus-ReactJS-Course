@@ -16,8 +16,12 @@ const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode }) => {
   const convertedDataL = convertHistoryDataLow(data);
   const convertedDataH = convertHistoryDataHeight(data);
 
-  const _max = mode ? Math.max(...convertedData, ...convertedDataH) : Math.max(...convertedData);
-  const _min = mode ? Math.min(...convertedData, ...convertedDataL) : Math.min(...convertedData);
+  const _max = mode
+    ? Math.max(...convertedData, ...convertedDataH)
+    : Math.max(...convertedData);
+  const _min = mode
+    ? Math.min(...convertedData, ...convertedDataL)
+    : Math.min(...convertedData);
 
   console.log(_max, _min);
 
@@ -60,7 +64,7 @@ const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode }) => {
         stroke={colorLine}
         strokeWidth='2'
       />
-      { mode && (
+      {mode && (
         <>
           <polyline
             points={pointsH.join(' ')}
@@ -75,7 +79,6 @@ const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode }) => {
             strokeWidth='1'
           />
         </>
-
       )}
 
       <text
@@ -140,7 +143,7 @@ const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode }) => {
 
 const mapStateToProps = (state: StateType) => ({
   data: state.data,
-  mode: state.extendedMode
+  mode: state.extendedMode,
 });
 
 const connector = connect(mapStateToProps);
