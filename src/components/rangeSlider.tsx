@@ -1,12 +1,15 @@
 import {FC, useState} from 'react';
 import InputRange from 'react-input-range';
+import {RangeValueType} from "../types";
+import {TypedDispatch} from "../state/store";
+import {ActionTypes, StateType} from "../state/types";
+import {connect, ConnectedProps} from "react-redux";
 
-type RangeValueType = {
-  min: number,
-  max: number
-}
-const RangeSlider: FC = () => {
-  const [value, setValue] = useState<RangeValueType>({min: 5, max: 55});
+const RangeSlider: FC<RangeSliderProps> = ({
+  range,
+  setRange
+}) => {
+  const [value, setValue] = useState<RangeValueType>(range);
   return (
     <>
       <InputRange
@@ -18,6 +21,7 @@ const RangeSlider: FC = () => {
           if ("min" in value && value.min < 0) {value.min = 0}
           if ("max" in value && value.max > 100) {value.max = 100}
           console.log(JSON.stringify(value));
+          setRange(value);
         }}
         value={ value }
       />
@@ -25,4 +29,24 @@ const RangeSlider: FC = () => {
   );
 };
 
-export default RangeSlider;
+const mapStateToProps = (state: StateType) => ({
+  range: state.range,
+});
+
+const mapDispatchToProps = (dispatch: TypedDispatch) => {
+  return {
+    setRange: (range: RangeValueType) =>
+      dispatch(
+        {
+          type: ActionTypes.SET_RANGE,
+          payload: range
+        }
+      )
+  }
+}
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type RangeSliderProps = ConnectedProps<typeof connector>;
+
+export default connector(RangeSlider);

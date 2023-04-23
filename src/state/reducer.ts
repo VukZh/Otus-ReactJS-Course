@@ -10,6 +10,10 @@ const initialState: StateType = {
   currency: '',
   timeStep: 'day',
   extendedMode: false,
+  range: {
+    min: 75,
+    max: 100
+  }
 };
 
 export const reducer = (
@@ -53,6 +57,8 @@ export const reducer = (
       return { ...state, timeStep: action.payload };
     case ActionTypes.SET_EXTENDED_MODE:
       return { ...state, extendedMode: action.payload };
+    case ActionTypes.SET_RANGE:
+      return { ...state, range: action.payload };
     default:
       return state;
   }

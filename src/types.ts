@@ -14,3 +14,8 @@ type HistoricalDataItemType = {
 };
 
 export type HistoricalDataType = Array<HistoricalDataItemType>;
+
+export type RangeValueType = {
+  min: number,
+  max: number
+}

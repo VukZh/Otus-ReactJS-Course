@@ -1,4 +1,4 @@
-import { CurrenciesTopType, HistoricalDataType } from '../types';
+import {CurrenciesTopType, HistoricalDataType, RangeValueType} from '../types';
 
 export enum ActionTypes {
   GET_TOP_CURRENCIES = 'GET_TOP_CURRENCIES',
@@ -10,6 +10,7 @@ export enum ActionTypes {
   SET_CURRENCY = 'SET_CURRENCY',
   SET_TIME_STEP = 'SET_TIME_STEP',
   SET_EXTENDED_MODE = 'SET_EXTENDED_MODE',
+  SET_RANGE = 'SET_RANGE'
 }
 
 type TimeStepType = 'minute' | 'hour' | 'day';
@@ -53,6 +54,11 @@ type SetExtendedModeActionType = {
   payload: boolean;
 };
 
+type SetRangeValueActionType = {
+  type: ActionTypes.SET_RANGE;
+  payload: RangeValueType;
+};
+
 type StateType = {
   top: CurrenciesTopType;
   data: HistoricalDataType;
@@ -63,6 +69,7 @@ type StateType = {
   currency: string;
   timeStep: TimeStepType;
   extendedMode: boolean;
+  range: RangeValueType;
 };
 
 export type {
@@ -81,4 +88,5 @@ export type CurrenciesActionsType =
   | GetHistoricalDataErrorActionType
   | SetCurrencyActionType
   | SetTimeStepActionType
-  | SetExtendedModeActionType;
+  | SetExtendedModeActionType
+  | SetRangeValueActionType;
