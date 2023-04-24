@@ -64,11 +64,9 @@ const NewsItemCreated = styled.li`
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.params;
-  console.log();
   if (typeof id === 'string') {
     try {
       const { data } = await getNews(id);
-      console.log(id, data);
       return {
         props: { news: data },
       };
