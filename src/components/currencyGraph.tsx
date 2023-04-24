@@ -36,6 +36,18 @@ const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode, range }) => {
     recalculatedData[recalculatedData.length - 1].time * 1000
   ).toLocaleString();
 
+  const _1_4_time = new Date(
+    recalculatedData[Math.round(recalculatedData.length * 0.25)].time * 1000
+  ).toLocaleString();
+
+  const _1_2_time = new Date(
+    recalculatedData[Math.round(recalculatedData.length * 0.5)].time * 1000
+  ).toLocaleString();
+
+  const _3_4_time = new Date(
+    recalculatedData[Math.round(recalculatedData.length * 0.75)].time * 1000
+  ).toLocaleString();
+
   const width = 1000;
   const height = 350;
 
@@ -58,6 +70,38 @@ const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode, range }) => {
       <line x1={width} y1='0' x2={width} y2={height} stroke='black' />
       <line x1='0' y1={height} x2={width} y2={height} stroke='black' />
       <line x1='0' y1='0' x2={width} y2='0' stroke='black' />
+      <line
+        x1={width * 0.5}
+        y1='1'
+        x2={width * 0.5}
+        y2={height - 15}
+        stroke='lightgray'
+        strokeDasharray='10,10'
+      />
+      <line
+        x1={width * 0.25}
+        y1='1'
+        x2={width * 0.25}
+        y2={height - 15}
+        stroke='lightgray'
+        strokeDasharray='10,10'
+      />
+      <line
+        x1={width * 0.75}
+        y1='1'
+        x2={width * 0.75}
+        y2={height - 15}
+        stroke='lightgray'
+        strokeDasharray='10,10'
+      />
+      <line
+        x1='1'
+        y1={height * 0.5}
+        x2={width - 55}
+        y2={height * 0.5}
+        stroke='lightgray'
+        strokeDasharray='10,10'
+      />
 
       <polyline
         points={points.join(' ')}
@@ -84,9 +128,9 @@ const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode, range }) => {
 
       <text
         x='5'
-        y='6'
+        y='345'
         textAnchor='start'
-        dominantBaseline='hanging'
+        dominantBaseline='auto'
         style={{
           fontSize: '9px',
           fontWeight: 'bold',
@@ -111,9 +155,51 @@ const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode, range }) => {
         {endTime}
       </text>
       <text
-        x='5'
+        x='290'
         y='345'
-        textAnchor='start'
+        textAnchor='end'
+        dominantBaseline='auto'
+        style={{
+          fontSize: '9px',
+          fontWeight: 'bold',
+          fontFamily: 'Helvetica, Arial, sans-serif',
+          fill: 'rgb(22, 119, 255)',
+        }}
+      >
+        {_1_4_time}
+      </text>
+      <text
+        x='540'
+        y='345'
+        textAnchor='end'
+        dominantBaseline='auto'
+        style={{
+          fontSize: '9px',
+          fontWeight: 'bold',
+          fontFamily: 'Helvetica, Arial, sans-serif',
+          fill: 'rgb(22, 119, 255)',
+        }}
+      >
+        {_1_2_time}
+      </text>
+      <text
+        x='790'
+        y='345'
+        textAnchor='end'
+        dominantBaseline='auto'
+        style={{
+          fontSize: '9px',
+          fontWeight: 'bold',
+          fontFamily: 'Helvetica, Arial, sans-serif',
+          fill: 'rgb(22, 119, 255)',
+        }}
+      >
+        {_3_4_time}
+      </text>
+      <text
+        x='995'
+        y='330'
+        textAnchor='end'
         dominantBaseline='auto'
         style={{
           fontSize: '9px',
@@ -137,6 +223,20 @@ const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode, range }) => {
         }}
       >
         {_max}
+      </text>
+      <text
+        x='995'
+        y='178'
+        textAnchor='end'
+        dominantBaseline='handing'
+        style={{
+          fontSize: '9px',
+          fontWeight: 'bold',
+          fontFamily: 'Helvetica, Arial, sans-serif',
+          fill: 'green',
+        }}
+      >
+        {Math.round(((_max + _min) / 2) * 10000) / 10000}
       </text>
     </svg>
   );
