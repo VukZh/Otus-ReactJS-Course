@@ -12,8 +12,8 @@ const initialState: StateType = {
   extendedMode: false,
   range: {
     min: 75,
-    max: 100
-  }
+    max: 100,
+  },
 };
 
 export const reducer = (

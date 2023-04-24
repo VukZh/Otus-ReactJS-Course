@@ -15,7 +15,7 @@ const BgCurrencyGraph: React.FC<BgCurrencyGraphProps> = ({ data }) => {
 
   const width = 1000;
   const height = 66;
-  const colorLine = 'black';
+  const colorLine = 'gray';
 
   const xScale = width / (convertedData.length - 1);
   const yScale = height / (max - min);

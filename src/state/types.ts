@@ -1,4 +1,5 @@
-import {CurrenciesTopType, HistoricalDataType, RangeValueType} from '../types';
+import { CurrenciesTopType, HistoricalDataType } from '../types';
+import { Range } from 'react-input-range';
 
 export enum ActionTypes {
   GET_TOP_CURRENCIES = 'GET_TOP_CURRENCIES',
@@ -10,7 +11,7 @@ export enum ActionTypes {
   SET_CURRENCY = 'SET_CURRENCY',
   SET_TIME_STEP = 'SET_TIME_STEP',
   SET_EXTENDED_MODE = 'SET_EXTENDED_MODE',
-  SET_RANGE = 'SET_RANGE'
+  SET_RANGE = 'SET_RANGE',
 }
 
 type TimeStepType = 'minute' | 'hour' | 'day';
@@ -56,7 +57,7 @@ type SetExtendedModeActionType = {
 
 type SetRangeValueActionType = {
   type: ActionTypes.SET_RANGE;
-  payload: RangeValueType;
+  payload: Range;
 };
 
 type StateType = {
@@ -69,7 +70,7 @@ type StateType = {
   currency: string;
   timeStep: TimeStepType;
   extendedMode: boolean;
-  range: RangeValueType;
+  range: Range;
 };
 
 export type {

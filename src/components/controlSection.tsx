@@ -5,6 +5,21 @@ import { TypedDispatch } from '../state/store';
 import { connect, ConnectedProps } from 'react-redux';
 import { CurrenciesTopType } from '../types';
 import { CheckboxChangeEvent } from 'antd/es/checkbox';
+import styled from 'styled-components';
+
+const TimeStep = styled.div`
+  display: flex;
+  width: 300px;
+  justify-content: space-around;
+`;
+
+const ControlsPart = styled.div`
+  display: flex;
+  margin: 20px;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 60%;
+`;
 
 const ControlSection: FC<ControlSectionProps> = ({
   topList,
@@ -13,6 +28,7 @@ const ControlSection: FC<ControlSectionProps> = ({
   getTopList,
   getHistoricalData,
   setExtendedMode,
+  currency,
 }) => {
   useEffect(() => {
     getTopList();
@@ -39,16 +55,6 @@ const ControlSection: FC<ControlSectionProps> = ({
   };
   return (
     <>
-      <div>Time step: </div>
-      <Radio.Group
-        defaultValue='day'
-        buttonStyle='solid'
-        onChange={setTimeStepHandler}
-      >
-        <Radio.Button value='day'>Daily</Radio.Button>
-        <Radio.Button value='hour'>Hourly</Radio.Button>
-        <Radio.Button value='minute'>Minute</Radio.Button>
-      </Radio.Group>
       <div>Select currency:</div>
       <Select
         showSearch
@@ -60,14 +66,35 @@ const ControlSection: FC<ControlSectionProps> = ({
         options={options}
         onChange={setCurrencyHandler}
       />
-      <div></div>
-      <Checkbox onChange={changeModeHandler}>Extended Graph</Checkbox>
+      {currency && (
+        <>
+          <ControlsPart>
+            <TimeStep>
+              <div>Time step: </div>
+              <Radio.Group
+                defaultValue='day'
+                buttonStyle='solid'
+                onChange={setTimeStepHandler}
+              >
+                <Radio.Button value='day'>Daily</Radio.Button>
+                <Radio.Button value='hour'>Hourly</Radio.Button>
+                <Radio.Button value='minute'>Minute</Radio.Button>
+              </Radio.Group>
+              <div></div>
+            </TimeStep>
+
+            <Checkbox onChange={changeModeHandler}>Extended view</Checkbox>
+          </ControlsPart>
+          <div>{currency}</div>
+        </>
+      )}
     </>
   );
 };
 
 const mapStateToProps = (state: StateType) => ({
   topList: state.top,
+  currency: state.currency,
 });
 
 const mapDispatchToProps = (dispatch: TypedDispatch) => {

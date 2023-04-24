@@ -39,7 +39,7 @@
 .input-range__track--active {
   background: none;
   height: 61px;
-  border: 2px solid rgb(22, 119, 255);;
+  border: 2px solid rgb(22, 119, 255);
 }
 
 .input-range {

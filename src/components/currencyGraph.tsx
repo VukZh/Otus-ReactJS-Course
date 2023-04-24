@@ -6,7 +6,10 @@ import { HistoricalDataType } from '../types';
 const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode, range }) => {
   if (!data.length) return null;
 
-  const recalcData = data.slice(Math.floor((data.length * range.min) / 100), Math.ceil((data.length * range.max) / 100))
+  const recalculatedData = data.slice(
+    Math.floor((data.length * range.min) / 100),
+    Math.ceil((data.length * range.max) / 100)
+  );
   const convertHistoryData = (data: HistoricalDataType) =>
     data.map((item) => (item.close + item.open) / 2);
   const convertHistoryDataHeight = (data: HistoricalDataType) =>
@@ -14,9 +17,9 @@ const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode, range }) => {
   const convertHistoryDataLow = (data: HistoricalDataType) =>
     data.map((item) => item.low);
 
-  const convertedData = convertHistoryData(recalcData);
-  const convertedDataL = convertHistoryDataLow(recalcData);
-  const convertedDataH = convertHistoryDataHeight(recalcData);
+  const convertedData = convertHistoryData(recalculatedData);
+  const convertedDataL = convertHistoryDataLow(recalculatedData);
+  const convertedDataH = convertHistoryDataHeight(recalculatedData);
 
   const _max = mode
     ? Math.max(...convertedData, ...convertedDataH)
@@ -28,8 +31,10 @@ const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode, range }) => {
   const max = _max + 0.22 * (_max - _min);
   const min = _min - 0.22 * (_max - _min);
 
-  const startTime = new Date(recalcData[0].time * 1000).toLocaleString();
-  const endTime = new Date(recalcData[recalcData.length - 1].time * 1000).toLocaleString();
+  const startTime = new Date(recalculatedData[0].time * 1000).toLocaleString();
+  const endTime = new Date(
+    recalculatedData[recalculatedData.length - 1].time * 1000
+  ).toLocaleString();
 
   const width = 1000;
   const height = 350;
@@ -57,7 +62,7 @@ const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode, range }) => {
       <polyline
         points={points.join(' ')}
         fill='none'
-        stroke='blue'
+        stroke='rgb(22, 119, 255)'
         strokeWidth='2'
       />
       {mode && (
@@ -86,7 +91,7 @@ const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode, range }) => {
           fontSize: '9px',
           fontWeight: 'bold',
           fontFamily: 'Helvetica, Arial, sans-serif',
-          fill: 'blue',
+          fill: 'rgb(22, 119, 255)',
         }}
       >
         {startTime}
@@ -100,7 +105,7 @@ const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode, range }) => {
           fontSize: '9px',
           fontWeight: 'bold',
           fontFamily: 'Helvetica, Arial, sans-serif',
-          fill: 'blue',
+          fill: 'rgb(22, 119, 255)',
         }}
       >
         {endTime}
@@ -114,10 +119,10 @@ const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode, range }) => {
           fontSize: '9px',
           fontWeight: 'bold',
           fontFamily: 'Helvetica, Arial, sans-serif',
-          fill: 'red',
+          fill: 'green',
         }}
       >
-        {recalcData[0].low}
+        {_min}
       </text>
       <text
         x='995'
@@ -128,10 +133,10 @@ const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode, range }) => {
           fontSize: '9px',
           fontWeight: 'bold',
           fontFamily: 'Helvetica, Arial, sans-serif',
-          fill: 'red',
+          fill: 'green',
         }}
       >
-        {recalcData[recalcData.length - 1].high}
+        {_max}
       </text>
     </svg>
   );
