@@ -1,8 +1,8 @@
 import React from 'react';
-import ControlSection from './components/controlSection';
-import CurrencyGraph from './components/currencyGraph';
-import RangeSlider from './components/rangeSlider';
-import BgCurrencyGraph from './components/bgCurrencyGraph';
+import ControlSection from '../components/controlSection';
+import CurrencyGraph from '../components/currencyGraph';
+import RangeSlider from '../components/rangeSlider';
+import BgCurrencyGraph from '../components/bgCurrencyGraph';
 import styled from 'styled-components';
 
 const MainWrapper = styled.div`
