@@ -6,6 +6,7 @@ import { connect, ConnectedProps } from 'react-redux';
 import { CurrenciesTopType } from '../types';
 import { CheckboxChangeEvent } from 'antd/es/checkbox';
 import styled from 'styled-components';
+import Link from 'next/link';
 
 const TimeStep = styled.div`
   display: flex;
@@ -53,6 +54,9 @@ const ControlSection: FC<ControlSectionProps> = ({
   const changeModeHandler = (e: CheckboxChangeEvent) => {
     setExtendedMode(e.target.checked);
   };
+
+  const hrefNews = `/news/${currency}`;
+
   return (
     <>
       <div>Select currency:</div>
@@ -85,7 +89,7 @@ const ControlSection: FC<ControlSectionProps> = ({
 
             <Checkbox onChange={changeModeHandler}>Extended view</Checkbox>
           </ControlsPart>
-          <div>{currency}</div>
+          <Link href={hrefNews}>{currency} News</Link>
         </>
       )}
     </>

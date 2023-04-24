@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { store } from '../state/store';
-import CurrencyGraph from "../components/currencyGraph";
+import CurrencyGraph from '../components/currencyGraph';
 export default {
   title: 'Example/CurrencyGraph',
   component: CurrencyGraph,
