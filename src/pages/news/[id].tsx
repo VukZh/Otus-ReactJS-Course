@@ -64,23 +64,20 @@ const NewsItemCreated = styled.li`
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.params;
-  if (typeof id === 'string') {
-    try {
-      const { data } = await getNews(id);
-      return {
-        props: { news: data },
-      };
-    } catch (e) {
-      return e.message;
-    }
+  try {
+    const { data } = await getNews(id as string);
+    return {
+      props: { news: data },
+    };
+  } catch (e) {
+    return e.message;
   }
-  return [];
 };
 
 const NewsPage = ({
   news,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const shortNews: Array<NewsType> = news.length ? news.Data.slice(0, 10) : [];
+  const shortNews: Array<NewsType> = news.Data.slice(0, 10);
   return (
     <News>
       {shortNews.map((item) => {
