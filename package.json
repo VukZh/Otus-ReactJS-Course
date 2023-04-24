@@ -4,12 +4,9 @@
   "description": "currency chart viewer",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --env development",
-    "PROD": "webpack --env production",
-    "DEV": "webpack --env development",
-    "Ndev": "next dev",
-    "Nbuild": "next build",
-    "Nstart": "next start",
+    "DEV": "next dev",
+    "PROD": "next build",
+    "start": "next start",
     "test": "jest --coverage",
     "stryker - test with mutation testing": "npx stryker run",
     "storybook": "storybook dev -p 6006",
@@ -43,6 +40,7 @@
     "@storybook/addon-interactions": "^7.0.5",
     "@storybook/addon-links": "^7.0.5",
     "@storybook/addon-mdx-gfm": "^7.0.5",
+    "@storybook/addon-styling": "^1.0.1",
     "@storybook/react": "^7.0.5",
     "@storybook/react-webpack5": "^7.0.5",
     "@storybook/testing-library": "^0.1.0",
@@ -89,6 +87,6 @@
     "react-redux": "^8.0.5",
     "redux": "^4.2.1",
     "redux-saga": "^1.2.3",
-    "styled-components": "^5.3.9"
+    "styled-components": "^5.3.10"
   }
 }
