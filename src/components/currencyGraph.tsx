@@ -7,8 +7,8 @@ const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode, range }) => {
   if (!data.length) return null;
 
   const recalculatedData = data.slice(
-    Math.floor((data.length * range.min) / 100),
-    Math.ceil((data.length * range.max) / 100)
+    Math.floor((data.length * range.min) / 300),
+    Math.ceil((data.length * range.max) / 300)
   );
   const convertHistoryData = (data: HistoricalDataType) =>
     data.map((item) => (item.close + item.open) / 2);

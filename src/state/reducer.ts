@@ -11,8 +11,8 @@ const initialState: StateType = {
   timeStep: 'day',
   extendedMode: false,
   range: {
-    min: 75,
-    max: 100,
+    min: 200,
+    max: 300,
   },
 };
 

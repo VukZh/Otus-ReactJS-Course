@@ -11,7 +11,7 @@ const RangeSlider: FC<RangeSliderProps> = ({ data, range, setRange }) => {
     <>
       <InputRange
         draggableTrack
-        maxValue={100}
+        maxValue={300}
         minValue={0}
         onChange={(value) => {
           if (typeof value !== 'number') {
@@ -19,8 +19,8 @@ const RangeSlider: FC<RangeSliderProps> = ({ data, range, setRange }) => {
             if (value.min < 0) {
               value.min = 0;
             }
-            if (value.max > 100) {
-              value.max = 100;
+            if (value.max > 300) {
+              value.max = 300;
             }
             setRange(value);
           }
