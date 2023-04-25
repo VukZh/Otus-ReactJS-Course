@@ -10,7 +10,7 @@ type HistoricalItemType = {
   volumeto: number;
 };
 
-type HistoricalDataType = {
+export type HistoricalDataType = {
   Data: {
     Aggregated: boolean;
     Data: Array<HistoricalItemType>;

@@ -3,6 +3,7 @@ import { StateType } from '../state/types';
 import { connect, ConnectedProps } from 'react-redux';
 import { HistoricalDataType } from '../types';
 
+const roundedPrice = (price: number) => Math.round(price * 10000) / 10000;
 const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode, range }) => {
   if (!data.length) return null;
 
@@ -208,7 +209,7 @@ const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode, range }) => {
           fill: 'green',
         }}
       >
-        {_min}
+        {roundedPrice(_min)}
       </text>
       <text
         x='995'
@@ -222,7 +223,7 @@ const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode, range }) => {
           fill: 'green',
         }}
       >
-        {_max}
+        {roundedPrice(_max)}
       </text>
       <text
         x='995'
@@ -236,7 +237,7 @@ const CurrencyGraph: React.FC<CurrencyGraphProps> = ({ data, mode, range }) => {
           fill: 'green',
         }}
       >
-        {Math.round(((_max + _min) / 2) * 10000) / 10000}
+        {roundedPrice((_max + _min) / 2)}
       </text>
     </svg>
   );

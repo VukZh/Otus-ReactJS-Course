@@ -24,7 +24,7 @@ type TopListItemType = {
   RAW: object;
 };
 
-type TopListType = {
+export type TopListType = {
   Data: Array<TopListItemType>;
   HasWarning: boolean;
   Message: string;
