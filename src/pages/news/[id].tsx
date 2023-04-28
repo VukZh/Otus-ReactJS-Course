@@ -1,6 +1,8 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import Image from 'next/image';
 import { getNews } from '../../services/getNews';
 import styled from 'styled-components';
+import Link from 'next/link';
 
 type CategoryType = {
   CATEGORY: string;
@@ -47,19 +49,37 @@ const News = styled.ul`
 `;
 
 const NewsItem = styled.div`
-  padding: 20px;
+  padding: 15px;
   font-family: Helvetica, Arial, sans-serif;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid lightgrey;
   list-style: none;
-`;
-
-const NewsItemTitle = styled.li`
-  font-weight: bold;
-`;
-
-const NewsItemCreated = styled.li`
   color: gray;
   font-size: small;
+  display: flex;
+`;
+
+const NewsItemLinkPart = styled.div`
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column;
+  padding-left: 15px;
+`;
+
+const NewsItemLink = styled.a`
+  font-weight: bold;
+  font-size: medium;
+  color: darkblue;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    color: #366aee;
+  }
+
+  &:visited {
+    color: lightskyblue;
+  }
 `;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -83,19 +103,30 @@ const NewsPage = ({
       {shortNews.map((item) => {
         const date = new Date(item.CREATED_ON * 1000);
         return (
-          <NewsItem key={item.ID}>
-            <NewsItemCreated>{date.toLocaleString('en-US')}</NewsItemCreated>
-            <NewsItemTitle>
-              <a
-                href={item.URL}
-                target='_blank'
-                rel='noopener noreferrer'
-                style={{ textDecoration: 'none' }}
-              >
-                {item.TITLE}
-              </a>
-            </NewsItemTitle>
-          </NewsItem>
+          <>
+            <NewsItem key={item.ID}>
+              <Link href={item.URL} rel='noopener noreferrer' target='_blank'>
+                <Image
+                  src={item.IMAGE_URL}
+                  width={50}
+                  height={50}
+                  alt={item.TITLE}
+                ></Image>
+              </Link>
+              <NewsItemLinkPart>
+                <div>{date.toLocaleString('en-US')}</div>
+                <div>
+                  <NewsItemLink
+                    href={item.URL}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    {item.TITLE}
+                  </NewsItemLink>
+                </div>
+              </NewsItemLinkPart>
+            </NewsItem>
+          </>
         );
       })}
     </News>

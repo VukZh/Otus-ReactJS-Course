@@ -89,7 +89,9 @@ const ControlSection: FC<ControlSectionProps> = ({
 
             <Checkbox onChange={changeModeHandler}>Extended view</Checkbox>
           </ControlsPart>
-          <Link href={hrefNews}>{currency} News</Link>
+          <Link href={hrefNews} rel='noopener noreferrer' target='_blank'>
+            {currency} News
+          </Link>
         </>
       )}
     </>
