@@ -110,7 +110,7 @@ const NewsPage = ({
                   src={item.IMAGE_URL}
                   width={50}
                   height={50}
-                  alt={item.TITLE}
+                  alt={item.SOURCE_DATA.NAME}
                 ></Image>
               </Link>
               <NewsItemLinkPart>
