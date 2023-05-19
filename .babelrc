@@ -1,0 +1,18 @@
+{
+  "presets": [
+    "@babel/preset-typescript",
+    [
+      "@babel/preset-env",
+      {
+        "targets": ["> 5%"],
+        "corejs": 3,
+        "useBuiltIns": "usage"
+      }
+    ],
+    [
+      "@babel/preset-react", {
+        "runtime": "automatic"
+      }
+    ]
+  ]
+}
